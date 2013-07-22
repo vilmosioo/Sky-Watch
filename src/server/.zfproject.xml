@@ -1,0 +1,348 @@
+<?xml version="1.0"?>
+<projectProfile type="default" version="1.12.0">
+  <projectDirectory>
+    <projectProfileFile filesystemName=".zfproject.xml"/>
+    <applicationDirectory classNamePrefix="Application_">
+      <configsDirectory>
+        <applicationConfigFile type="ini"/>
+      </configsDirectory>
+      <controllersDirectory>
+        <controllerFile controllerName="Index">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="user"/>
+          <actionMethod actionName="role"/>
+          <actionMethod actionName="type"/>
+        </controllerFile>
+        <controllerFile controllerName="AuthController">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="login"/>
+        </controllerFile>
+        <controllerFile controllerName="Auth">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="login"/>
+          <actionMethod actionName="logout"/>
+          <actionMethod actionName="noauth"/>
+        </controllerFile>
+        <controllerFile controllerName="User">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Role">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Type">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Home">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Notification">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Thyco">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+      </controllersDirectory>
+      <formsDirectory>
+        <formFile formName="Login"/>
+      </formsDirectory>
+      <layoutsDirectory>
+        <layoutScriptsDirectory>
+          <layoutScriptFile layoutName="layout"/>
+        </layoutScriptsDirectory>
+      </layoutsDirectory>
+      <modelsDirectory>
+        <dbTableDirectory>
+          <dbTableFile dbTableName="User"/>
+          <dbTableFile dbTableName="UserType"/>
+          <dbTableFile dbTableName="UserRole"/>
+        </dbTableDirectory>
+      </modelsDirectory>
+      <modulesDirectory>
+        <moduleDirectory moduleName="v1">
+          <configsDirectory enabled="false"/>
+          <controllersDirectory>
+            <controllerFile controllerName="Meeting">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+            <controllerFile controllerName="Notification">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+            <controllerFile controllerName="Profile">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+            <controllerFile controllerName="Auth">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="noauth"/>
+            </controllerFile>
+            <controllerFile controllerName="Location">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+            <controllerFile controllerName="Thyco">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+            <controllerFile controllerName="Sao">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+            <controllerFile controllerName="Bsc">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+            <controllerFile controllerName="Planet">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+            <controllerFile controllerName="Search">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+            <controllerFile controllerName="Ephemerid">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+            <controllerFile controllerName="Error">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+          </controllersDirectory>
+          <formsDirectory enabled="false"/>
+          <layoutsDirectory enabled="false"/>
+          <modelsDirectory>
+            <dbTableDirectory>
+              <dbTableFile dbTableName="User"/>
+              <dbTableFile dbTableName="Type"/>
+              <dbTableFile dbTableName="Role"/>
+              <dbTableFile dbTableName="UserRole"/>
+              <dbTableFile dbTableName="UserType"/>
+              <dbTableFile dbTableName="Meeting"/>
+              <dbTableFile dbTableName="Location"/>
+              <dbTableFile dbTableName="Notification"/>
+              <dbTableFile dbTableName="Token"/>
+              <dbTableFile dbTableName="Timeslot"/>
+              <dbTableFile dbTableName="Thyco"/>
+              <dbTableFile dbTableName="BrightStarCatalogue"/>
+              <dbTableFile dbTableName="SmithsonianAstrophysicalObservatory"/>
+              <dbTableFile dbTableName="Planet"/>
+              <dbTableFile dbTableName="Name"/>
+              <dbTableFile dbTableName="Star"/>
+              <dbTableFile dbTableName="Galaxy"/>
+              <dbTableFile dbTableName="NGC"/>
+            </dbTableDirectory>
+          </modelsDirectory>
+          <servicesDirectory enabled="false"/>
+          <viewsDirectory>
+            <viewScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Meeting">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Notification">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Profile">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Auth">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Auth">
+                <viewScriptFile forActionName="noauth"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Location">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Thyco">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Sao">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Bsc">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Planet">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Search">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Ephemerid">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Error">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+            </viewScriptsDirectory>
+            <viewHelpersDirectory/>
+            <viewFiltersDirectory/>
+          </viewsDirectory>
+        </moduleDirectory>
+        <moduleDirectory moduleName="client">
+          <configsDirectory enabled="false"/>
+          <controllersDirectory>
+            <controllerFile controllerName="Home">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+            <controllerFile controllerName="User">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+            <controllerFile controllerName="Meeting">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+            <controllerFile controllerName="Meetings">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="get"/>
+              <actionMethod actionName="create"/>
+              <actionMethod actionName="formHandler"/>
+            </controllerFile>
+            <controllerFile controllerName="Users">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="get"/>
+            </controllerFile>
+            <controllerFile controllerName="Notifications">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+          </controllersDirectory>
+          <formsDirectory>
+            <formFile formName="CreateMeeting"/>
+          </formsDirectory>
+          <layoutsDirectory enabled="false"/>
+          <modelsDirectory>
+            <dbTableDirectory enabled="false"/>
+          </modelsDirectory>
+          <servicesDirectory enabled="false"/>
+          <viewsDirectory>
+            <viewScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Home">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="User">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Meeting">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Meetings">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Meetings">
+                <viewScriptFile forActionName="get"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="meetings">
+                <viewScriptFile forActionName="get"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Users">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Users">
+                <viewScriptFile forActionName="get"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Notifications">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="notifications">
+                <viewScriptFile forActionName="get"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="notifications">
+                <viewScriptFile forActionName="get"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Meetings">
+                <viewScriptFile forActionName="create"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Meetings">
+                <viewScriptFile forActionName="formHandler"/>
+              </viewControllerScriptsDirectory>
+            </viewScriptsDirectory>
+            <viewHelpersDirectory/>
+            <viewFiltersDirectory/>
+          </viewsDirectory>
+        </moduleDirectory>
+      </modulesDirectory>
+      <servicesDirectory enabled="false"/>
+      <viewsDirectory>
+        <viewScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Index">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Index">
+            <viewScriptFile forActionName="user"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="AuthController">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="AuthController">
+            <viewScriptFile forActionName="login"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Auth">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Auth">
+            <viewScriptFile forActionName="login"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Auth">
+            <viewScriptFile forActionName="logout"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Auth">
+            <viewScriptFile forActionName="noauth"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Index">
+            <viewScriptFile forActionName="role"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Index">
+            <viewScriptFile forActionName="type"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="User">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="user">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Role">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Type">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Home">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Notification">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Thyco">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+        </viewScriptsDirectory>
+        <viewHelpersDirectory/>
+        <viewFiltersDirectory enabled="false"/>
+      </viewsDirectory>
+      <bootstrapFile filesystemName="Bootstrap.php"/>
+    </applicationDirectory>
+    <dataDirectory enabled="false">
+      <cacheDirectory enabled="false"/>
+      <searchIndexesDirectory enabled="false"/>
+      <localesDirectory enabled="false"/>
+      <logsDirectory enabled="false"/>
+      <sessionsDirectory enabled="false"/>
+      <uploadsDirectory enabled="false"/>
+    </dataDirectory>
+    <docsDirectory>
+      <file filesystemName="README.txt"/>
+    </docsDirectory>
+    <libraryDirectory>
+      <zfStandardLibraryDirectory enabled="false"/>
+    </libraryDirectory>
+    <publicDirectory>
+      <publicStylesheetsDirectory enabled="false"/>
+      <publicScriptsDirectory enabled="false"/>
+      <publicImagesDirectory enabled="false"/>
+      <publicIndexFile filesystemName="index.php"/>
+      <htaccessFile filesystemName=".htaccess"/>
+    </publicDirectory>
+    <projectProvidersDirectory enabled="false"/>
+    <temporaryDirectory enabled="false"/>
+    <testsDirectory>
+      <testPHPUnitConfigFile filesystemName="phpunit.xml"/>
+      <testPHPUnitBootstrapFile filesystemName="bootstrap.php"/>
+      <testApplicationDirectory>
+        <testApplicationControllerDirectory>
+          <testApplicationControllerFile forControllerName="Index"/>
+        </testApplicationControllerDirectory>
+      </testApplicationDirectory>
+      <testLibraryDirectory/>
+    </testsDirectory>
+  </projectDirectory>
+</projectProfile>
