@@ -1,9 +1,19 @@
-<div class="hero-unit">
-  <h1>'Allo, 'Allo!</h1>
-  <p>You now have</p>
-  <ul>
-      <li ng-repeat="thing in awesomeThings">{{thing}}</li>
-  </ul>
-  <p>installed.</p>
-  <h3>Enjoy coding! - Yeoman</h3>
-</div>
+<div class="grid-5" ng-repeat="item in items">
+  <div class="card">
+    <span class="isvisible icon-eye-open"></span>
+    <h2 class="title">{{ item.title }}</h2>
+    <p class="names"><span ng-repeat="name in item.names">{{name}}{{ !$last && ', ' || ''}}</span></p>
+    <p class="description">{{item.description}}</p>
+    <div class="coordinates clearfix">
+      <span class="az">{{ item.coordinates.RA.h }}<sup>h</sup> {{ item.coordinates.RA.m }}<sup>m</sup> {{ item.coordinates.RA.s }}<sup>s</sup></span>
+      <span class="alt">{{ item.coordinates.DE.d }}° {{ item.coordinates.RA.m }}<sup>'</sup> {{ item.coordinates.RA.s }}<sup>"</sup></span>
+    </div>
+    <div class="details">
+      <p>Right ascension  {{ item.coordinates.RA.h }}<sup>h</sup> {{ item.coordinates.RA.m }}<sup>m</sup> {{ item.coordinates.RA.s }}<sup>s</sup></p>
+      <p>Declination  {{ item.coordinates.DE.d }}° {{ item.coordinates.RA.m }}<sup>'</sup> {{ item.coordinates.RA.s }}<sup>"</sup></p>
+      <p>Distance  {{item.distance}} ± {{item.e_distance}} kly (2.0 ± 0.5 kpc)[13]</p>
+      <p>Apparent magnitude (V)  {{item.Vmag}}</p>
+      <p>Apparent dimensions (V)  {{item.dimensions[0]}}"x{{item.dimensions[1]}}"</p>
+    </div>
+  </div>   
+</div> 
