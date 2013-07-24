@@ -1,4 +1,9 @@
 src/server/library/Zend/
+src/client/node_modules
+src/client/dist
+src/client/.tmp
+src/client/.sass-cache
+src/client/app/components
 
 #################
 ## Eclipse
