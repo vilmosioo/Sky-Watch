@@ -10,7 +10,7 @@ angular.module('ngApp')
         item : '='
       },
       controller : function($scope, $element, $attrs){
-        console.log($scope, $element, $attrs);  
+          
       }
     };  
   });
