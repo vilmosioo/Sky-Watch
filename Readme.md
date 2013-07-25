@@ -13,7 +13,7 @@ Predictive app to determine what interesting astronomical objects are viewable f
 
 ### Installation
 
-You will need [Node](http://nodejs.org/), [Yeoman](http://yeoman.io/)Yeoman, [Git](http://git-scm.com/)Git and [Compass](http://compass-style.org/) to install all dependencies.
+You will need [Node](http://nodejs.org/), [Yeoman](http://yeoman.io/), [Git](http://git-scm.com/) and [Compass](http://compass-style.org/) to install all dependencies.
 
 	git clone https://github.com/vilmosioo/Sky-Watch.git
 	cd src/client
