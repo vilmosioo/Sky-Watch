@@ -10,10 +10,10 @@ class V1_NgcController extends Zend_Controller_Action
 
         // ensure database table
         $db = Zend_Registry::get('db');
-        $db->query('DROP TABLE IF EXISTS ngc;'); // for debug purposes
-        if(!in_array('ngc', $db->listTables())){
+        $db->query('DROP TABLE IF EXISTS names;DROP TABLE IF EXISTS ngc;'); // for debug purposes
+        if(!in_array('ngc', $db->listTables()) || !in_array('names', $db->listTables())){
             // create table query
-            $sql = "CREATE TABLE IF NOT EXISTS ngc (".
+            $sql = "DROP TABLE IF EXISTS ngc; CREATE TABLE IF NOT EXISTS ngc (".
                 "id INTEGER NOT NULL AUTO_INCREMENT,".
                 "RAh INTEGER DEFAULT NULL,".
                 "RAm FLOAT DEFAULT NULL,".
@@ -27,150 +27,31 @@ class V1_NgcController extends Zend_Controller_Action
                 "number_of_stars INTEGER DEFAULT NULL,".
                 "class text DEFAULT NULL,".
                 "PRIMARY KEY (id)".
-            ")";
+            ");".
+            "DROP TABLE IF EXISTS names; CREATE TABLE IF NOT EXISTS names (".
+              "id INTEGER NOT NULL AUTO_INCREMENT,".
+              "ngc INTEGER NOT NULL,".
+              "name text NOT NULL,".
+              "PRIMARY KEY (id)".
+              // "UNIQUE KEY ngc (ngc)".
+            ");".
+            "ALTER TABLE names ADD CONSTRAINT names_ibfk_1 FOREIGN KEY (ngc) REFERENCES ngc (id);";
             $db->query($sql);
 
             // populate table from CSV file
             $handle = @fopen(APPLICATION_PATH . '/modules/v1/db/SAC_DeepSky_Ver81_QCQ.txt', "r");
             if ($handle) {
                 $i = 0;
-                $types = array(
-                    'ASTER' =>  'Asterism',
-                    'BRTNB' =>  'Bright Nebula',
-                    'CL+NB' =>  'Cluster with Nebulosity',
-                    'DRKNB' =>  'Dark Nebula',
-                    'GALCL' =>  'Galaxy cluster',
-                    'GALXY' =>  'Galaxy',
-                    'GLOCL' =>  'Globular Cluster',
-                    'GX+DN' =>  'Diffuse Nebula in a Galaxy',
-                    'GX+GC' =>  'Globular Cluster in a Galaxy',
-                    'G+C+N' =>  'Cluster with Nebulosity in a Galaxy',
-                    'LMCCN' =>  'Cluster with Nebulosity in the LMC',
-                    'LMCDN' =>  'Diffuse Nebula in the LMC',
-                    'LMCGC' =>  'Globular Cluster in the LMC',
-                    'LMCOC' =>  'Open cluster in the LMC',
-                    'NONEX' =>  'Nonexistent',
-                    'OPNCL' =>  'Open Cluster',
-                    'PLNNB' =>  'Planetary Nebula',
-                    'SMCCN' =>  'Cluster with Nebulosity in the SMC',
-                    'SMCDN' =>  'Diffuse Nebula in the SMC',
-                    'SMCGC' =>  'Globular Cluster in the SMC',
-                    'SMCOC' =>  'Open cluster in the SMC',
-                    'SNREM' =>  'Supernova Remnant',
-                    'QUASR' =>  'Quasar',
-                    '1STAR' =>  '1 Star',
-                    '2STAR' =>  '3 Stars',
-                    '3STAR' =>  '3 Stars',
-                    '4STAR' =>  '4 Stars',
-                    '5STAR' =>  '5 Stars',
-                    '6STAR' =>  '6 Stars',
-                    '7STAR' =>  '7 Stars',
-                    '8STAR' =>  '8 Stars',
-                    '9STAR' =>  '9 Stars',
-                    '10STAR' =>  '10 Stars',
-                    '11STAR' =>  '11 Stars',
-                    '12STAR' =>  '12 Stars',
-                    '13STAR' =>  '13 Stars',
-                    '14STAR' =>  '14 Stars',
-                    '15STAR' =>  '15 Stars',
-                    '16STAR' =>  '16 Stars',
-                );
-                $constellations = array(
-                    "and" => "Andromeda",
-                    "ant" => "Antlia",
-                    "aps" => "Apus",
-                    "aqr" => "Aquarius",
-                    "aql" => "Aquila",
-                    "ara" => "Ara",
-                    "ari" => "Aries",
-                    "aur" => "Auriga",
-                    "boo" => "Boötes",
-                    "cae" => "Caelum",
-                    "cam" => "Camelopardalis",
-                    "cnc" => "Cancer",
-                    "cvn" => "Canes Venatici",
-                    "cma" => "Canis Major",
-                    "cmi" => "Canis Minor",
-                    "cap" => "Capricornus",
-                    "car" => "Carina",
-                    "cas" => "Cassiopeia",
-                    "cen" => "Centaurus",
-                    "cep" => "Cepheus",
-                    "cet" => "Cetus",
-                    "cha" => "Chamaeleon",
-                    "cir" => "Circinus",
-                    "col" => "Columba",
-                    "com" => "Coma Berenices",
-                    "cra" => "Corona Austrina",
-                    "crb" => "Corona Borealis",
-                    "crv" => "Corvus",
-                    "crt" => "Crater",
-                    "cru" => "Crux",
-                    "cyg" => "Cygnus",
-                    "del" => "Delphinus",
-                    "dor" => "Dorado",
-                    "dra" => "Draco",
-                    "equ" => "Equuleus",
-                    "eri" => "Eridanus",
-                    "for" => "Fornax",
-                    "gem" => "Gemini",
-                    "gru" => "Grus",
-                    "her" => "Hercules",
-                    "hor" => "Horologium",
-                    "hya" => "Hydra",
-                    "hyi" => "Hydrus",
-                    "ind" => "Indus",
-                    "lac" => "Lacerta",
-                    "leo" => "Leo",
-                    "lmi" => "Leo Minor",
-                    "lep" => "Lepus",
-                    "lib" => "Libra",
-                    "lup" => "Lupus",
-                    "lyn" => "Lynx",
-                    "lyr" => "Lyra",
-                    "men" => "Mensa",
-                    "mic" => "Microscopium",
-                    "mon" => "Monoceros",
-                    "mus" => "Musca",
-                    "nor" => "Norma",
-                    "oct" => "Octans",
-                    "oph" => "Ophiuchus",
-                    "ori" => "Orion",
-                    "pav" => "Pavo",
-                    "peg" => "Pegasus",
-                    "per" => "Perseus",
-                    "phe" => "Phoenix",
-                    "pic" => "Pictor",
-                    "psc" => "Pisces",
-                    "psa" => "Piscis Austrinus",
-                    "pup" => "Puppis",
-                    "pyx" => "Pyxis",
-                    "ret" => "Reticulum",
-                    "sge" => "Sagitta",
-                    "sgr" => "Sagittarius",
-                    "sco" => "Scorpius",
-                    "scl" => "Sculptor",
-                    "sct" => "Scutum",
-                    "ser" => "Serpens",
-                    "sex" => "Sextans",
-                    "tau" => "Taurus",
-                    "tel" => "Telescopium",
-                    "tri" => "Triangulum",
-                    "tra" => "Triangulum Australe",
-                    "tuc" => "Tucana",
-                    "uma" => "Ursa Major",
-                    "umi" => "Ursa Minor",
-                    "vel" => "Vela",
-                    "vir" => "Virgo",
-                    "vol" => "Volans",
-                    "vul" => "Vulpecula"
-                );
-                $table = new V1_Model_DbTable_NGC();
-                while (($buffer = fgets($handle, 4096)) !== false && $i++ < 100) {
+                $types = Zend_Registry::get('types');
+                $constellations = Zend_Registry::get('constellations');
+                $names = Zend_Registry::get('names');
+                $ngc_table = new V1_Model_DbTable_NGC();
+                $names_table = new V1_Model_DbTable_Names();
+                while (($buffer = fgets($handle, 4096)) !== false && $i++ < 105) {
                     try{
                         $temp = explode(',', preg_replace("/\s+/", " ", str_replace('"', '', $buffer)));
-                        $item = array(
-                            // 'names' => array(trim($temp[0]), trim($temp[1])),
+                        // performace very slow, need to improve
+                        $ngc_table->insert(array(
                             'type' => @$types[trim($temp[2])] ? $types[trim($temp[2])] : '',
                             'constelation' => @$constellations[strtolower(trim($temp[3]))] ? $constellations[strtolower(trim($temp[3]))] : '',
                             'RAh' => explode(" ", trim($temp[4]))[0],
@@ -182,15 +63,41 @@ class V1_NgcController extends Zend_Controller_Action
                             'size_min' => trim($temp[11]),
                             'number_of_stars' => trim($temp[14]),
                             'class' => trim($temp[13]) // only for galaxies
-                        );
-                        // performace very slow, need to improve
-                        $table->insert($item);
+                        ));
+                        $id = $db->lastInsertId();
+                        if(trim($temp[0])){ 
+                            $names_table->insert(array(
+                                'name' => trim($temp[0]),
+                                'ngc' => $id
+                            ));
+                        }
+                        if(trim($temp[1])){ 
+                            $names_table->insert(array(
+                                'name' => trim($temp[1]),
+                                'ngc' => $id
+                            ));
+                        }
+                        $common_name = @Zend_Registry::get('names')[trim($temp[0])];
+                        if($common_name) {
+                            $names_table->insert(array(
+                                'id' => $id,
+                                'name' => $common_name
+                            ));     
+                        }
+                        $common_name = @Zend_Registry::get('names')[trim($temp[1])];
+                        if($common_name) {
+                            $names_table->insert(array(
+                                'id' => $id,
+                                'name' => $common_name
+                            ));     
+                        }
                     }
                     catch(Exception $e){
                         // die silently
                         $this->info['error'] = array('message' => 'Failed to insert row '.$i, 'exception' => $e);
                     }
                 }
+                
                 if (!feof($handle)) {
                     $this->info['error'] = "Error: unexpected fgets() fail\n";
                 }
@@ -218,9 +125,20 @@ class V1_NgcController extends Zend_Controller_Action
         $offset = !empty($offset) && is_numeric($offset) ? $offset : 0;
         
         $body = array('title' => 'New General Catalogue and Index Catalogue');
-        $object = new V1_Model_DbTable_NGC();
-        $body['results'] = $object->fetchAll($object->select()->limit($limit, $offset))->toArray();
+        
+        $ngc_table = new V1_Model_DbTable_NGC();
+        $names_table = new V1_Model_DbTable_Names();
+        
+        $results = $ngc_table->fetchAll($ngc_table->select()->limit($limit, $offset))->toArray();
+        foreach ($results as $key => $value) {
+            $results[$key]['names'] = array();
+            $names = $names_table->fetchAll($names_table->select()->where('ngc = ?', $value['id']))->toArray();
+            foreach ($names as $key1 => $value1) {
+                array_push($results[$key]['names'], $value1['name']);
+            }
+        }
         $body['info'] = $this->info;
+        $body['results'] = $results;
 
         $this->getResponse()->setBody(!empty($callback) ? "{$callback}(" . json_encode($body) . ")" : json_encode($body));
         $this->getResponse()->setHttpResponseCode(200);
