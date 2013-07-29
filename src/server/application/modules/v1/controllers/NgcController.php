@@ -10,7 +10,8 @@ class V1_NgcController extends Zend_Controller_Action
 
         // ensure database table
         $db = Zend_Registry::get('db');
-        $db->query('DROP TABLE IF EXISTS names;DROP TABLE IF EXISTS ngc;'); // for debug purposes
+        // for debug purposes
+        // $db->query('DROP TABLE IF EXISTS names;DROP TABLE IF EXISTS ngc;'); 
         if(!in_array('ngc', $db->listTables()) || !in_array('names', $db->listTables())){
             // create table query
             $sql = "DROP TABLE IF EXISTS ngc; CREATE TABLE IF NOT EXISTS ngc (".
@@ -40,18 +41,23 @@ class V1_NgcController extends Zend_Controller_Action
 
             // populate table from CSV file
             $handle = @fopen(APPLICATION_PATH . '/modules/v1/db/SAC_DeepSky_Ver81_QCQ.txt', "r");
+
+            $ngcs = array();
+            $ngc_names = array();
+
             if ($handle) {
                 $i = 0;
                 $types = Zend_Registry::get('types');
                 $constellations = Zend_Registry::get('constellations');
                 $names = Zend_Registry::get('names');
-                $ngc_table = new V1_Model_DbTable_NGC();
-                $names_table = new V1_Model_DbTable_Names();
-                while (($buffer = fgets($handle, 4096)) !== false && $i++ < 105) {
+                
+                while (($buffer = fgets($handle, 4096)) !== false) {
+                    $i++;
                     try{
                         $temp = explode(',', preg_replace("/\s+/", " ", str_replace('"', '', $buffer)));
                         // performace very slow, need to improve
-                        $ngc_table->insert(array(
+                        array_push($ngcs, array(
+                            'id' => $i,
                             'type' => @$types[trim($temp[2])] ? $types[trim($temp[2])] : '',
                             'constelation' => @$constellations[strtolower(trim($temp[3]))] ? $constellations[strtolower(trim($temp[3]))] : '',
                             'RAh' => explode(" ", trim($temp[4]))[0],
@@ -64,29 +70,30 @@ class V1_NgcController extends Zend_Controller_Action
                             'number_of_stars' => trim($temp[14]),
                             'class' => trim($temp[13]) // only for galaxies
                         ));
-                        $id = $db->lastInsertId();
+                        
+                        $id = $i;
                         if(trim($temp[0])){ 
-                            $names_table->insert(array(
-                                'name' => trim($temp[0]),
-                                'ngc' => $id
+                            array_push($ngc_names, array(
+                                'ngc' => $id,
+                                'name' => trim($temp[0])                                
                             ));
                         }
                         if(trim($temp[1])){ 
-                            $names_table->insert(array(
-                                'name' => trim($temp[1]),
-                                'ngc' => $id
+                            array_push($ngc_names, array(
+                                'ngc' => $id,
+                                'name' => trim($temp[1])
                             ));
                         }
-                        $common_name = @Zend_Registry::get('names')[trim($temp[0])];
+                        $common_name = @$names[trim($temp[0])];
                         if($common_name) {
-                            $names_table->insert(array(
+                            array_push($ngc_names, array(
                                 'id' => $id,
                                 'name' => $common_name
                             ));     
                         }
-                        $common_name = @Zend_Registry::get('names')[trim($temp[1])];
+                        $common_name = @$names[trim($temp[1])];
                         if($common_name) {
-                            $names_table->insert(array(
+                            array_push($ngc_names, array(
                                 'id' => $id,
                                 'name' => $common_name
                             ));     
@@ -97,6 +104,38 @@ class V1_NgcController extends Zend_Controller_Action
                         $this->info['error'] = array('message' => 'Failed to insert row '.$i, 'exception' => $e);
                     }
                 }
+
+                $sql = "INSERT INTO ngc (id, type, constelation, RAh, RAm, DEd, DEm, magnitude, size_max, size_min, number_of_stars, class) VALUES ";
+                for($i = 0; $i < count($ngcs) - 1; $i++){
+                    $sql .= "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?), ";
+                }
+                $sql .= "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+                $values = array();
+                foreach ($ngcs as $key => $value) {
+                    foreach ($value as $key1 => $value1) {
+                        array_push($values, $value1 ? $value1 : ' ');
+                    }
+                }
+                
+                $stmt = $db->prepare($sql); 
+                $stmt->execute( $values );
+
+                $sql = "INSERT INTO names (ngc, name) VALUES ";
+                for($i = 0; $i < count($ngc_names) - 1; $i++){
+                    $sql .= "(?, ?), ";
+                }
+                $sql .= "(?, ?)";
+
+                $values = array();
+                foreach ($ngc_names as $key => $value) {
+                    foreach ($value as $key1 => $value1) {
+                        array_push($values, $value1 ? $value1 : ' ');
+                    }
+                }
+
+                $stmt = $db->prepare($sql); 
+                $stmt->execute( $values );
                 
                 if (!feof($handle)) {
                     $this->info['error'] = "Error: unexpected fgets() fail\n";
