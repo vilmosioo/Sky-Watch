@@ -40,30 +40,32 @@ class V1_NgcController extends Zend_Controller_Action
             $db->query($sql);
 
             // populate table from CSV file
-            $handle = @fopen(APPLICATION_PATH . '/modules/v1/db/SAC_DeepSky_Ver81_QCQ.txt', "r");
-
+            $data = @file(APPLICATION_PATH . '/modules/v1/db/SAC_DeepSky_Ver81_QCQ.TXT');
+        
             $ngcs = array();
             $ngc_names = array();
 
-            if ($handle) {
+            if (!empty($data)) {
                 $i = 0;
                 $types = Zend_Registry::get('types');
                 $constellations = Zend_Registry::get('constellations');
                 $names = Zend_Registry::get('names');
                 
-                while (($buffer = fgets($handle, 4096)) !== false) {
+                foreach ($data as $key => $value) {
                     $i++;
                     try{
-                        $temp = explode(',', preg_replace("/\s+/", " ", str_replace('"', '', $buffer)));
-                        // performace very slow, need to improve
+                        $temp = explode(',', preg_replace("/\s+/", " ", str_replace('"', '', $value)));
+                        $RA = explode(" ", trim($temp[4]));
+                        $DE = explode(" ", trim($temp[5]));
+
                         array_push($ngcs, array(
                             'id' => $i,
                             'type' => @$types[trim($temp[2])] ? $types[trim($temp[2])] : '',
                             'constelation' => @$constellations[strtolower(trim($temp[3]))] ? $constellations[strtolower(trim($temp[3]))] : '',
-                            'RAh' => explode(" ", trim($temp[4]))[0],
-                            'RAm' => explode(" ", trim($temp[4]))[1],
-                            'DEd' => explode(" ", trim($temp[5]))[0],
-                            'DEm' => explode(" ", trim($temp[5]))[1],
+                            'RAh' => $RA[0],
+                            'RAm' => $RA[1],
+                            'DEd' => $DE[0],
+                            'DEm' => $DE[1],
                             'magnitude' => trim($temp[6]),
                             'size_max' => trim($temp[10]),
                             'size_min' => trim($temp[11]),
@@ -98,51 +100,53 @@ class V1_NgcController extends Zend_Controller_Action
                                 'name' => $common_name
                             ));     
                         }
+
+                        // insert every 100 records
+                        if($i % 100 == 0){
+                            $sql = "INSERT INTO ngc (id, type, constelation, RAh, RAm, DEd, DEm, magnitude, size_max, size_min, number_of_stars, class) VALUES ";
+                            for($j = 0; $j < count($ngcs) - 1; $j++){
+                                $sql .= "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?), ";
+                            }
+                            $sql .= "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+                            $values = array();
+                            foreach ($ngcs as $key => $value) {
+                                foreach ($value as $key1 => $value1) {
+                                    array_push($values, $value1 ? $value1 : ' ');
+                                }
+                            }
+                            
+                            $stmt = $db->prepare($sql); 
+                            $stmt->execute( $values );
+                            $ngcs = array();
+
+                            $sql = "INSERT INTO names (ngc, name) VALUES ";
+                            for($j = 0; $j < count($ngc_names) - 1; $j++){
+                                $sql .= "(?, ?), ";
+                            }
+                            $sql .= "(?, ?)";
+
+                            $values = array();
+                            foreach ($ngc_names as $key => $value) {
+                                foreach ($value as $key1 => $value1) {
+                                    array_push($values, $value1 ? $value1 : ' ');
+                                }
+                            }
+
+                            $stmt = $db->prepare($sql); 
+                            $stmt->execute( $values );
+                            $ngc_names = array();
+                        }
                     }
                     catch(Exception $e){
                         // die silently
                         $this->info['error'] = array('message' => 'Failed to insert row '.$i, 'exception' => $e);
                     }
                 }
-
-                $sql = "INSERT INTO ngc (id, type, constelation, RAh, RAm, DEd, DEm, magnitude, size_max, size_min, number_of_stars, class) VALUES ";
-                for($i = 0; $i < count($ngcs) - 1; $i++){
-                    $sql .= "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?), ";
-                }
-                $sql .= "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-                $values = array();
-                foreach ($ngcs as $key => $value) {
-                    foreach ($value as $key1 => $value1) {
-                        array_push($values, $value1 ? $value1 : ' ');
-                    }
-                }
-                
-                $stmt = $db->prepare($sql); 
-                $stmt->execute( $values );
-
-                $sql = "INSERT INTO names (ngc, name) VALUES ";
-                for($i = 0; $i < count($ngc_names) - 1; $i++){
-                    $sql .= "(?, ?), ";
-                }
-                $sql .= "(?, ?)";
-
-                $values = array();
-                foreach ($ngc_names as $key => $value) {
-                    foreach ($value as $key1 => $value1) {
-                        array_push($values, $value1 ? $value1 : ' ');
-                    }
-                }
-
-                $stmt = $db->prepare($sql); 
-                $stmt->execute( $values );
-                
-                if (!feof($handle)) {
-                    $this->info['error'] = "Error: unexpected fgets() fail\n";
-                }
-                fclose($handle);
+            } else {
+                $this->info['error'] = array('message' => 'Could not open file.');
             }
-        }
+        } 
     }
 
     public function headAction()
@@ -162,13 +166,23 @@ class V1_NgcController extends Zend_Controller_Action
         extract($this->_request->getParams());
         $limit = !empty($limit) && is_numeric($limit) && $limit < 50 ? $limit : 50;
         $offset = !empty($offset) && is_numeric($offset) ? $offset : 0;
-        
+        $orderby = !empty($orderby) && in_array($orderby, array('magnitude', 'RA', 'DE')) ? $orderby : 'magnitude';
+        $desc = !empty($desc) && in_array($desc, array('DESC', 'ASC')) ? $desc : 'ASC';
+
+        if($orderby == 'RA'){
+            $orderby = array("RAh $desc", "RAm $desc");
+        } else if($orderby == 'DE'){
+            $orderby = array("DEd $desc", "DEm $desc");
+        } else {
+            $orderby .= ' ' . $desc;
+        }
+
         $body = array('title' => 'New General Catalogue and Index Catalogue');
         
         $ngc_table = new V1_Model_DbTable_NGC();
         $names_table = new V1_Model_DbTable_Names();
         
-        $results = $ngc_table->fetchAll($ngc_table->select()->limit($limit, $offset))->toArray();
+        $results = $ngc_table->fetchAll($ngc_table->select()->order($orderby)->limit($limit, $offset))->toArray();
         foreach ($results as $key => $value) {
             $results[$key]['names'] = array();
             $names = $names_table->fetchAll($names_table->select()->where('ngc = ?', $value['id']))->toArray();
@@ -176,9 +190,13 @@ class V1_NgcController extends Zend_Controller_Action
                 array_push($results[$key]['names'], $value1['name']);
             }
         }
-        $body['info'] = $this->info;
         $body['results'] = $results;
-
+        
+        // add any additional information generated
+        if(!empty($this->info)){
+            $body['info'] = $this->info;
+        }
+        
         $this->getResponse()->setBody(!empty($callback) ? "{$callback}(" . json_encode($body) . ")" : json_encode($body));
         $this->getResponse()->setHttpResponseCode(200);
     }
