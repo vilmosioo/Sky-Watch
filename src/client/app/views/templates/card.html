@@ -1,17 +1,17 @@
 <div class="card">
-    <span class="isvisible icon-eye-open"></span>
-    <h2 class="title">{{ item.title }}</h2>
-    <p class="names"><span ng-repeat="name in item.names">{{name}}{{ !$last && ', ' || ''}}</span></p>
-    <p class="description">{{item.description}}</p>
-    <div class="coordinates clearfix">
-      <span class="az">{{ item.coordinates.RA.h }}<sup>h</sup> {{ item.coordinates.RA.m }}<sup>m</sup> {{ item.coordinates.RA.s }}<sup>s</sup></span>
-      <span class="alt">{{ item.coordinates.DE.d }}° {{ item.coordinates.RA.m }}<sup>'</sup> {{ item.coordinates.RA.s }}<sup>"</sup></span>
-    </div>
-    <div class="details">
-      <p>Right ascension  {{ item.coordinates.RA.h }}<sup>h</sup> {{ item.coordinates.RA.m }}<sup>m</sup> {{ item.coordinates.RA.s }}<sup>s</sup></p>
-      <p>Declination  {{ item.coordinates.DE.d }}° {{ item.coordinates.RA.m }}<sup>'</sup> {{ item.coordinates.RA.s }}<sup>"</sup></p>
-      <p>Distance  {{item.distance}} ± {{item.e_distance}} kly (2.0 ± 0.5 kpc)[13]</p>
-      <p>Apparent magnitude (V)  {{item.Vmag}}</p>
-      <p>Apparent dimensions (V)  {{item.dimensions[0]}}"x{{item.dimensions[1]}}"</p>
-    </div>
+  <span class="isvisible icon-eye-open"></span>
+  <h2 class="title">{{ item.names[0] }}</h2>
+  <p class="names"><span ng-repeat="name in item.names" ng-show="!$first">{{ name }}{{ !$last && ', ' || ''}}</span></p>
+  <p class="description">{{item.type}} in constellation {{item.constelation}}</p>
+  <div class="coordinates clearfix">
+    <span class="az">{{ item.RAh }}<sup>h</sup> {{ item.RAm }}<sup>m</sup></span>
+    <span class="alt">{{ item.DEd }}° {{ item.DEm }}<sup>'</sup></span>
   </div>
+  <div class="details">
+    <p>Right ascension  {{ item.RAh }}<sup>h</sup> {{ item.RAm }}<sup>m</sup></p>
+    <p>Declination  {{ item.DEd }}° {{ item.DEm }}<sup>'</sup></p>
+    <p>Apparent magnitude (V)  {{item.magnitude}}</p>
+    <p>Apparent dimensions (V)  {{item.size_max}}"x{{item.size_min}}"</p>
+    <p ng-show="item.number_of_stars.length">Number of stars: {{item.number_of_stars}}</p>
+  </div>
+</div>

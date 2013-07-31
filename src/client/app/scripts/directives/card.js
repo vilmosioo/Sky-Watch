@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 angular.module('ngApp')
   .directive('card', function () {
@@ -8,9 +8,6 @@ angular.module('ngApp')
       restrict: 'E',
       scope: {
         item : '='
-      },
-      controller : function($scope, $element, $attrs){
-          
       }
-    };  
+    };
   });
