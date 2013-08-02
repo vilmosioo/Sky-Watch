@@ -269,6 +269,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initMisc(){
         date_default_timezone_set('UTC');
         Zend_Date::setOptions(array('format_type' => 'php'));
+        ini_set("auto_detect_line_endings", true);
     }
 
 }

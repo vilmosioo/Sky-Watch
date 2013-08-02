@@ -36,7 +36,7 @@ class V1_NgcController extends Zend_Controller_Action
               "PRIMARY KEY (id)".
               // "UNIQUE KEY ngc (ngc)".
             ");".
-            "ALTER TABLE names ADD CONSTRAINT names_ibfk_1 FOREIGN KEY (ngc) REFERENCES ngc (id);";
+            "ALTER TABLE names ADD CONSTRAINT names_ibfk_1 FOREIGN KEY (ngc) REFERENCES ngc (id) ON DELETE CASCADE ON UPDATE CASCADE;";
             $db->query($sql);
 
             // populate table from CSV file
