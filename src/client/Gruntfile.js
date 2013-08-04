@@ -128,13 +128,17 @@ module.exports = function (grunt) {
       options: {
         sassDir: '<%= yeoman.app %>/styles',
         cssDir: '.tmp/styles',
-        imagesDir: '<%= yeoman.app %>/images',
+        imagesDir: '<%= yeoman.app %>/images/*.{png,jpg,jpeg,gif,webp,svg}',
         javascriptsDir: '<%= yeoman.app %>/scripts',
-        fontsDir: '<%= yeoman.app %>/styles/fonts',
+        // fontsDir: 'styles/fonts',
         importPath: '<%= yeoman.app %>/components',
         relativeAssets: true
       },
-      dist: {},
+      dist: {
+        options: {
+          outputStyle: 'compressed'
+        }
+      },
       server: {
         options: {
           debugInfo: true
@@ -187,15 +191,15 @@ module.exports = function (grunt) {
     htmlmin: {
       dist: {
         options: {
-          /*removeCommentsFromCDATA: true,
+          removeCommentsFromCDATA: true,
           // https://github.com/yeoman/grunt-usemin/issues/44
-          //collapseWhitespace: true,
+          //  collapseWhitespace: true,
           collapseBooleanAttributes: true,
           removeAttributeQuotes: true,
           removeRedundantAttributes: true,
           useShortDoctype: true,
           removeEmptyAttributes: true,
-          removeOptionalTags: true*/
+          removeOptionalTags: true
         },
         files: [{
           expand: true,
@@ -236,7 +240,7 @@ module.exports = function (grunt) {
             '<%= yeoman.dist %>/scripts/{,*/}*.js',
             '<%= yeoman.dist %>/styles/{,*/}*.css',
             '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-            '<%= yeoman.dist %>/styles/fonts/*'
+            '<%= yeoman.dist %>/styles/fonts/*.{eot,svg,ttf,woff}'
           ]
         }
       }
@@ -251,9 +255,8 @@ module.exports = function (grunt) {
           src: [
             '*.{ico,txt}',
             '.htaccess',
-            'components/**/*',
-            'images/{,*/}*.{gif,webp}',
-            'styles/fonts/*'
+            'images/*.{png,jpg,jpeg,gif,webp,svg}',
+            'styles/fonts/*.{eot,svg,ttf,woff}'
           ]
         }]
       }
@@ -287,10 +290,10 @@ module.exports = function (grunt) {
     'coffee',
     'compass:dist',
     'useminPrepare',
+    'concat',
     'imagemin',
     'cssmin',
     'htmlmin',
-    'concat',
     'copy',
     'cdnify',
     'ngmin',
