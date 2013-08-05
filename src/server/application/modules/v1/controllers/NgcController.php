@@ -180,17 +180,13 @@ class V1_NgcController extends Zend_Controller_Action
         $body = array('title' => 'New General Catalogue and Index Catalogue');
         
         $ngc_table = new V1_Model_DbTable_NGC();
-        $names_table = new V1_Model_DbTable_Names();
-        
-        $results = $ngc_table->fetchAll($ngc_table->select()->order($orderby)->limit($limit, $offset))->toArray();
+        $items = array();
+
+        $results = $ngc_table->fetchAll($ngc_table->select()->order($orderby)->limit($limit, $offset));
         foreach ($results as $key => $value) {
-            $results[$key]['names'] = array();
-            $names = $names_table->fetchAll($names_table->select()->where('ngc = ?', $value['id']))->toArray();
-            foreach ($names as $key1 => $value1) {
-                array_push($results[$key]['names'], $value1['name']);
-            }
+            array_push($items, $value->normalize());
         }
-        $body['results'] = $results;
+        $body['results'] = $items;
         
         // add any additional information generated
         if(!empty($this->info)){

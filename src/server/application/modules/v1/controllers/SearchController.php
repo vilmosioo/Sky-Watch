@@ -34,94 +34,45 @@ class V1_SearchController extends Zend_Controller_Action
             $results = array();
 
             // sanitize search query
-            $search = strtolower($search);
+            $search = str_replace(" ", "%", $search);
+            $search = '%'.trim(strtolower($search)).'%';
 
-            // check to see if we ask for a specific catalogue
-            if(preg_match("/sao \d+/", $search)){
-                $stars = new V1_Model_DbTable_SmithsonianAstrophysicalObservatory();
-                $search = trim(str_replace("sao", "", $search));
-                $search = '%'.$search.'%';
+            $names = new V1_Model_DbTable_Names();
+            $ngc = new V1_Model_DbTable_NGC();
+            $planets = new V1_Model_DbTable_Planet();
+                
+            $results = $names->fetchAll(
+                $names->select()
+                    ->where('LOWER(name) LIKE ?', $search)
+                    ->order('name ASC')
+                    ->limit(50, 0) // count, offset
+            );
 
-                $results = $stars->fetchAll(
-                    $stars->select()
-                        ->where('SAO LIKE ?', $search)
-                        ->order('SAO ASC')
-                        ->limit(100) 
-                )->toArray();
-            } else if(preg_match("/hip \d+/", $search)){
-                $stars = new V1_Model_DbTable_Hipparcos();
-                $search = trim(str_replace("hip", "", $search));
-                $search = '%'.$search.'%';
-
-                $results = $stars->fetchAll(
-                    $stars->select()
-                        ->where('HIP LIKE ?', $search)
-                        ->order('HIP ASC')
-                        ->limit(100) 
-                )->toArray();
-            } else if(preg_match("/bsc \d+/", $search)){
-                $stars = new V1_Model_DbTable_BrightStarCatalogue();
-                $search = trim(str_replace("bsc", "", $search));
-                $search = '%'.$search.'%';
-
-                $results = $stars->fetchAll(
-                    $stars->select()
-                        ->where('HR LIKE ?', $search)
-                        ->order('HR ASC')
-                        ->limit(100) 
-                )->toArray();
+            $results2 = $planets->fetchAll(
+                $query = $planets->select()
+                    ->where('LOWER(name) LIKE ?', $search)
+                    ->order('name ASC')
+                    ->limit(50, 0)
+            );
+            
+            $items = array();
+            
+            if(count($results) == 0 && count($results2) == 0){
+            	$body['results'] = array('Your query returned 0 results.');
             } else {
-                $names = new V1_Model_DbTable_Name();
-                
-                $greek_letters = array("alpha" => "alp", "beta" => "bet", "gamma" => "gam", "delta" => "del", "epsilon" => "eps", "zeta" => "zet", "theta" => "the", "iota" => "iot", "kappa" => "kap", "lambda" => "lam", "omicron" => "omi", "sigma" => "sig", "tau" => "tao", "upsilon" => "ups", "omega" => "ome");
-                foreach ($greek_letters as $key => $value) {
-                    $search = str_replace(strtolower($key), $value, $search);
-                }
-
-                $constellations = array("Andromeda" => "and", "Antlia" => "ant", "Apus" => "aps", "Aquarius" => "aqr", "Aquila" => "aql", "Ara" => "ara", "Aries" => "ari", "Auriga" => "aur", "Boötes" => "boo", "Caelum" => "cae", "Camelopardalis" => "cam", "Cancer" => "cnc", "Canes Venatici" => "cvn", "Canis Major" => "cma", "Canis Minor" => "cmi", "Capricornus" => "cap", "Carina" => "car", "Cassiopeia" => "cas", "Centaurus" => "cen", "Cepheus" => "cep", "Cetus" => "cet", "Chamaeleon" => "cha", "Circinus" => "cir", "Columba" => "col", "Coma Berenices" => "com", "Corona Austrina" => "cra", "Corona Borealis" => "crb", "Corvus" => "crv", "Crater" => "crt", "Crux" => "cru", "Cygnus" => "cyg", "Delphinus" => "del", "Dorado" => "dor", "Draco" => "dra", "Equuleus" => "equ", "Eridanus" => "eri", "Fornax" => "for", "Gemini" => "gem", "Grus" => "gru", "Hercules" => "her", "Horologium" => "hor", "Hydra" => "hya", "Hydrus" => "hyi", "Indus" => "ind", "Lacerta" => "lac", "Leo" => "leo", "Leo Minor" => "lmi", "Lepus" => "lep", "Libra" => "lib", "Lupus" => "lup", "Lynx" => "lyn", "Lyra" => "lyr", "Mensa" => "men", "Microscopium" => "mic", "Monoceros" => "mon", "Musca" => "mus", "Norma" => "nor", "Octans" => "oct", "Ophiuchus" => "oph", "Orion" => "ori", "Pavo" => "pav", "Pegasus" => "peg", "Perseus" => "per", "Phoenix" => "phe", "Pictor" => "pic", "Pisces" => "psc", "Piscis Austrinus" => "psa", "Puppis" => "pup", "Pyxis" => "pyx", "Reticulum" => "ret", "Sagitta" => "sge", "Sagittarius" => "sgr", "Scorpius" => "sco", "Sculptor" => "scl", "Scutum" => "sct", "Serpens" => "ser", "Sextans" => "sex", "Taurus" => "tau", "Telescopium" => "tel", "Triangulum" => "tri", "Triangulum Australe" => "tra", "Tucana" => "tuc", "Ursa Major" => "uma", "Ursa Minor" => "umi", "Vela" => "vel", "Virgo" => "vir", "Volans" => "vol", "vulpecula" => "vul");
-                foreach ($constellations as $key => $value) {
-                    $search = str_replace(strtolower($key), $value, $search);
-                }
-                
-                $search = str_replace(" ", "%", $search);
-                $search = '%'.$search.'%';
-
-                // get name query result
-                $results = $names->fetchAll(
-                    $names->select()
-                        ->where('name LIKE ?', $search)
-                        ->order('name ASC')
-                        ->limit(100, 0) // count, offset
-                );
-                if(count($results) == 0){
-                	$results = array('Your query returned 0 results.');
-                } else {
-                    $stars = new V1_Model_DbTable_Star();
-                    $ngc = new V1_Model_DbTable_NGC();
-                    $planets = new V1_Model_DbTable_Planet();
+                if(count($results) > 0){
                     foreach ($results as $result) {
-                        $sourceid = $result->sourceid;
-                        if($result->source == 'Star'){
-                            $result->sourceid = $stars->find($sourceid)->current()->normalize();
-                        } else if($result->source == 'NewGeneralCatalogueandIndexCatalogue'){
-                            $result->sourceid = $ngc->find($sourceid)->current()->toArray();
-                        } else if($result->source == 'Planet'){
-                            $result->sourceid = $planets->find($sourceid)->current()->toArray();
-                        }
-                        $temp = $names->fetchAll(
-                            $names->select()
-                                ->where('source = ?', $result->source)
-                                ->where('sourceid = ?', $sourceid)
-                        );
-                        $all_names = array();
-                        foreach ($temp as $value) {
-                            $all_names[] = $value->name;
-                        }
-                        $result->name = $all_names;
+                        array_push($items, $ngc->find($result->ngc)->current()->normalize());
                     }
                 }
-                $body['results'] = $results->toArray();
+
+                if(count($results2) > 0){
+                    foreach ($results2 as $result) {
+                        array_push($items, $result->normalize());
+                    }
+                }
             }
+            $body['results'] = $items;
         }
 
         $this->getResponse()->setBody(!empty($callback) ? "{$callback}(" . json_encode($body) . ")" : json_encode($body));
