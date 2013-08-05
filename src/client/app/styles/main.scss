@@ -12,6 +12,15 @@ $gridSeparator : 10px;
 
 /*==============MAIN==============*/
 #main{ padding:3%; text-align:left;
+  .search-container{ position:relative; 
+    #search{
+      @include ctb-box-sizing(border-box); padding:8px 35px 8px 10px; width:100%; height:36px; 
+    }
+    &:before {
+        position:absolute; top:3px; right:3px; display: inline-block; width:30px; height:30px; line-height:30px; font-size: 25px; color:#ccc;
+        font-family: "FontAwesome"; content: "\f002";
+    }
+  }
   .card{
     padding:15px; background:#fff; overflow:hidden; height:202px; @include ctb-border-radius(3px); @include ctb-box-shadow(1px 1px 5px #666); position:relative;
     .isvisible{
@@ -57,25 +66,21 @@ $gridSeparator : 10px;
     width:50%;
   }
   @media only screen and (max-width: $gridMinWidth * 2) {
-    width:100%;
+    padding-right:0; float:none; width:100%;
   }
 }
 
-
-.animate-enter, 
-.animate-leave
+.animate-enter
 { 
   @include ctb-transition(0.3s cubic-bezier(0.250, 0.250, 0.750, 0.750) all);
   position: relative;
   @include ctb-translate3d(0,0,0);
 } 
 
-.animate-leave.animate-leave-active,
 .animate-enter { 
   opacity: 0; top:40px; 
 }
 
-.animate-enter.animate-enter-active, 
-.animate-leave {
+.animate-enter.animate-enter-active {
   opacity: 1; top:0; 
 }

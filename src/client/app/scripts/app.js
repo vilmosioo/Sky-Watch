@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ngApp', [])
+angular.module('ngApp', ['ngSanitize'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
