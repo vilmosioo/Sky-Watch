@@ -9,7 +9,7 @@ angular.module('ngApp')
 			if(val){
 				$scope.items = Sky.searchItems({
 					q : $sanitize(val)
-				});	
+				});
 			}
 		});
 	});
