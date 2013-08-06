@@ -78,7 +78,10 @@ $gridSeparator : 10px;
 { 
   @include ctb-transition(0.3s cubic-bezier(0.250, 0.250, 0.750, 0.750) all);
   position: relative;
+  // enable hardware accelerated animations
   @include ctb-translate3d(0,0,0);
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
 } 
 
 .animate-enter { 
