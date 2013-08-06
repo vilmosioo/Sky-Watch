@@ -2,14 +2,15 @@
 
 angular.module('ngApp')
 	.controller('MainCtrl', function MainCtrl($scope, $sanitize, Sky) {
+		$scope.search = '';
 		$scope.items = Sky.getItems({
 			limit : 10
 		});
-		$scope.$watch('search', function(val){
-			if(val){
+		$scope.submit = function(){
+			if($scope.search && $scope.search.length){
 				$scope.items = Sky.searchItems({
-					q : $sanitize(val)
+					q : $sanitize($scope.search)
 				});
 			}
-		});
+		};
 	});

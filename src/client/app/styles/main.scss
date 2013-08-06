@@ -12,12 +12,12 @@ $gridSeparator : 10px;
 
 /*==============MAIN==============*/
 #main{ padding:3%; text-align:left;
-  .search-container{ position:relative; 
+  .search-container{ position:relative; margin:0; 
     #search{
-      @include ctb-box-sizing(border-box); padding:8px 35px 8px 10px; width:100%; height:36px; 
+      @include ctb-box-sizing(border-box); padding:8px 35px 8px 10px; width:100%; height:36px; margin:0; 
     }
     &:before {
-        position:absolute; top:3px; right:3px; display: inline-block; width:30px; height:30px; line-height:30px; font-size: 25px; color:#ccc;
+        position:absolute; top:3px; right:5px; display: inline-block; width:30px; height:30px; line-height:30px; font-size: 25px; color:#ccc;
         font-family: "FontAwesome"; content: "\f002";
     }
   }
@@ -68,6 +68,10 @@ $gridSeparator : 10px;
   @media only screen and (max-width: $gridMinWidth * 2) {
     padding-right:0; float:none; width:100%;
   }
+}
+
+.animate-leave{
+  @include transition-delay(0 !important);
 }
 
 .animate-enter
