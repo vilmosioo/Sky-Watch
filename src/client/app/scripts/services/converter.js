@@ -9,7 +9,7 @@ angular.module('ngApp')
       */
       convert : function(RA, DE){
 
-          console.log(Time.getGMST0());
+          Time.getGMST();
           // LST - local sideral time
           // GST - Greenwich sideral time
           // To an accuracy within 0.1 second per century, Greenwich (Mean) Sidereal Time (in hours and decimal parts of an hour) can be calculated as
