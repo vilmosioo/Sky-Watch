@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ngApp')
-	.controller('MainCtrl', function MainCtrl($scope, $sanitize, Sky) {
+	.controller('MainCtrl', function MainCtrl($scope, $sanitize, Sky, Converter) {
 		$scope.search = '';
 		$scope.items = Sky.getItems({
 			limit : 10
@@ -13,4 +13,5 @@ angular.module('ngApp')
 				});
 			}
 		};
+		// Converter.convert(0, 0);
 	});
