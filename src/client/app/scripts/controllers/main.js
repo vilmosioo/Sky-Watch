@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ngApp')
-	.controller('MainCtrl', function MainCtrl($scope, $sanitize, Sky, Converter) {
+	.controller('MainCtrl', function MainCtrl($scope, $sanitize, Sky, Converter, Geo) {
 		$scope.search = '';
 		$scope.items = Sky.getItems({
 			limit : 10
@@ -14,4 +14,8 @@ angular.module('ngApp')
 			}
 		};
 		// Converter.convert(0, 0);
+		Geo.locate()
+           .then(function (position) {
+                console.log(position);
+            });
 	});
