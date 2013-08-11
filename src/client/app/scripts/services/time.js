@@ -40,14 +40,8 @@ angular.module('ngApp')
       getGMST : function(){
         // http://www.indigotide.com/software/siderealsource.html
         var jc = this.getJC(), 
-          jd = this.getJD(); 
-        
-        console.group('GSMT0');
-        console.log('jd', this.getJD());
-        console.log('jc', this.getJC());
-        
-        // Greenwich Mean Sidereal Time (GMST) in degrees
-        var GMST = 280.46061837 + 360.98564736629*jd + 0.000387933*jc*jc - jc*jc*jc/38710000; 
+          jd = this.getJD(),
+          GMST = 280.46061837 + 360.98564736629*jd + 0.000387933*jc*jc - jc*jc*jc/38710000; 
         
         // normalize GMST
         while( GMST > 360.0 ){
@@ -57,11 +51,7 @@ angular.module('ngApp')
           GMST += 360.0;
         }
 
-        console.log('GMST', GMST / 15)
-        console.groupEnd();
-
-        // turn to hours
-        return GMST / 15;   
+        return GMST;   
       }
     };
   });
