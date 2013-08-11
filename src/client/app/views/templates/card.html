@@ -4,8 +4,8 @@
   <p class="names"><span ng-repeat="name in item.names" ng-show="!$first">{{ name }}{{ !$last && ', ' || ''}}</span></p>
   <p class="description">{{item.type}} in constellation {{item.constelation}}</p>
   <div class="coordinates clearfix">
-    <span class="az">{{ item.az || '-'}}</span>
-    <span class="alt">{{ item.alt || '-'}}</span>
+    <span class="az">{{ item.az | degrees:'hours'}}</span>
+    <span class="alt">{{ item.alt | degrees}}</span>
   </div>
   <div class="details">
     <p>Right ascension  {{ item.RAh }}<sup>h</sup> {{ item.RAm }}<sup>m</sup></p>
