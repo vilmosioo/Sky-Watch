@@ -1,13 +1,33 @@
 'use strict';
 
 angular.module('ngApp')
-	.factory('Converter', function (Time) {
-		return {
+	.factory('Converter', function ($rootScope, $timeout, Time) {
+		var timer = null;
+		var converter = {
+			/**
+			* Given a set of objects, update the local coordinates every second
+			* @param items
+			*/
+			convertAll: function(items){
+				if(timer !== null){
+					$timeout.cancel(timer);
+				}
+				timer = $timeout(function(){
+					for (var i = items.length - 1; i >= 0; i--){
+						var localPos = converter.convert({
+							RA: (parseFloat(items[i].RAh) || 0) + (parseFloat(items[i].RAm) || 0) / 60 + (parseFloat(items[i].RAs) || 0) / 3600,
+							DE: (parseFloat(items[i].DEd) || 0) + (parseFloat(items[i].DEm) || 0) / 60 + (parseFloat(items[i].DEs) || 0) / 3600
+						}, $rootScope.position);
+						items[i].az = localPos.az;
+						items[i].alt = localPos.alt;
+					}
+				}, 1000);
+			},
 			/** Converts a set of coordinates from equatorial to local coordinates
 			* @param RA - the right ascension, in hours as a float number 
 			* @param DE - the declination, in degrees as a float
 			*/
-			convert : function(coord, position){
+			convert: function(coord, position){
 				var RA = coord.RA,
 					DE = coord.DE,
 					latitude = position.latitude,
@@ -52,4 +72,5 @@ angular.module('ngApp')
 				};
 			}
 		};
+		return converter;
 	});

@@ -5,9 +5,22 @@ angular.module('ngApp', ['ngSanitize'])
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        controller: 'MainController'
+      })
+      .when('/search/', {
+        templateUrl: 'views/search.html',
+        controller: 'SearchController'
+      })
+      .when('/about/', {
+        templateUrl: 'views/about.html',
+        controller: 'AboutController'
       })
       .otherwise({
         redirectTo: '/'
       });
+  })
+  .run(function($rootScope, Geo){
+    Geo.locate().then(function (position) {
+      $rootScope.position = position.coords;
+    });
   });

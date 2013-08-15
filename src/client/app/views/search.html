@@ -1,0 +1,8 @@
+<div class="clearfix">
+  <form ng-submit="submit()" class="grid-5 search-container">
+  	<input id="search" type="search" placeholder="Search..." ng-model="search">
+  </form>
+</div>
+<div class="grid-5" ng-repeat="item in items" ng-animate="'animate'" style="transition-delay: {{$index * 0.05}}s">
+  <card item='item'></card>   
+</div>

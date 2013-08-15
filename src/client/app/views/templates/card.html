@@ -1,5 +1,7 @@
 <div class="card">
-  <span class="isvisible icon-eye-open"></span>
+  <span class="isvisible icon-eye-open" ng-show="item.alt > 15"></span>
+  <span class="isvisible icon-eye-close" ng-show="item.alt <= 15"></span>
+  <span class="info icon-info"></span>
   <h2 class="title">{{ item.names[0] }}</h2>
   <p class="names"><span ng-repeat="name in item.names" ng-show="!$first">{{ name }}{{ !$last && ', ' || ''}}</span></p>
   <p class="description">{{item.type}} in constellation {{item.constelation}}</p>

@@ -34,7 +34,11 @@
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
+    <header id="header" ng-controller="HeaderController">
+      <nav>
+        <a ng-href="{{item.href}}" title="{{item.label}}" ng-bind="item.label" ng-repeat="item in menu"></a>
+      </nav>
+    </header>
     <main id="main" role="main" class="clearfix" ng-view></main>
 
     <!-- build:js scripts/scripts.js -->
@@ -44,7 +48,10 @@
     <script src="components/angular-sanitize/angular-sanitize.js"></script>
     <script src="components/modernizr/modernizr.js"></script>
     <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/MainController.js"></script>
+    <script src="scripts/controllers/HeaderController.js"></script>
+    <script src="scripts/controllers/AboutController.js"></script>
+    <script src="scripts/controllers/SearchController.js"></script>
     <script src="scripts/directives/card.js"></script>
     <script src="scripts/services/converter.js"></script>
     <script src="scripts/services/time.js"></script>
