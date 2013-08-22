@@ -127,12 +127,7 @@ module.exports = function (grunt) {
     compass: {
       options: {
         sassDir: '<%= yeoman.app %>/styles',
-        cssDir: '.tmp/styles',
-        imagesDir: '<%= yeoman.app %>/images/*.{png,jpg,jpeg,gif,webp,svg}',
-        javascriptsDir: '<%= yeoman.app %>/scripts',
-        // fontsDir: 'styles/fonts',
-        importPath: '<%= yeoman.app %>/components',
-        relativeAssets: true
+        cssDir: '.tmp/styles'
       },
       dist: {
         options: {
