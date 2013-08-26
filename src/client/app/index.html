@@ -34,11 +34,7 @@
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <header id="header" ng-controller="HeaderController">
-      <nav>
-        <a ng-href="{{item.href}}" title="{{item.label}}" ng-bind="item.label" ng-repeat="item in menu"></a>
-      </nav>
-    </header>
+    <div ng-include src="'views/templates/header.html'"></div>
     <main id="main" role="main" class="clearfix" ng-view></main>
 
     <!-- build:js scripts/scripts.js -->

@@ -9,7 +9,17 @@ body{
 /*==============VARIABLES===============*/
 $gridMinWidth : 300px;
 $gridSeparator : 10px;
-
+$mainColor: rgb(65,180,255);
+/*==============HEADER============*/
+#header{
+  background:$mainColor; padding:7px 3%;
+  #logo{
+    color:#fff; font-weight:900; text-decoration: none; float:left; font-size:1.5em; letter-spacing: -2px;
+  }
+  #search{
+    color:#fff; text-decoration: none; float:right; font-size:1.5em; 
+  }
+}
 /*==============MAIN==============*/
 #main{ padding:3%; text-align:left;
   .search-container{ position:relative; margin:0; 
@@ -27,7 +37,7 @@ $gridSeparator : 10px;
       position:absolute; right:5px; top:3px; display:inline-block; width:30px; height:30px; text-align:center; line-height:30px; font-size:25px; color:#ccc;
     }   
     .title{
-      color:rgb(65,180,255); font-weight: bold; margin:0;text-overflow: ellipsis; white-space: nowrap; overflow: hidden;
+      color:$mainColor; font-weight: bold; margin:0;text-overflow: ellipsis; white-space: nowrap; overflow: hidden;
     }
     .names{
       font-weight:bold;text-overflow: ellipsis; white-space: nowrap; overflow: hidden; height:20px;
@@ -42,7 +52,7 @@ $gridSeparator : 10px;
         strong{ display:inline-block; width:50px; font-weight:100;}
       }
       .az{ float:left; color:rgb(255, 120, 45);}
-      .alt{ float:right; color:rgb(65,180,255);}
+      .alt{ float:right; color:$mainColor;}
     }
     .details{
       display: none;
