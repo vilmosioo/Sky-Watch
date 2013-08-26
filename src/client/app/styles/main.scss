@@ -80,6 +80,10 @@ $mainColor: rgb(65,180,255);
   }
 }
 
+.isloading{
+  height:50px; @include opacity(.18); background:url("../images/loader.gif") center center no-repeat;
+}
+
 .animate-leave{
   @include transition-delay(0 !important);
 }
