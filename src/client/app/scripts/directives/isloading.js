@@ -9,7 +9,7 @@ angular.module('ngApp')
       scope: {
         flag : '='
       },
-      link: function(scope, element, attrs) {
+      link: function(scope, element) {
         scope.$watch('flag', function(val){
           element.css('display', val ? 'block' : 'none');
         });
