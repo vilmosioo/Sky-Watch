@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ngApp')
-  .directive('card', function () {
+  .directive('card', function card() {
     return {
       templateUrl: 'views/templates/card.html',
       replace: true,

@@ -66,14 +66,21 @@ $mainColor: rgb(65,180,255);
 /*==============COMMON==============*/
 .grid-5{
   width:20%; float:left; display:inline-block; padding:0 $gridSeparator $gridSeparator 0; 
+  &:nth-child(5n){padding-right:0;}
   @media only screen and (max-width: $gridMinWidth * 5) {
     width:25%;
+    &:nth-child(5n){padding-right:$gridSeparator;}
+    &:nth-child(4n){padding-right:0;}
   }
   @media only screen and (max-width: $gridMinWidth * 4) {
     width:33.33%;
+    &:nth-child(4n){padding-right:$gridSeparator;}
+    &:nth-child(3n){padding-right:0;}
   }
   @media only screen and (max-width: $gridMinWidth * 3) {
     width:50%;
+    &:nth-child(3n){padding-right:$gridSeparator;}
+    &:nth-child(2n){padding-right:0;}
   }
   @media only screen and (max-width: $gridMinWidth * 2) {
     padding-right:0; float:none; width:100%;
@@ -81,7 +88,7 @@ $mainColor: rgb(65,180,255);
 }
 
 .isloading{
-  height:50px; @include opacity(.18); background:url("../images/loader.gif") center center no-repeat;
+  height:50px; @include opacity(.18); background:url("../images/loader.gif") center center no-repeat; clear:both;
 }
 
 .animate-leave{

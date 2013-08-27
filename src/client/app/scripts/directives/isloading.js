@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ngApp')
-  .directive('isLoading', function () {
+  .directive('isLoading', function isLoading() {
     return {
       template: '<div class="isloading"></div>',
       replace: true,
