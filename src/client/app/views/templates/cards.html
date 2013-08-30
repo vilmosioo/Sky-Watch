@@ -2,5 +2,6 @@
   <div ng-class="'grid-' + config.grid" ng-repeat="item in list.items" ng-animate="'animate'" style="transition-delay: {{$index * 0.05}}s">
     <card item='item'></card>   
   </div>
+  <div class="clear"></div>
   <is-loading flag="list.isloading"></is-loading>
 </div>

@@ -84,6 +84,7 @@ $mainColor: rgb(65,180,255);
   }
   @media only screen and (max-width: $gridMinWidth * 2) {
     padding-right:0; float:none; width:100%;
+    &:nth-child(3n){padding-right:0;}
   }
 }
 
