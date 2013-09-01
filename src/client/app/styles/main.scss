@@ -88,8 +88,16 @@ $mainColor: rgb(65,180,255);
   }
 }
 
-.isloading{
-  height:50px; @include opacity(.18); background:url("../images/loader.gif") center center no-repeat; clear:both;
+.loadmore{
+  a{ display:block; @include ctb-border-radius(3px); @include ctb-box-shadow(1px 1px 5px #666); padding:10px 15px; background:$mainColor; cursor:pointer; text-align:center; color:#fff; text-decoration: none;}
+  &.isloading{
+    height:50px; @include opacity(.18); background:url("../images/loader.gif") center center no-repeat; 
+    a{ display:none;}
+  }
+}
+
+.clear{
+  clear:both; display:block;
 }
 
 .animate-leave{

@@ -3,16 +3,20 @@
 angular.module('ngApp')
   .directive('isLoading', function isLoading() {
     return {
-      template: '<div class="isloading"></div>',
+      template: '<div ng-class="{isloading:flag}" class="loadmore clear"><a>Load more</a></div>',
       replace: true,
       restrict: 'E',
       scope: {
-        flag : '='
+        flag : '=',
+        handler: '='
       },
-      link: function(scope, element) {
-        scope.$watch('flag', function(val){
-          element.css('display', val ? 'block' : 'none');
-        });
+      link: function($scope, elem){
+        if(typeof $scope.handler === 'function'){
+          elem.bind('click', $scope.handler);
+          $scope.$on('$destroy', function(){
+            return elem.unbind('click', $scope.handler); 
+          });
+        }
       }
     };
   });

@@ -1,7 +1,13 @@
-<div ng-class="config.wrapClass">
-  <div ng-class="'grid-' + config.grid" ng-repeat="item in list.items" ng-animate="'animate'" style="transition-delay: {{$index * 0.05}}s">
-    <card item='item'></card>   
+<div>
+  <div ng-class="config.wrapClass">
+    <div ng-class="'grid-' + config.grid" ng-repeat="item in list.items" ng-animate="'animate'" style="transition-delay: {{$index * 0.05}}s">
+      <card item='item'></card>   
+    </div>
   </div>
   <div class="clear"></div>
-  <is-loading flag="list.isloading"></is-loading>
+  <div>
+    <div ng-class="'grid-' + config.grid">
+      <is-loading flag="list.isloading" handler="list.load"></is-loading>
+    </div>
+  </div>
 </div>
