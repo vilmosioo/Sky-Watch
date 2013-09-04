@@ -5,15 +5,18 @@ angular.module('ngApp', ['ngSanitize'])
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainController'
+        controller: 'MainController',
+        title: 'Home'
       })
       .when('/search/', {
         templateUrl: 'views/search.html',
-        controller: 'SearchController'
+        controller: 'SearchController',
+        title: 'Search'
       })
       .when('/about/', {
         templateUrl: 'views/about.html',
-        controller: 'AboutController'
+        controller: 'AboutController',
+        title: 'About'
       })
       .otherwise({
         redirectTo: '/'

@@ -3,7 +3,7 @@
 angular.module('ngApp')
   .directive('isLoading', function isLoading() {
     return {
-      template: '<div ng-class="{isloading:flag}" class="loadmore clear"><a>Load more</a></div>',
+      template: '<div ng-class="{isloading:flag}" class="loadmore clear"><a>Load more</a><span class="loader"></span></div>',
       replace: true,
       restrict: 'E',
       scope: {
