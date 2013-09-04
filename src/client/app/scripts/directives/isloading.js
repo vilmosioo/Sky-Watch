@@ -14,7 +14,7 @@ angular.module('ngApp')
         if(typeof $scope.handler === 'function'){
           elem.bind('click', $scope.handler);
           $scope.$on('$destroy', function(){
-            return elem.unbind('click', $scope.handler); 
+            return elem.unbind('click', $scope.handler);
           });
         }
       }

@@ -4,6 +4,7 @@ src/client/dist
 src/client/.tmp
 src/client/.sass-cache
 src/client/app/components
+src/server/application/configs/application.prod.ini
 
 #################
 ## Eclipse

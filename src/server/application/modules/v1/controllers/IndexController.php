@@ -33,7 +33,7 @@ class V1_IndexController extends Zend_Controller_Action
         $ngc_table = new V1_Model_DbTable_NGC();
         $names_table = new V1_Model_DbTable_Names();
         
-        $results = $ngc_table->fetchAll($ngc_table->select()->order($orderby)->limit($limit, $offset))->toArray();
+        $results = $ngc_table->fetchAll($ngc_table->select()->order($orderby)->limit($limit + $offset, 0))->toArray();
         foreach ($results as $key => $value) {
             $results[$key]['names'] = array();
             $names = $names_table->fetchAll($names_table->select()->where('ngc = ?', $value['id']))->toArray();
@@ -74,7 +74,8 @@ class V1_IndexController extends Zend_Controller_Action
         $body['results'] = array_merge($body['results'], $results);
 
         usort($body['results'], array(&$this, "cmp"));
-        
+        $body['results'] = array_splice($body['results'], $offset, $limit);
+
         $this->getResponse()->setBody(!empty($callback) ? "{$callback}(" . json_encode($body) . ")" : json_encode($body));
         $this->getResponse()->setHttpResponseCode(200);
     }
