@@ -31,9 +31,9 @@ $iconMuted:         #eee;
 @include font-face(
     'FontAwesome',
     font-files(
-        "#{$fontAwesomePath}.woff?v=3.0.1", woff,
-        "#{$fontAwesomePath}.ttf?v=3.0.1", truetype),
-    '#{$fontAwesomePath}.eot?v=3.0.1',
+        "#{$fontAwesomePath}.woff", woff,
+        "#{$fontAwesomePath}.ttf", truetype),
+    '#{$fontAwesomePath}.eot',
     normal,
     normal);
 

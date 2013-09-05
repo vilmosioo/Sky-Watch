@@ -20,6 +20,18 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     yeoman: yeomanConfig,
+    manifest: {
+      generate: {
+        options: {
+          basePath: 'dist/',
+          preferOnline: true
+        },
+        src: [
+          '**/*.*' // cache all files
+        ],
+        dest: 'dist/manifest.appcache'
+      }
+    },
     watch: {
       coffee: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
@@ -295,7 +307,8 @@ module.exports = function (grunt) {
     'ngmin',
     'uglify',
     'rev',
-    'usemin'
+    'usemin',
+    'manifest'
   ]);
 
   grunt.registerTask('default', ['build']);

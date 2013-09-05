@@ -8,6 +8,20 @@ body{
 
 h1, h2, h3, h4, h5, h6{ line-height:1.2; letter-spacing: -2px; font-weight:300;}
 
+/*===============FONTS===================*/
+@font-face {
+  font-family: 'Muli';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Muli Light'), local('Muli-Light'), url(fonts/TgrecWq39GVsTOFonFwGXQLUuEpTyoUstqEm5AMlJo4.woff) format('woff');
+}
+@font-face {
+  font-family: 'Muli';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Muli'), url(fonts/minRpKQdEvXRRS8oAbAtWvesZW2xOQ-xsNqO47m55DA.woff) format('woff');
+}
+
 /*==============VARIABLES===============*/
 $gridMinWidth : 300px;
 $gridSeparator : 20px;
