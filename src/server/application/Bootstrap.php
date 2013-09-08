@@ -12,6 +12,29 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         )));
     }
 
+    protected function _initCache(){
+        $file = APPLICATION_PATH . '/../.tmp/';
+        if(!is_dir($file)){
+            mkdir($file);
+        }
+
+        $frontend= array(
+            'lifetime' => 7200,
+            'automatic_serialization' => true
+        );
+
+        $backend= array(
+            'cache_dir' => $file,
+        );
+
+        $cache = Zend_Cache::factory('core', 'File', $frontend, $backend);
+
+        Zend_Db_Table_Abstract::setDefaultMetadataCache($cache);
+        
+        // make the cache available in the application
+        Zend_Registry::set('cache', $cache);
+    }
+
     protected function _initData(){
         Zend_Registry::set('types' , array(
             'ASTER' =>  'Asterism',

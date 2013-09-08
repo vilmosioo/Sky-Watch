@@ -28,7 +28,7 @@ class V1_PlanetController extends Zend_Controller_Action
           "RAs FLOAT NOT NULL,".
           "DEd INTEGER NOT NULL,".
           "DEm INTEGER NOT NULL,".
-          "Des FLOAT NOT NULL,".
+          "DEs FLOAT NOT NULL,".
           "size FLOAT NOT NULL,".
           "magnitude FLOAT NOT NULL,".
           "constellation text NOT NULL,".

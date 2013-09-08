@@ -28,49 +28,63 @@ class V1_IndexController extends Zend_Controller_Action
         $offset = !empty($offset) && is_numeric($offset) ? $offset : 0;
         $orderby = !empty($orderby) && in_array($orderby, array('magnitude', 'RA', 'DE')) ? $orderby : 'magnitude';
         $desc = !empty($desc) && in_array($desc, array('DESC', 'ASC')) ? $desc : 'ASC';
+        
         $body = array();
-
+        $cache = Zend_Registry::get('cache');
         $ngc_table = new V1_Model_DbTable_NGC();
         $names_table = new V1_Model_DbTable_Names();
         
-        $results = $ngc_table->fetchAll($ngc_table->select()->order($orderby)->limit($limit + $offset, 0))->toArray();
-        foreach ($results as $key => $value) {
-            $results[$key]['names'] = array();
-            $names = $names_table->fetchAll($names_table->select()->where('ngc = ?', $value['id']))->toArray();
-            foreach ($names as $key1 => $value1) {
-                array_push($results[$key]['names'], $value1['name']);
+        $results = array();
+        if(!$results = $cache->load('ngc_' . $orderby . '_' . $limit . '_' . $offset)) {
+            $results = $ngc_table->fetchAll($ngc_table->select()->order($orderby)->limit($limit + $offset, 0))->toArray();
+            foreach ($results as $key => $value) {
+                $results[$key]['names'] = array();
+                $names = $names_table->fetchAll($names_table->select()->where('ngc = ?', $value['id']))->toArray();
+                foreach ($names as $key1 => $value1) {
+                    array_push($results[$key]['names'], $value1['name']);
+                }
             }
+            
+            $cache->save($results, 'ngc_' . $orderby . '_' . $limit . '_' . $offset);
         }
+
         $body['results'] = $results;
         
-        $planet_table = new V1_Model_DbTable_Planet();
-        $ephemerid_table = new V1_Model_DbTable_Ephemerid();
+        // current julian date
+        $now = gregoriantojd(date('m'), date('d'), date('Y')) - 0.5;
+        $now_str = str_replace('.', '_', $now);
 
-        $results = $planet_table->fetchAll($planet_table->select())->toArray();
-        foreach ($results as $key => $value) {
-            // current julian date, including fractions
-            $now = gregoriantojd(date('m'), date('d'), date('Y')) - 0.5 + date('H') / 24 + date('i') / 60 / 24 + date('s') / 3600 / 24;
+        $results = array();
+        if(!$results = $cache->load('planet_' . $now_str)) {
+            $planet_table = new V1_Model_DbTable_Planet();
+            $ephemerid_table = new V1_Model_DbTable_Ephemerid();
+                
+            $results = $planet_table->fetchAll($planet_table->select())->toArray();
+            foreach ($results as $key => $value) {
+                // perform a union of ephemerids: 12 larger and 12 smaller, this ensures the most relevant ephemeris is present in the array
+                $select1 = $ephemerid_table->select()->where("planet = '$value[id]' AND JD >= '$now'")->limit(12);
+                $select2 = $ephemerid_table->select()->where("planet = '$value[id]' AND JD < '$now'")->order('JD DESC')->limit(12);
+                $query = $ephemerid_table->select()->union(array("($select1)", "($select2)"), Zend_Db_Select::SQL_UNION_ALL)->order('JD DESC');
+                $ephemerids = $ephemerid_table->fetchAll($query)->toArray();
+                
+                // add ephemerids to item
+                $results[$key]['ephemerids'] = $ephemerids;
 
-            // perform a union of ephemerids: 3 larger and 3 smaller
-            $select1 = $ephemerid_table->select()->where("planet = '$value[id]' AND JD >= '$now'")->limit(3);
-            $select2 = $ephemerid_table->select()->where("planet = '$value[id]' AND JD < '$now'")->order('JD DESC')->limit(3);
-            $query = $ephemerid_table->select()->union(array("($select1)", "($select2)"), Zend_Db_Select::SQL_UNION_ALL)->order('JD DESC');
-            $ephemerids = $ephemerid_table->fetchAll($query)->toArray();
-            
-            // add ephemerids to item
-            $results[$key]['ephemerids'] = $ephemerids;
-
-            // calculate mean magnitude (might not be necessary)
-            $magnitude = 99;
-            if(!empty($ephemerids)){
-                $magnitude = 0;
-                foreach ($ephemerids as $key1 => $value1) {
-                    $magnitude += floatval($value1['magnitude']);
+                // calculate mean magnitude (might not be necessary)
+                $magnitude = 99;
+                if(!empty($ephemerids)){
+                    $magnitude = 0;
+                    foreach ($ephemerids as $key1 => $value1) {
+                        $magnitude += floatval($value1['magnitude']);
+                    }
+                    $magnitude /= count($ephemerids);
                 }
-                $magnitude /= count($ephemerids);
+                $results[$key]['magnitude'] = $magnitude;
             }
-            $results[$key]['magnitude'] = $magnitude;
+            
+            $cache->save($results, 'planet_' . $now_str);
         }
+
         $body['results'] = array_merge($body['results'], $results);
 
         usort($body['results'], array(&$this, "cmp"));
