@@ -11,10 +11,10 @@ angular.module('ngApp')
       }
 
       $scope.results.isloading = true;
-      Sky.getItems({limit: 5, offset: $scope.results.items.length}).then(function(obj){
+      Sky.getItems({limit: 5, offset: $scope.results.items.length}).then(function(results){
         $scope.results.isloading = false;
-        for(var i = 0; angular.isArray(obj.data.results) && i < obj.data.results.length; i++){
-          $scope.results.items.push(obj.data.results[i]);
+        for(var i = 0; angular.isArray(results) && i < results.length; i++){
+          $scope.results.items.push(results[i]);
         }
       }, function(data, status, headers, config){
         $scope.results.isloading = false;

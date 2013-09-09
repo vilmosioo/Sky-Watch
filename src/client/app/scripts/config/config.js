@@ -7,6 +7,7 @@ angular.module('ngApp')
     });
   })
   .constant('Constants', {
-    searchUrl: 'http://vilmosioo.co.uk/sky-watch-server/public/index.php/v1/search',
-    ngcUrl: 'http://vilmosioo.co.uk/sky-watch-server/public/index.php/v1'
+    SEARCH_URL: 'http://vilmosioo.co.uk/sky-watch-server/public/index.php/v1/search',
+    NGC_URL: 'http://vilmosioo.co.uk/sky-watch-server/public/index.php/v1',
+    ITEMS: 'sky_watch_items'
   });
