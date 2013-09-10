@@ -39,6 +39,10 @@ $loaderSize:30px;
     color:$mainColor; float:right; font-weight:100;
   }
 }
+/*==============FOOTER============*/
+#footer{
+  min-height:50px;
+}
 /*==============MAIN==============*/
 #main{ padding:0 3%; text-align:left;
   .search-container{ position:relative; margin:0; 

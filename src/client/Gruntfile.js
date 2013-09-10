@@ -24,7 +24,8 @@ module.exports = function (grunt) {
       generate: {
         options: {
           basePath: 'dist/',
-          preferOnline: true
+          preferOnline: true,
+          verbose: false
         },
         src: [
           '**/*.*' // cache all files

@@ -11,6 +11,13 @@ angular.module('ngApp')
       }
 
       $scope.results.isloading = true;
+
+      // call apply to ensure load icon is visible
+      var phase = $scope.$root.$$phase;
+      if(phase !== '$apply' && phase !== '$digest') {
+        $scope.$apply();
+      }
+
       Sky.getItems({limit: 5, offset: $scope.results.items.length}).then(function(results){
         $scope.results.isloading = false;
         for(var i = 0; angular.isArray(results) && i < results.length; i++){
