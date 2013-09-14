@@ -5,6 +5,7 @@ src/client/.tmp
 src/client/.sass-cache
 src/client/app/components
 src/server/application/configs/application.prod.ini
+src/client/app/scripts/config/constants.js
 
 #################
 ## Eclipse

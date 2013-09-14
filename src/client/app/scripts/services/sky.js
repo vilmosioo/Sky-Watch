@@ -32,7 +32,6 @@ angular.module('ngApp')
             items = JSON.parse(items);
             _defer.resolve(items.splice(_offset, _limit));
           } else {
-            console.log(_index);
             $http.jsonp(Constants.NGC_URL + '?callback=JSON_CALLBACK&limit=' + _index + '&offset=' + (_index - 100))
               .success(function(data){
                 // save to storage 

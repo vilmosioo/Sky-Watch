@@ -33,6 +33,15 @@ module.exports = function (grunt) {
         dest: 'dist/manifest.appcache'
       }
     },
+    ngconstant: {
+      dev: [{
+        dest: 'app/scripts/config/constants.js',
+        name: 'Constants',
+        constants: {
+          Constants: grunt.file.readJSON('app/scripts/config/constants.json')
+        }
+      }]
+    },
     watch: {
       coffee: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
@@ -276,6 +285,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('server', [
     'clean:server',
+    'ngconstant',
     'coffee:dist',
     'compass:server',
     'livereload-start',
@@ -294,6 +304,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'ngconstant',
     'jshint',
     'test',
     'coffee',
