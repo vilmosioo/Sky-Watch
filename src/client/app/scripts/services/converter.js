@@ -9,6 +9,7 @@ angular.module('ngApp')
 			* @param items
 			*/
 			convertAll: function(items){
+				console.log('convert', items);
 				if(timer !== null){
 					$timeout.cancel(timer);
 				}

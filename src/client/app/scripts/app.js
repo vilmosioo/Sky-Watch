@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ngApp', ['ngSanitize', "Constants"])
+angular.module('ngApp', ['ngSanitize', 'Constants'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
@@ -9,7 +9,7 @@ angular.module('ngApp', ['ngSanitize', "Constants"])
         title: 'Home'
       })
       .when('/search/', {
-        templateUrl: 'views/search.html',
+        templateUrl: 'views/main.html',
         controller: 'SearchController',
         title: 'Search'
       })

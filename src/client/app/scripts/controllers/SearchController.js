@@ -1,9 +1,7 @@
 'use strict';
 
 angular.module('ngApp')
-	.controller('SearchController', function SearchCtrl($scope, $sanitize, Sky) {
-		$scope.search = '';
-
+	.controller('SearchController', function SearchCtrl($scope, $rootScope, $sanitize, $location, Sky) {
 		var _load = function(){
 			// do no load if already loading
       if($scope.results.isloading){
@@ -11,7 +9,7 @@ angular.module('ngApp')
       }
 
       $scope.results.isloading = true;
-			Sky.searchItems({q: $sanitize($scope.search), limit: 5, offset: $scope.results.items.length})
+			Sky.searchItems({q: $sanitize($rootScope.search), limit: 5, offset: $scope.results.items.length})
 			.then(function(obj){
 				$scope.results.isloading = false;
 	      for(var i = 0; angular.isArray(obj.data.results) && i < obj.data.results.length; i++){
@@ -29,13 +27,6 @@ angular.module('ngApp')
       load: _load
 		};
 
-		// search function
-		$scope.submit = function(){
-			if($scope.search && $scope.search.length){
-				$scope.results.items = [];
-				$scope.results.load();
-			} else {
-				$scope.results.items = [];
-			}
-		};
+		$scope.results.load();
+
 	});

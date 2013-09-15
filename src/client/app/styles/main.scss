@@ -28,15 +28,40 @@ $gridSeparator : 20px;
 $mainColor: rgb(65,180,255);
 $gray:#ccc;
 $loaderSize:30px;
+$iconSize:20px;
 /*==============HEADER============*/
 #header{
   border-top:3px solid $mainColor; padding:12px 3% 15px;
   #logo, #search{ color:$mainColor; text-decoration: none;font-size:1.5em;}
   #logo{
-    float:left;  
+    float:left; 
+    @media only screen and (max-width: 2 * $gridMinWidth) {
+      float:none;
+    } 
   }
   #search{
-    color:$mainColor; float:right; font-weight:100;
+    float:right; position:relative; 
+    input{
+      @include ctb-box-sizing(border-box); width:70px; height:auto; float:right; font-weight:100; padding-right: $iconSize; @include ctb-transition(.5s width); 
+      &:focus{
+        width:206px;
+      };
+    }
+    &:after{
+      font-family: FontAwesome; color:$gray; font-weight: 100; font-style: normal;
+      content: "\f002";
+      position:absolute; top:5px; right:4px;
+      width:$iconSize; height:$iconSize; font-size: $iconSize; line-height: $iconSize;
+    }
+    @media only screen and (max-width: 2 * $gridMinWidth) {
+      margin:12px 0 0; float:none; display:block; clear:both;
+      input{
+        float:none; width:100%;
+        &:focus{
+          width:100%;
+        }
+      }
+    }
   }
 }
 /*==============FOOTER============*/
@@ -85,6 +110,9 @@ $loaderSize:30px;
 }
 
 /*==============COMMON==============*/
+.noResults{
+  text-align:center;margin:30px auto;font-style:italic;
+}
 .grid-5{
   width:20%; float:left; display:inline-block; padding:0 $gridSeparator $gridSeparator 0; 
   &:nth-child(5n){padding-right:0;}

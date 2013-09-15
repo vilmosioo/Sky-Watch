@@ -1,7 +1,7 @@
 <div class="card">
   <span class="isvisible" ng-class="{'icon-eye-open' : item.alt > 15, 'icon-eye-close' : item.alt <= 15}"></span>
   <h2 class="title">{{ item.names[0] }}</h2>
-  <p class="names" ng-show="item.names > 1">
+  <p class="names" ng-show="item.names.length > 1">
     <strong><span ng-repeat="name in item.names" ng-show="!$first">{{ name }}{{ !$last && ', ' || ''}}</span></strong>
   </p>
   <div class='separator'></div>

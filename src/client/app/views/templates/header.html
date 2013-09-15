@@ -1,4 +1,7 @@
-<header id="header" class="clearfix">
+<header id="header" class="clearfix" ng-controller="HeaderController">
   <a href="#/" id="logo">Sky Watch</a>
-  <a ng-href="#/search/" title="Search" id="search" class="icon-search"></a>  
+
+  <form id="search" ng-submit="submit()">
+    <input type="search" placeholder="Search..." ng-model="search">
+  </form>
 </header>

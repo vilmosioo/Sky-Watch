@@ -5,6 +5,9 @@
     </div>
   </div>
   <div class="clear"></div>
+  <div class="noResults" ng-hide="list.items.length > 0 || list.isloading">
+    Sorry, no results
+  </div>
   <div>
     <is-loading flag="list.isloading" handler="list.load"></is-loading>
   </div>
