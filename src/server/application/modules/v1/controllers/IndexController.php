@@ -29,6 +29,12 @@ class V1_IndexController extends Zend_Controller_Action
         $orderby = !empty($orderby) && in_array($orderby, array('magnitude', 'RA', 'DE')) ? $orderby : 'magnitude';
         $desc = !empty($desc) && in_array($desc, array('DESC', 'ASC')) ? $desc : 'ASC';
         
+        // orderby is the term and order is the SQL columns
+        $order = $orderby;
+        $order == 'RA' && $order = array('RAh', 'RAm');
+        $order == 'DE' && $order = array('DEd', 'DEm');
+        $this->_orderby = $order;
+        
         $body = array();
         $cache = Zend_Registry::get('cache');
         $ngc_table = new V1_Model_DbTable_NGC();
@@ -36,7 +42,7 @@ class V1_IndexController extends Zend_Controller_Action
         
         $results = array();
         if(!$results = $cache->load('ngc_' . $orderby . '_' . $limit . '_' . $offset)) {
-            $results = $ngc_table->fetchAll($ngc_table->select()->order($orderby)->limit($limit + $offset, 0))->toArray();
+            $results = $ngc_table->fetchAll($ngc_table->select()->order($order)->limit($limit + $offset, 0))->toArray();
             foreach ($results as $key => $value) {
                 $results[$key]['names'] = array();
                 $names = $names_table->fetchAll($names_table->select()->where('ngc = ?', $value['id']))->toArray();
@@ -70,16 +76,26 @@ class V1_IndexController extends Zend_Controller_Action
                 // add ephemerids to item
                 $results[$key]['ephemerids'] = $ephemerids;
 
-                // calculate mean magnitude (might not be necessary)
-                $magnitude = 99;
+                // calculate mean fields (might not be necessary)
+                $fields = array(
+                    'magnitude' => 99,
+                    'RAh' => 0,
+                    'RAm' => 0,
+                    'DEd' => 0,
+                    'DEm' => 0
+                );
                 if(!empty($ephemerids)){
-                    $magnitude = 0;
+                    $fields['magnitude'] = 0;
                     foreach ($ephemerids as $key1 => $value1) {
-                        $magnitude += floatval($value1['magnitude']);
+                        foreach ($fields as $field_key => $field_value) {
+                           $fields[$field_key] += floatval($value1[$field_key]); 
+                        }
                     }
-                    $magnitude /= count($ephemerids);
+                    
                 }
-                $results[$key]['magnitude'] = $magnitude;
+                foreach ($fields as $field_key => $field_value) {
+                   $results[$key][$field_key] = $fields[$field_key] / count($ephemerids); 
+                }
             }
             
             $cache->save($results, 'planet_' . $now_str);
@@ -87,20 +103,36 @@ class V1_IndexController extends Zend_Controller_Action
 
         $body['results'] = array_merge($body['results'], $results);
 
+        // sort NGC+planets array
         usort($body['results'], array(&$this, "cmp"));
+        
+        // return limit+offset array
         $body['results'] = array_splice($body['results'], $offset, $limit);
 
         $this->getResponse()->setBody(!empty($callback) ? "{$callback}(" . json_encode($body) . ")" : json_encode($body));
         $this->getResponse()->setHttpResponseCode(200);
     }
 
-    // combine the results
+    protected $_orderby = 'magnitude';
+
+    // comparison function
     public function cmp($a, $b)
     {
         if ($a == $b) {
             return 0;
         }
-        return (floatval($a['magnitude']) < floatval($b['magnitude'])) ? -1 : 1;
+        if(is_array($this->_orderby)){
+            // compare each term one after the other
+            foreach ($this->_orderby as $key => $value) {
+                if(floatval($a[$value]) != floatval($b[$value])){
+                    return (floatval($a[$value]) < floatval($b[$value])) ? -1 : 1;   
+                }
+            }
+            // all terms equal
+            return 0;
+        } else {
+            return (floatval($a[$this->_orderby]) < floatval($b[$this->_orderby])) ? -1 : 1;
+        }
     }
 
     public function getAction()
