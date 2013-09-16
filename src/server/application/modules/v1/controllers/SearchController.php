@@ -25,55 +25,67 @@ class V1_SearchController extends Zend_Controller_Action
     {
         extract($this->_request->getParams());
         @$search = !empty($q) ? $q : null;
-        
+        $limit = !empty($limit) && is_numeric($limit) && $limit < 50 ? $limit : 50;
+        $offset = !empty($offset) && is_numeric($offset) ? $offset : 0;
+
         $body = array('title' => "Search results for : " . $search);
-        
+        $cache = Zend_Registry::get('cache');
+        $search_results = array();
+
         if(empty($search)){
             $body['error'] = 'Please provide a query string by adding ?q=YOUR_QUERY to the url.';
         } else {
-            $results = array();
+            
+            if(!$search_results = $cache->load('search_' . $q . '_' . $offset . '_' . $limit)) {
+                $results = array();
 
-            // sanitize search query
-            $search = str_replace(" ", "%", $search);
-            $search = '%'.trim(strtolower($search)).'%';
+                // sanitize search query
+                $search = str_replace(" ", "%", $search);
+                $search = '%'.trim(strtolower($search)).'%';
 
-            $names = new V1_Model_DbTable_Names();
-            $ngc = new V1_Model_DbTable_NGC();
-            $planets = new V1_Model_DbTable_Planet();
+                $names = new V1_Model_DbTable_Names();
+                $ngc = new V1_Model_DbTable_NGC();
+                $planets = new V1_Model_DbTable_Planet();
+                    
+                $results = $names->fetchAll(
+                    $names->select()
+                        ->where('LOWER(name) LIKE ?', $search)
+                        ->order('name ASC')
+                        ->limit(50, 0) // count, offset
+                );
+
+                $results2 = $planets->fetchAll(
+                    $query = $planets->select()
+                        ->where('LOWER(name) LIKE ?', $search)
+                        ->order('name ASC')
+                        ->limit(50, 0)
+                );
                 
-            $results = $names->fetchAll(
-                $names->select()
-                    ->where('LOWER(name) LIKE ?', $search)
-                    ->order('name ASC')
-                    ->limit(50, 0) // count, offset
-            );
+                $items = array();
+                
+                if(count($results) == 0 && count($results2) == 0){
+                    $search_results = array('Your query returned 0 results.');
+                } else {
+                    if(count($results) > 0){
+                        foreach ($results as $result) {
+                            array_push($items, $ngc->find($result->ngc)->current()->normalize());
+                        }
+                    }
 
-            $results2 = $planets->fetchAll(
-                $query = $planets->select()
-                    ->where('LOWER(name) LIKE ?', $search)
-                    ->order('name ASC')
-                    ->limit(50, 0)
-            );
-            
-            $items = array();
-            
-            if(count($results) == 0 && count($results2) == 0){
-            	$body['results'] = array('Your query returned 0 results.');
-            } else {
-                if(count($results) > 0){
-                    foreach ($results as $result) {
-                        array_push($items, $ngc->find($result->ngc)->current()->normalize());
+                    if(count($results2) > 0){
+                        foreach ($results2 as $result) {
+                            array_push($items, $result->normalize());
+                        }
                     }
                 }
-
-                if(count($results2) > 0){
-                    foreach ($results2 as $result) {
-                        array_push($items, $result->normalize());
-                    }
-                }
+                $search_results = $items;
+                $cache->save($search_results, 'search_' . $q . '_' . $offset . '_' . $limit);
             }
-            $body['results'] = $items;
         }
+
+        // return limit+offset array
+        $body['total'] = count($search_results);
+        $body['results'] = array_splice($search_results, $offset, $limit);
 
         $this->getResponse()->setBody(!empty($callback) ? "{$callback}(" . json_encode($body) . ")" : json_encode($body));
         $this->getResponse()->setHttpResponseCode(200);
