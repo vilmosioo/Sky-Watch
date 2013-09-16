@@ -26,7 +26,7 @@ angular.module('ngApp')
               LocalStorage.removeItem(key);
             }
           }
-          
+
           // watch for changes in LocalStorage
           var items = LocalStorage.getItem(_key);
           if(items){

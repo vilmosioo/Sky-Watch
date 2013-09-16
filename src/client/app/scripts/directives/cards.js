@@ -24,9 +24,9 @@ angular.module('ngApp')
               var phase = $scope.$root.$$phase;
               if(phase !== '$apply' && phase !== '$digest') {
                 $scope.$apply(function(){
-                  Converter.convertAll($scope.list.items);  
+                  Converter.convertAll($scope.list.items);
                 });
-              }  
+              }
             }, 1000);
             $scope.$on('$destroy', function(){
               return clearInterval(interval);
