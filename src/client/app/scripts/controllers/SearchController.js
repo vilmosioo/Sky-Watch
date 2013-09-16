@@ -12,9 +12,10 @@ angular.module('ngApp')
 			Sky.searchItems({q: $sanitize($rootScope.search), limit: 5, offset: $scope.results.items.length})
 			.then(function(obj){
 				$scope.results.isloading = false;
-	      for(var i = 0; angular.isArray(obj.data.results) && i < obj.data.results.length; i++){
+				for(var i = 0; angular.isArray(obj.data.results) && i < obj.data.results.length; i++){
 	        $scope.results.items.push(obj.data.results[i]);
 	      }
+	      $scope.results.more = $scope.results.items.length < obj.data.total;
 	    }, function(data, status, headers, config){
 				$scope.results.isloading = false;
 	      console.log('error', data, status, headers, config);
@@ -24,7 +25,8 @@ angular.module('ngApp')
 		$scope.results = {
 			items: [],
 			isloading: false,
-      load: _load
+      load: _load,
+      more: true
 		};
 
 		$scope.results.load();

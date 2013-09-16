@@ -20,7 +20,7 @@ angular.module('ngApp')
         // calculate local coordinates
         var positionWatch = $rootScope.$watch('position', function(position){
           if(position){
-            setInterval(function(){
+            var interval = setInterval(function(){
               var phase = $scope.$root.$$phase;
               if(phase !== '$apply' && phase !== '$digest') {
                 $scope.$apply(function(){
@@ -28,6 +28,9 @@ angular.module('ngApp')
                 });
               }  
             }, 1000);
+            $scope.$on('$destroy', function(){
+              return clearInterval(interval);
+            });
             positionWatch();
           }
         });

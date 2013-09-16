@@ -32,7 +32,8 @@ angular.module('ngApp')
     $scope.results = {
       items: [],
       isloading: false,
-      load: _load
+      load: _load,
+      more: true
     };
 
     $scope.results.load();
