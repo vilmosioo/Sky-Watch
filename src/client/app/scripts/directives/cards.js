@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ngApp')
-  .directive('cards', function cards($window, $rootScope, Converter) {
+  .directive('cards', function cards($window, $timeout, $rootScope, Converter) {
     return {
       templateUrl: 'views/templates/cards.html',
       replace: true,
@@ -20,7 +20,14 @@ angular.module('ngApp')
         // calculate local coordinates
         var positionWatch = $rootScope.$watch('position', function(position){
           if(position){
-            $scope.$watch('list.items', Converter.convertAll, true);
+            setInterval(function(){
+              var phase = $scope.$root.$$phase;
+              if(phase !== '$apply' && phase !== '$digest') {
+                $scope.$apply(function(){
+                  Converter.convertAll($scope.list.items);  
+                });
+              }  
+            }, 1000);
             positionWatch();
           }
         });
