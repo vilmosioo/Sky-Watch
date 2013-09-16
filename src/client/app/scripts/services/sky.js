@@ -13,7 +13,8 @@ angular.module('ngApp')
       getItems : function(params){
         var _limit = params && angular.isNumber(params.limit) ? Math.min(100, parseInt(params.limit, 10)) : 10,
           _offset = params && angular.isNumber(params.offset) ? parseInt(params.offset, 10) : 0,
-          _index = (Math.round((_offset + _limit) / 100) + 1) * 100,
+          _real_offset = _offset % (Constants.BUFFER * _limit),
+          _index = Math.floor(_offset / Constants.BUFFER / _limit),
           _defer = $q.defer(),
           _time = Math.round(Time.getJD()),
           _key = Constants.ITEMS + '_' + _time + '_' + _index;
@@ -25,19 +26,19 @@ angular.module('ngApp')
               LocalStorage.removeItem(key);
             }
           }
-
+          
           // watch for changes in LocalStorage
           var items = LocalStorage.getItem(_key);
           if(items){
             items = JSON.parse(items);
-            _defer.resolve(items.splice(_offset, _limit));
+            _defer.resolve(items.splice(_real_offset, _limit));
           } else {
-            $http.jsonp(Constants.NGC_URL + '?callback=JSON_CALLBACK&limit=' + _index + '&offset=' + (_index - 100))
+            $http.jsonp(Constants.NGC_URL + '?callback=JSON_CALLBACK&limit=' + Constants.BUFFER * _limit + '&offset=' + _offset)
               .success(function(data){
                 // save to storage 
                 LocalStorage.setItem(_key, JSON.stringify(data.results));
                 // handle success
-                _defer.resolve(data.results);
+                _defer.resolve(data.results.splice(_real_offset, _limit));
               })
               .error(function(data, status, headers, config){
                 _defer.reject(data, status, headers, config);
