@@ -152,9 +152,11 @@ $iconSize:20px;
 } 
 
 .animate-enter { 
-  opacity: 0; top:40px; 
+  opacity: 0; 
+  @include ctb-translate(0, 40px);
 }
 
 .animate-enter.animate-enter-active {
-  opacity: 1; top:0; 
+  opacity: 1; 
+  @include ctb-translate(0, 0);
 }

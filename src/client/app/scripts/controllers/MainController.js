@@ -1,8 +1,7 @@
 'use strict';
 
 angular.module('ngApp')
-	.controller('MainController', function MainCtrl($scope, Sky) {
-
+	.controller('MainController', function MainCtrl($scope, Sky, Constants) {
 		// load objects
     var _load = function(){
       // do no load if already loading
@@ -18,7 +17,7 @@ angular.module('ngApp')
         $scope.$apply();
       }
 
-      Sky.getItems({limit: 5, offset: $scope.results.items.length}).then(function(results){
+      Sky.getItems({limit: Constants.DEFAULT_LIMIT, offset: $scope.results.items.length}).then(function(results){
         $scope.results.isloading = false;
         for(var i = 0; angular.isArray(results) && i < results.length; i++){
           $scope.results.items.push(results[i]);

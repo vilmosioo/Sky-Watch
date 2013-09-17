@@ -9,7 +9,7 @@ angular.module('ngApp')
       }
 
       $scope.results.isloading = true;
-			Sky.searchItems({q: $sanitize($rootScope.search), limit: 5, offset: $scope.results.items.length})
+			Sky.searchItems({q: $sanitize($rootScope.search), limit: Constants.DEFAULT_LIMIT, offset: $scope.results.items.length})
 			.then(function(obj){
 				$scope.results.isloading = false;
 				for(var i = 0; angular.isArray(obj.data.results) && i < obj.data.results.length; i++){

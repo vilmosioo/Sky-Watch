@@ -1,6 +1,6 @@
 <div>
   <div ng-class="config.wrapClass">
-    <div ng-class="'grid-' + config.grid" ng-repeat="item in list.items" ng-animate="'animate'" style="transition-delay: {{$index * 0.05}}s">
+    <div ng-class="'grid-' + config.grid" ng-repeat="item in list.items" ng-animate="'animate'" style="transition-delay: {{$index % config.limit * 0.1}}s">
       <card item='item'></card>   
     </div>
   </div>

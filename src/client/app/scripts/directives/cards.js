@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ngApp')
-  .directive('cards', function cards($window, $timeout, $rootScope, Converter) {
+  .directive('cards', function cards($window, $timeout, $rootScope, Constants, Converter) {
     return {
       templateUrl: 'views/templates/cards.html',
       replace: true,
@@ -14,7 +14,8 @@ angular.module('ngApp')
         // set configuration option
         $scope.config = angular.extend({
           wrapClass: 'cards',
-          grid: 5
+          grid: 5,
+          limit: Constants.DEFAULT_LIMIT
         }, $scope.config);
 
         // calculate local coordinates
