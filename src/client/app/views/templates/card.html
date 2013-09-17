@@ -5,12 +5,12 @@
     <strong><span ng-repeat="name in item.names" ng-show="!$first">{{ name }}{{ !$last && ', ' || ''}}</span></strong>
   </p>
   <div class='separator'></div>
-  <p><strong>{{item.type}} in constellation {{item.constelation}}</strong></p>
-  <p>Right ascension  {{ item.RAh }}<sup>h</sup> {{ item.RAm | number }}<sup>m</sup></p>
-  <p>Declination  {{ item.DEd }}° {{ item.DEm | number }}<sup>'</sup></p>
-  <p>Apparent magnitude {{item.magnitude | number}}</p>
-  <p ng-show="item.size_max && item.size_min">Apparent dimensions {{item.size_max | number}}"x{{item.size_min | number}}"</p>
-  <p ng-show="item.number_of_stars">Number of stars: {{item.number_of_stars}}</p>
+  <p>{{item.type}} in constellation {{item.constelation}}</p>
+  <p>Right ascension <strong>{{ item.RAh }}<sup>h</sup> {{ item.RAm | number }}<sup>m</sup></strong></p>
+  <p>Declination <strong>{{ item.DEd }}° {{ item.DEm | number }}<sup>'</sup></strong></p>
+  <p>Apparent magnitude <strong>{{item.magnitude | number}}</strong></p>
+  <p ng-show="item.size_max && item.size_min">Apparent dimensions <strong>{{item.size_max | number}}"x{{item.size_min | number}}"</strong></p>
+  <p ng-show="item.number_of_stars">Number of stars: <strong>{{item.number_of_stars}}</strong></p>
   <div class="coordinates clearfix">
     <span class="az">{{ item.az | degrees:'hours'}}</span>
     <span class="alt">{{ item.alt | degrees}}</span>

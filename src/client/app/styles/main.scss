@@ -3,24 +3,10 @@
 * { @include ctb-box-sizing(border-box); line-height:1.2;}
 
 body{
-  text-align:center; background:#eee; font-family: 'Muli', sans-serif; color:#333; font-weight:100; font-size:16px;
+  text-align:center; background:#eee; font-family: Helvetica Neue, Helvetica, sans-serif; color:#333; font-weight:100; font-size:16px;
 }
 
-h1, h2, h3, h4, h5, h6{ line-height:1.2; letter-spacing: -2px; font-weight:300;}
-
-/*===============FONTS===================*/
-@font-face {
-  font-family: 'Muli';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Muli Light'), local('Muli-Light'), url(fonts/TgrecWq39GVsTOFonFwGXQLUuEpTyoUstqEm5AMlJo4.woff) format('woff');
-}
-@font-face {
-  font-family: 'Muli';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Muli'), url(fonts/minRpKQdEvXRRS8oAbAtWvesZW2xOQ-xsNqO47m55DA.woff) format('woff');
-}
+h1, h2, h3, h4, h5, h6{ line-height:1.2; font-weight:100;}
 
 /*==============VARIABLES===============*/
 $gridMinWidth : 300px;
@@ -32,7 +18,7 @@ $iconSize:20px;
 /*==============HEADER============*/
 #header{
   border-top:3px solid $mainColor; padding:12px 3% 15px;
-  #logo, #search{ color:$mainColor; text-decoration: none;font-size:1.5em;}
+  #logo, #search{ color:$mainColor; text-decoration: none;font-size:1.75em;}
   #logo{
     float:left; 
     @media only screen and (max-width: 2 * $gridMinWidth) {
@@ -40,9 +26,9 @@ $iconSize:20px;
     } 
   }
   #search{
-    float:right; position:relative; 
+    float:right; position:relative;  
     input{
-      @include ctb-box-sizing(border-box); width:70px; height:auto; float:right; font-weight:100; padding-right: $iconSize; @include ctb-transition(.5s width); 
+      @include ctb-box-sizing(border-box); width:100px; height:auto; float:right; font-weight:100; padding-right: $iconSize; @include ctb-transition(.5s width); 
       &:focus{
         width:206px;
       };
