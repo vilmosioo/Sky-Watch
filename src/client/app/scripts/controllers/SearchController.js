@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ngApp')
-	.controller('SearchController', function SearchCtrl($scope, $rootScope, $sanitize, $location, Sky) {
+	.controller('SearchController', function SearchCtrl($scope, $rootScope, Constants, $sanitize, $location, Sky) {
 		var _load = function(){
 			// do no load if already loading
       if($scope.results.isloading){
