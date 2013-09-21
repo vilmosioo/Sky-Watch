@@ -7,6 +7,7 @@ class V1_SearchController extends Zend_Controller_Action
     	$this->_helper->viewRenderer->setNoRender(true);
         $this->getResponse()->setHeader('Content-Type', 'application/json', true);
         $this->getResponse()->setHeader('access-control-allow-origin', '*', true);
+        $this->getResponse()->setHeader('Cache-Control', 'max-age='.(6*24*3600).', public', true); // cache for 6 hours 
     }
 
     public function headAction()
