@@ -17,8 +17,8 @@ $loaderSize:30px;
 $iconSize:20px;
 /*==============HEADER============*/
 #header{
-  border-top:3px solid $mainColor; padding:12px 3% 15px;
-  #logo, #search{ color:$mainColor; text-decoration: none;font-size:1.75em;}
+  border-top:3px solid $mainColor; padding:3px 3% 0; margin:0 0 15px;
+  #logo, #search{ color:$mainColor; margin:0 0 7px; line-height:45px; text-decoration: none; font-size:1.75em;}
   #logo{
     float:left; 
     @media only screen and (max-width: 2 * $gridMinWidth) {
@@ -26,9 +26,9 @@ $iconSize:20px;
     } 
   }
   #search{
-    float:right; position:relative;  
+    float:right; margin:0; position:relative; 
     input{
-      @include ctb-box-sizing(border-box); width:100px; height:auto; float:right; font-weight:100; padding-right: $iconSize; @include ctb-transition(.5s width); 
+      @include ctb-box-sizing(border-box); width:100px; height:auto; font-weight:100; margin:0; padding-right: $iconSize; @include ctb-transition(.5s width); 
       &:focus{
         width:206px;
       };
@@ -36,7 +36,7 @@ $iconSize:20px;
     &:after{
       font-family: FontAwesome; color:$gray; font-weight: 100; font-style: normal;
       content: "\f002";
-      position:absolute; top:5px; right:4px;
+      position:absolute; top:14px; right:4px;
       width:$iconSize; height:$iconSize; font-size: $iconSize; line-height: $iconSize;
     }
     @media only screen and (max-width: 2 * $gridMinWidth) {
@@ -50,23 +50,35 @@ $iconSize:20px;
     }
   }
 }
+/*==============MENU==============*/
+nav{ 
+  display:block; margin:0 -3%; clear:both;
+  ul{ @extend .clearfix; 
+    display:block;  margin:0; padding:0 3%; background:#fff; border-bottom: 2px solid $mainColor;
+    li{
+      display:inline-block; float:left; position:relative;
+      a{
+        display: inline-block; padding:7px 15px; color: #333; text-decoration: none; cursor:pointer;
+      }
+      &:hover, &.active{
+        a{
+          text-decoration: none;
+        }
+        &:after{
+          content:''; display:inline-block; position:absolute; bottom:0; left:0; width:100%; height:2px; background: $mainColor; z-index: 1; 
+        }
+      }
+    }
+  }
+}
 /*==============FOOTER============*/
 #footer{
   min-height:50px;
 }
 /*==============MAIN==============*/
 #main{ padding:0 3%; text-align:left;
-  .search-container{ position:relative; margin:0; 
-    #search{
-      @include ctb-box-sizing(border-box); padding:8px 35px 8px 10px; width:100%; height:36px; margin:0; 
-    }
-    &:before {
-        position:absolute; top:3px; right:7px; display: inline-block; width:30px; height:30px; font-size: 23px; font-weight:100; color:$gray;
-        font-family: "FontAwesome"; content: "\f002";
-    }
-  }
   .card{
-    padding:15px; background:#fff; overflow:hidden; @include ctb-border-radius(3px); @include ctb-box-shadow(0 0 3px $gray); position:relative;
+    padding:15px 15px 45px; background:#fff; height:203px; overflow:hidden; @include ctb-border-radius(3px); @include ctb-box-shadow(0 0 3px $gray); position:relative;
     .isvisible{
       position:absolute; right:5px; top:3px; width:30px; height:30px; text-align:center; line-height:30px; font-size:25px; color:$gray;
     }   
@@ -83,8 +95,7 @@ $iconSize:20px;
       color:#333; font-weight: 300;
     }
     .separator{ margin:10px 0;}
-    .coordinates{
-      margin:12px 0 2px;
+    .coordinates{ position: absolute; bottom:0; left:0; right:0; padding:12px 0 15px;
       .alt, .az{
         width:50%; text-align:center; display:inline-block; color:#fff; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;
         strong{ display:inline-block; width:50px; font-weight:100;}
