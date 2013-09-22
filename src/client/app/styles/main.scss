@@ -40,7 +40,7 @@ $iconSize:20px;
       width:$iconSize; height:$iconSize; font-size: $iconSize; line-height: $iconSize;
     }
     @media only screen and (max-width: 2 * $gridMinWidth) {
-      margin:12px 0 0; float:none; display:block; clear:both;
+      margin:0 0 12px; float:none; display:block; clear:both;
       input{
         float:none; width:100%;
         &:focus{
@@ -102,6 +102,9 @@ nav{
       }
       .az{ float:left; color:rgb(255, 120, 45);}
       .alt{ float:right; color:$mainColor;}
+    }
+    @media only screen and (max-width: $gridMinWidth * 2) {
+      height:auto;
     }
   }
 }
