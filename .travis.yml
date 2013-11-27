@@ -3,6 +3,8 @@ node_js:
   - "0.8"
 before_script:
   - npm install -g grunt-cli & npm install -g bower
+  - bower cache clean
+  - npm clear cache
   - cd src/client
   - npm install & bower install
 script:
