@@ -6,6 +6,7 @@ before_script:
   - bower cache clean
   - npm clear cache
   - cd src/client
-  - npm install & bower install
+  - npm install
+  - bower install
 script:
   - grunt
