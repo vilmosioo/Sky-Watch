@@ -6,4 +6,9 @@ angular.module('ngApp')
       $rootScope.pageTitle = route.$$route.title || '';
       $rootScope.search = $location.search().q || '';
     });
+  })
+  .run(function($rootScope, Geo){
+    Geo.locate().then(function (position) {
+      $rootScope.position = position.coords;
+    });
   });

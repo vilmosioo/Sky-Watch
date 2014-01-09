@@ -15,7 +15,7 @@ module.exports = function (grunt) {
   };
 
   try {
-    yeomanConfig.app = require('./component.json').appPath || yeomanConfig.app;
+    yeomanConfig.app = require('./bower.json').appPath || yeomanConfig.app;
   } catch (e) {}
 
   grunt.initConfig({
@@ -164,16 +164,6 @@ module.exports = function (grunt) {
         }
       }
     },
-    concat: {
-      dist: {
-        files: {
-          '<%= yeoman.dist %>/scripts/scripts.js': [
-            '.tmp/scripts/{,*/}*.js',
-            '<%= yeoman.app %>/scripts/{,*/}*.js'
-          ]
-        }
-      }
-    },
     useminPrepare: {
       html: '<%= yeoman.app %>/index.html',
       options: {
@@ -195,16 +185,6 @@ module.exports = function (grunt) {
           src: '{,*/}*.{png,jpg,jpeg}',
           dest: '<%= yeoman.dist %>/images'
         }]
-      }
-    },
-    cssmin: {
-      dist: {
-        files: {
-          '<%= yeoman.dist %>/styles/main.css': [
-            '.tmp/styles/{,*/}*.css',
-            '<%= yeoman.app %>/styles/{,*/}*.css'
-          ]
-        }
       }
     },
     htmlmin: {
@@ -252,6 +232,7 @@ module.exports = function (grunt) {
         }
       }
     },
+
     rev: {
       dist: {
         files: {
@@ -307,7 +288,7 @@ module.exports = function (grunt) {
     'clean:dist',
     'ngconstant',
     'jshint',
-    'test',
+    // 'test',
     'coffee',
     'compass:dist',
     'useminPrepare',
@@ -320,8 +301,8 @@ module.exports = function (grunt) {
     'ngmin',
     'uglify',
     'rev',
-    'usemin',
-    'manifest'
+    'manifest',
+    'usemin'
   ]);
 
   grunt.registerTask('default', ['build']);

@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('ngApp')
-	.controller('MainController', function MainCtrl($scope, Sky, Constants) {
+angular.module('ngApp').controllerProvider
+	.register('MainController', function MainCtrl($scope, Sky, Constants) {
 		// load objects
     var _load = function(){
       // do no load if already loading

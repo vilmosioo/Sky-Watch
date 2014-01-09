@@ -6,6 +6,10 @@ src/client/.sass-cache
 src/client/app/components
 src/server/application/configs/application.prod.ini
 src/client/app/scripts/config/constants.js
+src/client/.bower-cache
+src/client/.bower-registry
+src/client/.bower-tmp
+
 
 #################
 ## Eclipse
