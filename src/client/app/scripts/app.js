@@ -1,4 +1,11 @@
-require(['config/constants'], function requireApp(){
+require.config({
+	paths: {
+		'constants': 'config/constants',
+		'common': 'common'
+	}
+});
+
+require(['constants'], function requireApp(){
   'use strict';
 
   var app = angular.module('ngApp', ['ngSanitize', 'Constants']);
