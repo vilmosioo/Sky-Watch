@@ -173,8 +173,17 @@ module.exports = function (grunt) {
     usemin: {
       html: ['<%= yeoman.dist %>/{,*/}*.html'],
 			css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
+			js: ['<%= yeoman.dist %>/scripts/{,*/}*.js'],
 			options: {
-				assetsDirs: ['<%= yeoman.dist %>']
+				assetsDirs: ['<%= yeoman.dist %>', '<%= yeoman.dist %>/images', '<%= yeoman.dist %>/styles', '<%= yeoman.dist %>/styles/fonts'],
+				patterns: {
+					js: [
+						[/(\/scripts\/main\.js)/g, 'Replacing reference to main.js'],
+						[/(\/scripts\/controllers\/MainController\.js)/g, 'Replacing reference to MainController.js'],
+						[/(\/scripts\/controllers\/SearchController\.js)/g, 'Replacing reference to SearchController.js'],
+						[/(\/scripts\/controllers\/AboutController\.js)/g, 'Replacing reference to AboutController.js']
+					]
+				}
       }
     },
     imagemin: {
@@ -217,43 +226,50 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.dist %>/scripts',
-          src: '*.js',
-          dest: '<%= yeoman.dist %>/scripts'
+          cwd: '.tmp/concat/scripts',
+          src: ['app.js', 'main.js', 'controllers/*.js'],
+          dest: '.tmp/concat/scripts'
         }]
       }
-    },
-    uglify: {
-			require: {
-				files: {
-					'<%= yeoman.dist %>/components/requirejs/require.js': [
-						'<%= yeoman.app %>/components/requirejs/require.js'
-					]
-				}
-			},
-			dist: {
-				files: {
-					'<%= yeoman.dist %>/scripts/app.js': [
-						'<%= yeoman.app %>/scripts/app.js'
-					],
-					'<%= yeoman.dist %>/scripts/config/constants.js': [
-						'<%= yeoman.app %>/scripts/config/constants.js'
-					]
-				}
-			}
     },
     rev: {
       dist: {
         files: {
           src: [
-            '<%= yeoman.dist %>/scripts/{,*/}*.js',
-            '<%= yeoman.dist %>/styles/{,*/}*.css',
-            '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-            '<%= yeoman.dist %>/styles/fonts/*.{eot,svg,ttf,woff}'
+            '<%= yeoman.dist %>/**/*.js',
+            '<%= yeoman.dist %>/**/*.css',
+            '<%= yeoman.dist %>/**/*.{png,jpg,jpeg,gif,webp,svg}',
+            '<%= yeoman.dist %>/**/*.{eot,svg,ttf,woff}'
           ]
         }
       }
     },
+		uglify: {
+			options:{
+				compress: false,
+				beautify: true
+			},
+			main: {
+				files: {
+					'<%= yeoman.dist %>/scripts/main.js': [
+						'.tmp/concat/scripts/main.js'
+					]
+				}
+			},
+			controllers: {
+				files: {
+					'<%= yeoman.dist %>/scripts/controllers/MainController.js': [
+						'.tmp/concat/scripts/controllers/MainController.js'
+					],
+					'<%= yeoman.dist %>/scripts/controllers/SearchController.js': [
+						'.tmp/concat/scripts/controllers/SearchController.js'
+					],
+					'<%= yeoman.dist %>/scripts/controllers/AboutController.js': [
+						'.tmp/concat/scripts/controllers/AboutController.js'
+					]
+				}
+			}
+		},
     copy: {
       dist: {
         files: [{
@@ -270,12 +286,37 @@ module.exports = function (grunt) {
         }]
       }
     },
-		requirejs: {
-			compile: {
-				options: {
-					baseUrl: '<%= yeoman.app %>/scripts',
-					name: 'common',
-					out: '<%= yeoman.dist %>/scripts/common.js'
+		concat: {
+			main: {
+				files: {
+					'.tmp/concat/scripts/main.js': [
+						'<%= yeoman.app %>/scripts/config/config.js',
+						'<%= yeoman.app %>/scripts/controllers/HeaderController.js',
+						'<%= yeoman.app %>/scripts/directives/card.js',
+						'<%= yeoman.app %>/scripts/directives/cards.js',
+						'<%= yeoman.app %>/scripts/directives/menu.js',
+						'<%= yeoman.app %>/scripts/directives/isloading.js',
+						'<%= yeoman.app %>/scripts/services/converter.js',
+						'<%= yeoman.app %>/scripts/services/localstorage.js',
+						'<%= yeoman.app %>/scripts/services/modernizr.js',
+						'<%= yeoman.app %>/scripts/services/time.js',
+						'<%= yeoman.app %>/scripts/services/sky.js',
+						'<%= yeoman.app %>/scripts/services/geo.js',
+						'<%= yeoman.app %>/scripts/filters/degrees.js'
+					]
+				}
+			},
+			controllers: {
+				files: {
+					'.tmp/concat/scripts/controllers/MainController.js': [
+						'<%= yeoman.app %>/scripts/controllers/MainController.js'
+					],
+					'.tmp/concat/scripts/controllers/SearchController.js': [
+						'<%= yeoman.app %>/scripts/controllers/SearchController.js'
+					],
+					'.tmp/concat/scripts/controllers/AboutController.js': [
+						'<%= yeoman.app %>/scripts/controllers/AboutController.js'
+					]
 				}
 			}
 		}
@@ -315,11 +356,10 @@ module.exports = function (grunt) {
     'cssmin',
     'htmlmin',
     'copy',
-    'cdnify',
-    'ngmin',
-    'uglify',
-		'requirejs',
-    'rev',
+		'ngmin',
+		'cdnify',
+		'uglify',
+		'rev',
     'manifest',
     'usemin'
   ]);

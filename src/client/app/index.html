@@ -34,18 +34,21 @@
     <div ng-include src="'views/templates/header.html'"></div>
     <main id="main" role="main" class="clearfix" ng-view></main>
     <div ng-include src="'views/templates/footer.html'"></div>
-    
-    <!-- build:js scripts/vendor.js -->
+
+    <!-- build:js components/vendor.js -->
     <script src="components/angular-unstable/angular.js"></script>
     <script src="components/angular-resource/angular-resource.js"></script>
     <script src="components/angular-cookies/angular-cookies.js"></script>
     <script src="components/angular-sanitize/angular-sanitize.js"></script>
     <script src="components/modernizr/modernizr.js"></script>
+    <script src="components/labjs/LAB.min.js"></script>
     <!-- endbuild -->
-    
-    <!-- data-main attribute tells require.js to load scripts/main.js after require.js loads. -->
-    <script data-main="scripts/app" src="components/requirejs/require.js"></script>
-    
+
+    <!-- build:js scripts/app.js -->
+    <script src="scripts/config/constants.js"></script>
+    <script src="scripts/app.js"></script>
+    <!-- endbuild -->
+
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
       var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];

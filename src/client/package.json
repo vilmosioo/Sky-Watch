@@ -26,8 +26,7 @@
     "grunt-google-cdn": "~0.1.1",
     "grunt-ngmin": "~0.0.2",
     "grunt-manifest": "~0.4.0",
-    "grunt-ng-constant": "~0.4.2",
-    "grunt-contrib-requirejs": "~0.4.1"
+    "grunt-ng-constant": "~0.4.2"
   },
   "engines": {
     "node": ">=0.8.0"
