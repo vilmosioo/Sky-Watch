@@ -4,26 +4,8 @@ require(['config/constants'], function requireApp(){
   var app = angular.module('ngApp', ['ngSanitize', 'Constants']);
 
   // Load global services/directives etc. then boostrap
-  require([
-    'config/config',
-    'controllers/HeaderController',
-    'directives/card',
-    'directives/cards',
-    'directives/menu',
-    'directives/isloading',
-    'services/converter',
-    'services/localstorage',
-    'services/modernizr',
-    'services/time',
-    'services/sky',
-    'services/geo',
-    'filters/degrees'
-  ], function boostrap(){
-    // Manual boostrap
-    angular.element(document).ready(function() {
-      angular.bootstrap(document, ['ngApp']);
-    });
-  });
+
+  require(['common']);
 
   // Initial configuration    
   app.config(function ($routeProvider, $controllerProvider, $compileProvider, $filterProvider, $provide) {
