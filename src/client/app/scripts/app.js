@@ -27,12 +27,18 @@ require(['config/constants'], function requireApp(){
 
   // Initial configuration    
   app.config(function ($routeProvider, $controllerProvider, $compileProvider, $filterProvider, $provide) {
-    // Save providers for future use
-    app.controllerProvider = $controllerProvider;
-    app.compileProvider = $compileProvider;
-    app.routeProvider = $routeProvider;
-    app.filterProvider = $filterProvider;
-    app.provide = $provide;
+    // Redefine providers.
+    app._controller = app.controller;
+    app._service = app.service;
+    app._factory = app.factory;
+    app._directive = app.directive;
+
+    // Provider-based controller.
+    app.controller = $controllerProvider.register;
+    app.service = $provide.service;
+    app.factory = $provide.factory;
+    app.directive = $compileProvider.directive;
+    app.filter = $filterProvider.register;
 
     // require controller tempplate function
     var _requireDependencies = function(dependencies){

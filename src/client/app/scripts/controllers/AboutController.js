@@ -1,4 +1,4 @@
 'use strict';
 
-angular.module('ngApp').controllerProvider
+angular.module('ngApp')
 	.controller('AboutController', function AboutCtrl() {});
