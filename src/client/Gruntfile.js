@@ -245,10 +245,6 @@ module.exports = function (grunt) {
       }
     },
 		uglify: {
-			options:{
-				compress: false,
-				beautify: true
-			},
 			main: {
 				files: {
 					'<%= yeoman.dist %>/scripts/main.js': [
