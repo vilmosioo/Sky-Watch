@@ -347,7 +347,7 @@ module.exports = function (grunt) {
     'clean:dist',
     'ngconstant',
     'jshint',
-    // 'test',
+    'test',
     'coffee',
     'compass:dist',
     'useminPrepare',
