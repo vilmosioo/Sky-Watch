@@ -9,7 +9,7 @@ src/client/app/scripts/config/constants.js
 src/client/.bower-cache
 src/client/.bower-registry
 src/client/.bower-tmp
-
+.idea
 
 #################
 ## Eclipse

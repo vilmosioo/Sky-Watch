@@ -172,9 +172,10 @@ module.exports = function (grunt) {
     },
     usemin: {
       html: ['<%= yeoman.dist %>/{,*/}*.html'],
-      css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
-      options: {
-        dirs: ['<%= yeoman.dist %>']
+			css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
+			js: ['<%= yeoman.dist %>/scripts/{,*/}*.js'],
+			options: {
+				assetsDirs: ['<%= yeoman.dist %>']
       }
     },
     imagemin: {
@@ -224,15 +225,24 @@ module.exports = function (grunt) {
       }
     },
     uglify: {
-      dist: {
-        files: {
-          '<%= yeoman.dist %>/scripts/scripts.js': [
-            '<%= yeoman.dist %>/scripts/scripts.js'
-          ]
-        }
-      }
+			require: {
+				files: {
+					'<%= yeoman.dist %>/components/requirejs/require.js': [
+						'<%= yeoman.app %>/components/requirejs/require.js'
+					]
+				}
+			},
+			dist: {
+				files: {
+					'<%= yeoman.dist %>/scripts/app.js': [
+						'<%= yeoman.app %>/scripts/app.js'
+					],
+					'<%= yeoman.dist %>/scripts/config/constants.js': [
+						'<%= yeoman.app %>/scripts/config/constants.js'
+					]
+				}
+			}
     },
-
     rev: {
       dist: {
         files: {
@@ -260,7 +270,16 @@ module.exports = function (grunt) {
           ]
         }]
       }
-    }
+    },
+		requirejs: {
+			compile: {
+				options: {
+					baseUrl: '<%= yeoman.app %>/scripts',
+					name: 'common',
+					out: '<%= yeoman.dist %>/scripts/common.js'
+				}
+			}
+		}
   });
 
   grunt.renameTask('regarde', 'watch');
@@ -300,6 +319,7 @@ module.exports = function (grunt) {
     'cdnify',
     'ngmin',
     'uglify',
+		'requirejs',
     'rev',
     'manifest',
     'usemin'
