@@ -2,23 +2,6 @@
 
 var app = angular.module('ngApp', ['ngSanitize', 'Constants']);
 
-var _load = function(){
-	// Angular has been set up, run manual boostrap
-	angular.element(document).ready(function bootstrap() {
-		angular.bootstrap(document, ['ngApp']);
-	});
-};
-
-// Load global services/directives etc.
-$LAB.script('/scripts/main.js').wait(function mainLoaded(){
-	// wait for all dependencies to resolve, then boostrap
-	if(app.dependencies){
-		app.dependencies.wait(_load);
-	} else {
-		_load();
-	}
-});
-
 // Initial configuration
 app.config(function appConfig($routeProvider, $controllerProvider, $compileProvider, $filterProvider, $provide) {
 	// Redefine providers.
@@ -53,19 +36,19 @@ app.config(function appConfig($routeProvider, $controllerProvider, $compileProvi
 			templateUrl: 'views/main.html',
 			controller: 'MainController',
 			title: 'Home',
-			resolve: _requireDependencies(['/scripts/controllers/MainController.js'])
+			resolve: _requireDependencies(['scripts/controllers/MainController.js'])
 		})
 		.when('/search/', {
 			templateUrl: 'views/main.html',
 			controller: 'SearchController',
 			title: 'Search',
-			resolve: _requireDependencies(['/scripts/controllers/SearchController.js'])
+			resolve: _requireDependencies(['scripts/controllers/SearchController.js'])
 		})
 		.when('/about/', {
 			templateUrl: 'views/about.html',
 			controller: 'AboutController',
 			title: 'About',
-			resolve: _requireDependencies(['/scripts/controllers/AboutController.js'])
+			resolve: _requireDependencies(['scripts/controllers/AboutController.js'])
 		})
 		.otherwise({
 			redirectTo: '/'

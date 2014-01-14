@@ -178,10 +178,7 @@ module.exports = function (grunt) {
 				assetsDirs: ['<%= yeoman.dist %>', '<%= yeoman.dist %>/images', '<%= yeoman.dist %>/styles', '<%= yeoman.dist %>/styles/fonts'],
 				patterns: {
 					js: [
-						[/(\/scripts\/main\.js)/g, 'Replacing reference to main.js'],
-						[/(\/scripts\/controllers\/MainController\.js)/g, 'Replacing reference to MainController.js'],
-						[/(\/scripts\/controllers\/SearchController\.js)/g, 'Replacing reference to SearchController.js'],
-						[/(\/scripts\/controllers\/AboutController\.js)/g, 'Replacing reference to AboutController.js']
+						[/(scripts\/controllers\/\w+\.js)/g, 'Replacing reference to controllers']
 					]
 				}
       }
@@ -227,7 +224,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '.tmp/concat/scripts',
-          src: ['app.js', 'main.js', 'controllers/*.js'],
+          src: ['app.js', 'controllers/*.js'],
           dest: '.tmp/concat/scripts'
         }]
       }
@@ -245,13 +242,6 @@ module.exports = function (grunt) {
       }
     },
 		uglify: {
-			main: {
-				files: {
-					'<%= yeoman.dist %>/scripts/main.js': [
-						'.tmp/concat/scripts/main.js'
-					]
-				}
-			},
 			controllers: {
 				files: {
 					'<%= yeoman.dist %>/scripts/controllers/MainController.js': [
@@ -283,25 +273,6 @@ module.exports = function (grunt) {
       }
     },
 		concat: {
-			main: {
-				files: {
-					'.tmp/concat/scripts/main.js': [
-						'<%= yeoman.app %>/scripts/config/config.js',
-						'<%= yeoman.app %>/scripts/controllers/HeaderController.js',
-						'<%= yeoman.app %>/scripts/directives/card.js',
-						'<%= yeoman.app %>/scripts/directives/cards.js',
-						'<%= yeoman.app %>/scripts/directives/menu.js',
-						'<%= yeoman.app %>/scripts/directives/isloading.js',
-						'<%= yeoman.app %>/scripts/services/converter.js',
-						'<%= yeoman.app %>/scripts/services/localstorage.js',
-						'<%= yeoman.app %>/scripts/services/modernizr.js',
-						'<%= yeoman.app %>/scripts/services/time.js',
-						'<%= yeoman.app %>/scripts/services/sky.js',
-						'<%= yeoman.app %>/scripts/services/geo.js',
-						'<%= yeoman.app %>/scripts/filters/degrees.js'
-					]
-				}
-			},
 			controllers: {
 				files: {
 					'.tmp/concat/scripts/controllers/MainController.js': [
