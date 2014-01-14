@@ -1,20 +1,23 @@
 'use strict';
 
 angular.module('ngApp')
-	.factory('Geo', function ($q, $rootScope) {
+	.factory('Geo', function ($q, $timeout) {
+		var defer = $q.defer();
+		navigator.geolocation.getCurrentPosition(
+			function (position) {
+				$timeout(function(){
+					defer.resolve(position);
+				});
+			},
+			function(error) {
+				$timeout(function(){
+					defer.reject(error);
+				});
+			}
+		);
+
 		return {
 			locate: function () {
-				var defer = $q.defer();
-				navigator.geolocation.getCurrentPosition(
-					function (position) {
-						defer.resolve(position);
-						$rootScope.$apply();
-					},
-					function(error) {
-						defer.reject(error);
-						$rootScope.$apply();
-					}
-				);
 				return defer.promise;
 			}
 		};

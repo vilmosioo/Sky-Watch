@@ -21,19 +21,25 @@ angular.module('ngApp')
         // calculate local coordinates
         var positionWatch = $rootScope.$watch('position', function(position){
           if(position){
-            var interval = setInterval(function(){
-              var phase = $scope.$root.$$phase;
-              if(phase !== '$apply' && phase !== '$digest') {
-                $scope.$apply(function(){
-                  Converter.convertAll($scope.list.items);
-                });
-              }
-            }, 1000);
-            $scope.$on('$destroy', function(){
-              return clearInterval(interval);
-            });
+            var _calc = function(){
+              Converter.convertAll($scope.list.items);
+              $timeout(_calc, 1000);
+            };
+            _calc();
             positionWatch();
           }
+        });
+
+        var weatherWatch = $rootScope.$watch('weather', function(weather){
+          if(weather){
+            $scope.weather = weather;
+            weatherWatch();
+          }
+        });
+
+        $scope.$on('$destroy', function(){
+          positionWatch();
+          weatherWatch();
         });
       }
     };
