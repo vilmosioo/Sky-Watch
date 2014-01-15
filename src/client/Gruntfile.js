@@ -151,7 +151,8 @@ module.exports = function (grunt) {
       options: {
         sassDir: '<%= yeoman.app %>/styles',
         cssDir: '.tmp/styles',
-        relativeAssets: true
+        relativeAssets: true,
+        importPath: '<%= yeoman.app %>/components/compass-twitter-bootstrap/stylesheets_sass'
       },
       dist: {
         options: {

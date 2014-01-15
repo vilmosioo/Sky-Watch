@@ -9,7 +9,8 @@
     "angular-cookies": "~1.0.5",
     "angular-sanitize": "~1.0.4",
     "modernizr": "~2.6.2",
-    "labjs": "*"
+    "labjs": "*",
+    "compass-twitter-bootstrap": "~2.3.1"
   },
   "devDependencies": {
     "angular": "~1.0.7",
