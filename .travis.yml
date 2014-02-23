@@ -1,11 +1,13 @@
 language: node_js
 node_js:
-  - "0.8"
+  - "0.10"
 before_script:
-  - npm install -g grunt-cli & npm install -g bower
-  - gem install compass
-  - bower cache clean
-  - npm clear cache
+  - npm install -g grunt-cli bower
+  - gem install compass
+  - gem uninstall sass --version 3.3.0.rc.3
+  - gem install sass --version 3.2.13
+  - bower cache clean
+  - npm clear cache
   - cd src/client
   - npm install
   - bower install
