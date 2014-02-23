@@ -363,6 +363,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
+    'ngconstant',
     'concurrent:test',
     'connect:test',
     'karma',
@@ -371,7 +372,8 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'ngconstant',
+    'jshint',
+    'test',
     'useminPrepare',
     'concurrent:dist',
     'concat',
@@ -388,8 +390,6 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
-    'jshint',
-    'test',
     'build'
   ]);
 };
