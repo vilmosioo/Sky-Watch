@@ -1,9 +1,9 @@
 language: node_js
 node_js:
-  - "0.10"
+  - "0.10.24"
 before_script:
   - npm install -g grunt-cli & npm install -g bower
-  - gem install compass
+  - gem install compass --version 0.12.2
   - bower cache clean
   - npm clear cache
   - cd src/client
