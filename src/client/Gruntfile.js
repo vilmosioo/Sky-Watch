@@ -321,6 +321,20 @@ module.exports = function (grunt) {
       unit: {
         configFile: 'karma.conf.js'
       }
+    },
+    protractor: {
+      options: {
+        configFile: "protractor.conf.js"
+      },
+      test: {},
+    },
+    shell: {
+      test: {
+        options: {
+          stdout: true
+        },
+        command: 'node node_modules/protractor/bin/webdriver-manager update'
+      }
     }
   });
 
@@ -343,11 +357,16 @@ module.exports = function (grunt) {
     grunt.task.run(['serve']);
   });
 
+  grunt.registerTask('ptor', function () {
+    grunt.task.run(['shell', 'protractor']);
+  });
+
   grunt.registerTask('test', [
     'clean:server',
     'concurrent:test',
     'connect:test',
-    'karma'
+    // 'karma',
+    'ptor'
   ]);
 
   grunt.registerTask('build', [
@@ -369,7 +388,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
-    'newer:jshint',
+    'jshint',
     'test',
     'build'
   ]);
