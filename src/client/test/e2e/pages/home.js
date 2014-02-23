@@ -1,7 +1,7 @@
 'use strict';
 
 var HomePage = function(){
-	var path = '#/', 
+	var path = '#/',
 		search = element(by.css('[data-test="search-input"]')),
 		loadMore = element(by.css('[data-test="load-more"]')),
 		cards = element.all(by.repeater('item in list.items'));
@@ -17,7 +17,7 @@ var HomePage = function(){
 
 	this.searchElement = function(){
 		return search;
-	}
+	};
 
 	this.cardsElements = function(){
 		return cards;

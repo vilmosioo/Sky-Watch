@@ -324,7 +324,7 @@ module.exports = function (grunt) {
     },
     protractor: {
       options: {
-        configFile: "protractor.conf.js"
+        configFile: 'protractor.conf.js'
       },
       test: {},
     },
@@ -365,7 +365,7 @@ module.exports = function (grunt) {
     'clean:server',
     'concurrent:test',
     'connect:test',
-    // 'karma',
+    'karma',
     'ptor'
   ]);
 
