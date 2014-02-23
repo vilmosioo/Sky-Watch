@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ngApp')
-  .directive('cards', function cards($window, $interval, $rootScope, Constants, Converter) {
+  .directive('cards', function cards($window, $interval, $timeout, $rootScope, Constants, Converter) {
     return {
       templateUrl: 'views/templates/cards.html',
       replace: true,
@@ -40,9 +40,18 @@ angular.module('ngApp')
           }
         });
 
+        var listWatch = $scope.$watch('list', function(list){
+          if(!!list){
+            // required for animations to work
+            $timeout(list.load);
+            listWatch();
+          }
+        });
+
         $scope.$on('$destroy', function(){
           positionWatch();
           weatherWatch();
+          listWatch();
           if(interval){
             $interval.cancel(interval);
           }

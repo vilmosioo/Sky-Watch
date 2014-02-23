@@ -180,7 +180,7 @@ nav{
   .ng-leave-stagger,
   .ng-move-stagger {
     /* 50ms between each item being animated after the other */
-    @include ctb-transition-delay(0.1s);
+    @include ctb-transition-delay(50ms);
 
     /* this is required here to prevent any CSS inheritance issues */
     @include ctb-transition-duration(0);

@@ -29,5 +29,4 @@ angular.module('ngApp')
 			more: true
 		};
 
-		$scope.results.load();
 	});
