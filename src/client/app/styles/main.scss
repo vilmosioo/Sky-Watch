@@ -152,10 +152,6 @@ nav{
 }
 
 .cards{
-  .ng-leave{
-    @include transition-delay(0 !important);
-  }
-
   .ng-move,
   .ng-enter,
   .ng-leave {
@@ -178,5 +174,15 @@ nav{
   .ng-enter.ng-enter-active {
     opacity: 1; 
     @include ctb-translate(0, 0);
+  }
+
+  .ng-enter-stagger,
+  .ng-leave-stagger,
+  .ng-move-stagger {
+    /* 50ms between each item being animated after the other */
+    @include ctb-transition-delay(0.1s);
+
+    /* this is required here to prevent any CSS inheritance issues */
+    @include ctb-transition-duration(0);
   }
 }
