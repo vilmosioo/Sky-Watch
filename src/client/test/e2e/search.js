@@ -5,7 +5,7 @@ describe('Search test', function() {
 	var homePage = require('./pages/home.js'), searchPage = require('./pages/search.js');
 
 	afterEach(function(){
-		browser.sleep(2000);
+		browser.sleep(1000);
 	});
 
 	it('should display the search page', function() {

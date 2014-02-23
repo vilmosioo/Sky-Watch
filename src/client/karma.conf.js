@@ -17,11 +17,11 @@ module.exports = function(config) {
 			'app/components/angular-resource/angular-resource.js',
 			'app/components/angular-sanitize/angular-sanitize.js',
 			'app/components/angular-route/angular-route.js',
+			'app/components/angular-animate/angular-animate.js',
 			'app/components/modernizr/modernizr.js',
 			'app/components/labjs/LAB.min.js',
 
 			// the app
-			'app/scripts/*.js',
 			'app/scripts/**/*.js',
 			
 			// the tests

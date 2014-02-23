@@ -5,10 +5,10 @@ describe('Home Page', function() {
 	var homePage = require('./pages/home.js');
 
 	afterEach(function(){
-		browser.sleep(2000);
+		browser.sleep(1000);
 	});
 
-	it('should display', function() {
+	it('should load', function() {
 		homePage.get();
 		expect(browser.getCurrentUrl()).toContain(homePage.path());
 	});
