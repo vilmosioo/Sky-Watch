@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('ngApp', ['ngSanitize', 'Constants', 'ngRoute']);
+var app = angular.module('ngApp', ['ngSanitize', 'ngAnimate', 'Constants', 'ngRoute']);
 
 // Initial configuration
 app.config(function appConfig($routeProvider, $controllerProvider, $compileProvider, $filterProvider, $provide) {

@@ -151,26 +151,32 @@ nav{
   clear:both; display:block;
 }
 
-.animate-leave{
-  @include transition-delay(0 !important);
-}
+.cards{
+  .ng-leave{
+    @include transition-delay(0 !important);
+  }
 
-.animate-enter
-{ 
-  @include ctb-transition(0.3s cubic-bezier(0.250, 0.250, 0.750, 0.750) all);
-  position: relative;
-  // enable hardware accelerated animations
-  @include ctb-translate3d(0,0,0);
-  -webkit-backface-visibility: hidden;
-  -webkit-perspective: 1000;
-} 
-
-.animate-enter { 
-  opacity: 0; 
-  @include ctb-translate(0, 40px);
-}
-
-.animate-enter.animate-enter-active {
-  opacity: 1; 
-  @include ctb-translate(0, 0);
+  .ng-move,
+  .ng-enter,
+  .ng-leave {
+    @include ctb-transition(all linear 0.5s);
+    // enable hardware accelerated animations
+    @include ctb-translate3d(0,0,0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+  }
+ 
+  .ng-leave.ng-leave-active,
+  .ng-move,
+  .ng-enter {
+    opacity: 0; 
+    @include ctb-translate(0, 40px);
+  }
+ 
+  .ng-leave,
+  .ng-move.ng-move-active,
+  .ng-enter.ng-enter-active {
+    opacity: 1; 
+    @include ctb-translate(0, 0);
+  }
 }

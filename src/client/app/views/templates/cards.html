@@ -3,7 +3,7 @@
     <strong>Warning!</strong> Looks like there's no clear sky in your area :(
   </div>
   <div ng-class="config.wrapClass">
-    <div ng-class="'grid-' + config.grid" ng-repeat="item in list.items" ng-animate="'animate'" style="transition-delay: {{$index % config.limit * 0.1}}s">
+    <div ng-class="'grid-' + config.grid" ng-repeat="item in list.items" style="transition-delay: {{$index % config.limit * 0.1}}s">
       <card item='item'></card>   
     </div>
   </div>
