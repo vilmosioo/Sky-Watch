@@ -24,6 +24,7 @@ module.exports = function (grunt) {
       app: require('./bower.json').appPath || 'app',
       dist: 'dist'
     },
+    pkg: grunt.file.readJSON('./../../package.json'),
     manifest: {
       generate: {
         options: {
@@ -287,6 +288,10 @@ module.exports = function (grunt) {
       ]
     },
     uglify: {
+      options: {
+        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+        '<%= grunt.template.today("yyyy-mm-dd") %> */'
+      },
       controllers: {
         files: {
           '<%= yeoman.dist %>/scripts/controllers/MainController.js': [
@@ -349,6 +354,24 @@ module.exports = function (grunt) {
           {
             src: '.ftppass',
             dest: '.ftppass'
+          }
+        ]
+      },
+      dist: {
+        options: {
+          variables: {
+            'version' : '<%= pkg.version %>'
+          }
+        },
+        files: [
+          {
+            expand: true,
+            dot: true,
+            cwd: '<%= yeoman.dist %>',
+            dest: '<%= yeoman.dist %>',
+            src: [
+              '**/*'
+            ]
           }
         ]
       }
@@ -415,6 +438,7 @@ module.exports = function (grunt) {
     'uglify',
     'rev',
     'usemin',
+    'replace:dist',
     'manifest'
   ]);
 
