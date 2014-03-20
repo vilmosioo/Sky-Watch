@@ -335,6 +335,34 @@ module.exports = function (grunt) {
         },
         command: 'node node_modules/protractor/bin/webdriver-manager update'
       }
+    },
+    replace: {
+      ftp: {
+        options: {
+          variables: {
+            'ftp_user' : process.env.DEPLOY_USER || '',
+            'ftp_pass': process.env.DEPLOY_PASSWORD || ''
+          }
+        },
+        files: [
+          {
+            src: '.ftppass',
+            dest: '.ftppass'
+          }
+        ]
+      }
+    },
+    'ftp-deploy': {
+      build: {
+        auth: {
+          host: 'vilmosioo.co.uk',
+          port: 21,
+          authKey: 'key'
+        },
+        src: 'dist',
+        dest: '/',
+        exclusions: []
+      }
     }
   });
 

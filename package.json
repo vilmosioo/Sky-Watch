@@ -1,0 +1,25 @@
+{
+  "name": "Sky-Watch",
+  "version": "0.0.0",
+  "description": "Sky Watch =============",
+  "scripts": {
+    "build": "sh scripts/build.sh",
+    "deploy": "sh scripts/deploy.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vilmosioo/Sky-Watch.git"
+  },
+  "keywords": [
+    "astronomy",
+    "angular",
+    "zend",
+    "real-time"
+  ],
+  "author": "Vilmos Ioo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vilmosioo/Sky-Watch/issues"
+  },
+  "homepage": "https://github.com/vilmosioo/Sky-Watch"
+}

@@ -1,14 +1,21 @@
 language: node_js
 node_js:
-  - "0.10.24"
+- 0.10.24
 before_script:
-  - npm install -g grunt-cli bower
-  - gem install sass --version 3.2.13
-  - gem install compass
-  - bower cache clean
-  - npm clear cache
-  - cd src/client
-  - npm install
-  - bower install
+- npm install -g grunt-cli bower
+- gem install sass --version 3.2.13
+- gem install compass
+- bower cache clean
+- npm clear cache
+- cd src/client
+- npm install
+- bower install
+- cd ../..
 script:
-  - grunt
+- npm run build
+after_success:
+- npm run deploy
+env:
+  global:
+  - secure: GaVeSiDR628k9JCCkz0y8ytGOTQk1Rh6Z1PFOcoUZjsThdbDuMYRbTOWZ5VrE4nO5vdanzGZIyz175zJq5Ixpg8TieNHtvof1rKM+jQtIAH9RmRg2nQMo8omV8SfsWmCwh0Dkfixw7Jc/1mIQ7H4q61oyQEDX6+hOLH0GBBxFC0=
+  - secure: naph5PSsfk4uq0fdqvEvjv0SRss1IgKrkuHdUgJtz+PtmbDnKIeJbeRhgvnT9FWyHkTzhFaoy0ykfPyiY9y+wshVWpo45S9CgmcDXG+KWZo9lO0veD8wtrKTb7fcDeEo24USx/4ZGoNIXDWY408BpzingMaxnHbvT+z+Lq2SkxE=
