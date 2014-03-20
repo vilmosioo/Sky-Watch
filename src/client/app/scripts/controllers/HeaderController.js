@@ -3,7 +3,7 @@
 angular.module('ngApp')
   .controller('HeaderController', function HeaderController($scope, $rootScope, $sanitize, $location) {
     $scope.search = '';
-    $rootScope.$watch('search', function(value){
+    $rootScope.$watch('global.search', function(value){
       $scope.search = value;
     });
 
