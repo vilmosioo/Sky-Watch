@@ -29,7 +29,12 @@ class V1_SearchController extends Zend_Controller_Action
         $limit = !empty($limit) && is_numeric($limit) && $limit < 50 ? $limit : 50;
         $offset = !empty($offset) && is_numeric($offset) ? $offset : 0;
 
-        $body = array('title' => "Search results for : " . $search);
+        $body = array(
+            'title' => "Search results for : $search",
+            'limit' => $limit,
+            'offset' => $offset
+        );
+
         $cache = Zend_Registry::get('cache');
         $search_results = array();
 

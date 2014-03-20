@@ -37,7 +37,14 @@ class V1_IndexController extends Zend_Controller_Action
         $order == 'DE' && $order = array('DEd', 'DEm');
         $this->_orderby = $order;
         
-        $body = array();
+        // initialise response body
+        $body = array(
+            'limit' => $limit,
+            'offset' => $offset,
+            'orderby' => $orderby,
+            'desc' => $desc
+        );
+
         $cache = Zend_Registry::get('cache');
         $ngc_table = new V1_Model_DbTable_NGC();
         $names_table = new V1_Model_DbTable_Names();

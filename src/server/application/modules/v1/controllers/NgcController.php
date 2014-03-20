@@ -170,6 +170,15 @@ class V1_NgcController extends Zend_Controller_Action
         $orderby = !empty($orderby) && in_array($orderby, array('magnitude', 'RA', 'DE')) ? $orderby : 'magnitude';
         $desc = !empty($desc) && in_array($desc, array('DESC', 'ASC')) ? $desc : 'ASC';
 
+        // initialise response body
+        $body = array(
+            'title' => 'New General Catalogue and Index Catalogue',
+            'limit' => $limit,
+            'offset' => $offset,
+            'orderby' => $orderby,
+            'desc' => $desc
+        );
+
         if($orderby == 'RA'){
             $orderby = array("RAh $desc", "RAm $desc");
         } else if($orderby == 'DE'){
@@ -178,8 +187,6 @@ class V1_NgcController extends Zend_Controller_Action
             $orderby .= ' ' . $desc;
         }
 
-        $body = array('title' => 'New General Catalogue and Index Catalogue');
-        
         $ngc_table = new V1_Model_DbTable_NGC();
         $items = array();
 
