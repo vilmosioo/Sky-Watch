@@ -67,39 +67,11 @@ class V1_IndexController extends Zend_Controller_Action
         $results = array();
         if(!$results = $cache->load('planet_' . $now_str)) {
             $planet_table = new V1_Model_DbTable_Planet();
-            $ephemerid_table = new V1_Model_DbTable_Ephemerid();
                 
-            $results = $planet_table->fetchAll($planet_table->select())->toArray();
-            foreach ($results as $key => $value) {
-                // perform a union of ephemerids: 12 larger and 12 smaller, this ensures the most relevant ephemeris is present in the array
-                $select1 = $ephemerid_table->select()->where("planet = '$value[id]' AND JD >= '$now'")->limit(12);
-                $select2 = $ephemerid_table->select()->where("planet = '$value[id]' AND JD < '$now'")->order('JD DESC')->limit(12);
-                $query = $ephemerid_table->select()->union(array("($select1)", "($select2)"), Zend_Db_Select::SQL_UNION_ALL)->order('JD DESC');
-                $ephemerids = $ephemerid_table->fetchAll($query)->toArray();
-                
-                // add ephemerids to item
-                $results[$key]['ephemerids'] = $ephemerids;
-
-                // calculate mean fields (might not be necessary)
-                $fields = array(
-                    'magnitude' => 99,
-                    'RAh' => 0,
-                    'RAm' => 0,
-                    'DEd' => 0,
-                    'DEm' => 0
-                );
-                if(!empty($ephemerids)){
-                    $fields['magnitude'] = 0;
-                    foreach ($ephemerids as $key1 => $value1) {
-                        foreach ($fields as $field_key => $field_value) {
-                           $fields[$field_key] += floatval($value1[$field_key]); 
-                        }
-                    }
-                    
-                }
-                foreach ($fields as $field_key => $field_value) {
-                   $results[$key][$field_key] = $fields[$field_key] / count($ephemerids); 
-                }
+            $planets = $planet_table->fetchAll($planet_table->select());
+            $results = array();
+            foreach ($planets as $key => $value) {
+                array_push($results, $value->normalize());
             }
             
             $cache->save($results, 'planet_' . $now_str);
