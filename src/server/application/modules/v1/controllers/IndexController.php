@@ -47,17 +47,12 @@ class V1_IndexController extends Zend_Controller_Action
 
         $cache = Zend_Registry::get('cache');
         $ngc_table = new V1_Model_DbTable_NGC();
-        $names_table = new V1_Model_DbTable_Names();
         
-        $results = array();
         if(!$results = $cache->load('ngc_' . $orderby . '_' . $limit . '_' . $offset)) {
-            $results = $ngc_table->fetchAll($ngc_table->select()->order($order)->limit($limit + $offset, 0))->toArray();
-            foreach ($results as $key => $value) {
-                $results[$key]['names'] = array();
-                $names = $names_table->fetchAll($names_table->select()->where('ngc = ?', $value['id']))->toArray();
-                foreach ($names as $key1 => $value1) {
-                    array_push($results[$key]['names'], $value1['name']);
-                }
+            $ngc = $ngc_table->fetchAll($ngc_table->select()->order($order)->limit($limit + $offset, 0));
+            $results = array();
+            foreach ($ngc as $key => $value) {
+                array_push($results, $value->normalize());
             }
             
             $cache->save($results, 'ngc_' . $orderby . '_' . $limit . '_' . $offset);
