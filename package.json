@@ -1,6 +1,6 @@
 {
   "name": "Sky-Watch",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Sky Watch =============",
   "scripts": {
     "build": "sh scripts/build.sh",
