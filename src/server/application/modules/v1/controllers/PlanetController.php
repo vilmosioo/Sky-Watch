@@ -100,7 +100,6 @@ class V1_PlanetController extends Zend_Controller_Action
                     array_push($values, $value1 ? $value1 : ' ');
                   }
                 }
-                $this->info['values'] = $values;
                 $stmt = $db->prepare($sql); 
                 $stmt->execute( $values );
                 $ephemerids = array();
