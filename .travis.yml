@@ -10,6 +10,9 @@ before_script:
 - cd src/client
 - npm install
 - bower install
+- cd ../server
+- npm install
+- bower install
 - cd ../..
 script:
 - npm run build
