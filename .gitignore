@@ -1,15 +1,15 @@
 src/server/library/Zend/
-src/client/node_modules
-src/client/dist
-src/client/.tmp
-src/client/.sass-cache
-src/client/app/components
+node_modules
+dist
+.tmp
+.sass-cache
+components
 src/server/application/configs/application.prod.ini
 src/client/app/scripts/config/constants.js
-src/client/.bower-cache
-src/client/.bower-registry
-src/client/.bower-tmp
-src/client/coverage/
+.bower-cache
+.bower-registry
+.bower-tmp
+coverage/
 .idea
 
 #################
