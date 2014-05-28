@@ -419,7 +419,7 @@ module.exports = function (grunt) {
     'concurrent:test',
     'connect:test',
     'karma',
-    'ptor'
+    //'ptor'
   ]);
 
   grunt.registerTask('build', [
