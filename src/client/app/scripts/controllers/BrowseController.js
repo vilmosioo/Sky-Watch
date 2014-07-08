@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ngApp')
-	.controller('BrowseController', function BrowseCtrl($scope, Sky, Constants) {
+	.controller('BrowseController', function BrowseCtrl($scope, Sky) {
 		var _load = function(){
 			// do no load if already loading
 			if($scope.results.isloading){
@@ -10,8 +10,7 @@ angular.module('ngApp')
 
 			$scope.results.isloading = true;
 
-			// todo call the randomised API
-			Sky.getItems({limit: Constants.DEFAULT_LIMIT, offset: 0}).then(function(results){
+			Sky.random().then(function(results){
 				$scope.results.isloading = false;
 				for(var i = 0; angular.isArray(results) && i < results.length; i++){
 					$scope.results.items.push(results[i]);
