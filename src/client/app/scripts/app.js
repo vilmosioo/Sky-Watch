@@ -45,7 +45,7 @@ app.config(function appConfig($routeProvider, $controllerProvider, $compileProvi
 			resolve: _requireDependencies(['scripts/controllers/SearchController.js'])
 		})
 		.when('/browse/', {
-			templateUrl: 'views/browse.html',
+			templateUrl: 'views/main.html',
 			controller: 'BrowseController',
 			title: 'Browse',
 			resolve: _requireDependencies(['scripts/controllers/BrowseController.js'])
