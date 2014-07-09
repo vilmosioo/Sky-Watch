@@ -294,6 +294,9 @@ module.exports = function (grunt) {
       },
       controllers: {
         files: {
+          '<%= yeoman.dist %>/scripts/controllers/BrowseController.js': [
+            '.tmp/concat/scripts/controllers/BrowseController.js'
+          ],
           '<%= yeoman.dist %>/scripts/controllers/MainController.js': [
             '.tmp/concat/scripts/controllers/MainController.js'
           ],
@@ -309,6 +312,9 @@ module.exports = function (grunt) {
     concat: {
       controllers: {
         files: {
+          '.tmp/concat/scripts/controllers/BrowseController.js': [
+            '<%= yeoman.app %>/scripts/controllers/BrowseController.js'
+          ],
           '.tmp/concat/scripts/controllers/MainController.js': [
             '<%= yeoman.app %>/scripts/controllers/MainController.js'
           ],

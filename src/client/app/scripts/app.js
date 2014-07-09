@@ -44,6 +44,12 @@ app.config(function appConfig($routeProvider, $controllerProvider, $compileProvi
 			title: 'Search',
 			resolve: _requireDependencies(['scripts/controllers/SearchController.js'])
 		})
+		.when('/browse/', {
+			templateUrl: 'views/main.html',
+			controller: 'BrowseController',
+			title: 'Browse',
+			resolve: _requireDependencies(['scripts/controllers/BrowseController.js'])
+		})
 		.when('/about/', {
 			templateUrl: 'views/about.html',
 			controller: 'AboutController',

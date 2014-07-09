@@ -4,14 +4,22 @@ angular.module('ngApp')
   .factory('Sky', function ($http, $q, $rootScope, Constants, Time, LocalStorage, Modernizr) {
     return {
       searchItems : function(params){
-        var limit = angular.isNumber(params.limit) ? parseInt(params.limit, 10) : 10,
+        params = params || {};
+        var limit = angular.isNumber(params.limit) ? parseInt(params.limit, 10) : Constants.DEFAULT_LIMIT,
           offset = angular.isNumber(params.offset) ? parseInt(params.offset, 10) : 0,
           q = angular.isString(params.q) ? params.q : '';
 
         return $http.jsonp(Constants.SEARCH_URL + '?callback=JSON_CALLBACK&limit=' + limit + '&offset=' + offset + '&q=' + q);
       },
+      random: function(params){
+        params = params || {};
+        var limit = angular.isNumber(params.limit) ? parseInt(params.limit, 10) : Constants.DEFAULT_LIMIT;
+
+        return $http.jsonp(Constants.RANDOM_URL + '?callback=JSON_CALLBACK&limit=' + limit);
+      },
       getItems : function(params){
-        var _limit = params && angular.isNumber(params.limit) ? Math.min(100, parseInt(params.limit, 10)) : 10,
+        params = params || {};
+        var _limit = params && angular.isNumber(params.limit) ? Math.min(100, parseInt(params.limit, 10)) : Constants.DEFAULT_LIMIT,
           _offset = params && angular.isNumber(params.offset) ? parseInt(params.offset, 10) : 0,
           _real_offset = _offset % (Constants.BUFFER * _limit),
           _index = Math.floor(_offset / Constants.BUFFER / _limit),

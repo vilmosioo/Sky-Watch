@@ -1,8 +1,7 @@
 'use strict';
 
 angular.module('ngApp')
-	.controller('MainController', function MainCtrl($scope, Sky) {
-		// load objects
+	.controller('BrowseController', function BrowseCtrl($scope, Sky) {
 		var _load = function(){
 			// do no load if already loading
 			if($scope.results.isloading){
@@ -10,12 +9,12 @@ angular.module('ngApp')
 			}
 
 			$scope.results.isloading = true;
-
-			Sky.getItems({offset: $scope.results.items.length}).then(function(results){
+			Sky.random().then(function(obj){
 				$scope.results.isloading = false;
-				for(var i = 0; angular.isArray(results) && i < results.length; i++){
-					$scope.results.items.push(results[i]);
+				for(var i = 0; angular.isArray(obj.data.results) && i < obj.data.results.length; i++){
+					$scope.results.items.push(obj.data.results[i]);
 				}
+				$scope.results.more = $scope.results.items.length < obj.data.total;
 			}, function(data, status, headers, config){
 				$scope.results.isloading = false;
 				console.log('error', data, status, headers, config);
@@ -28,5 +27,4 @@ angular.module('ngApp')
 			load: _load,
 			more: true
 		};
-
 	});
