@@ -389,9 +389,22 @@ module.exports = function (grunt) {
           port: 21,
           authKey: 'key'
         },
-        src: 'dist',
+        src: '<%= yeoman.dist %>',
         dest: '/',
         exclusions: []
+      }
+    },
+    angular_template_inline_js: {
+      dist:{
+        options: {
+          basePath: '<%= yeoman.dist %>'
+        },
+        files: [{
+          cwd: '<%= yeoman.dist %>',
+          expand: true,
+          src: ['**/*.app.js'],
+          dest: '<%= yeoman.dist %>'
+        }]
       }
     }
   });
@@ -445,6 +458,7 @@ module.exports = function (grunt) {
     'rev',
     'usemin',
     'replace:dist',
+    'angular_template_inline_js',
     'manifest'
   ]);
 
