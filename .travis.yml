@@ -6,7 +6,7 @@ before_script:
 - gem install sass --version 3.2.13
 - gem install compass
 - bower cache clean
-- npm clear cache
+- npm cache clear
 - cd src/client
 - npm install
 - bower install
