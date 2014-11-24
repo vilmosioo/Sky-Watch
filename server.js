@@ -15,17 +15,16 @@ var connection = mysql.createConnection({
 	password: process.env.OPENSHIFT_MYSQL_DB_PASSWORD,
 	database: 'skywatch'
 });
-
+connection.connect();
+	
 app.use(function(req, res){
-	connection.connect();
 	connection.query('SELECT * FROM `ephemerid` WHERE id=1', function(err, rows, fields){
 		res.setHeader('Content-Type', 'application/json');
 		if(err){
-			return res.send(err);
+			return res.send(400, err);
 		}
 		res.send(rows);
 	});
-	connection.end();
 });
 
 var server = app.listen(process.env.OPENSHIFT_NODEJS_PORT || 8080, process.env.OPENSHIFT_NODEJS_IP, function(){
