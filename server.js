@@ -1,17 +1,33 @@
 #!/bin/env node
 //  OpenShift sample Node application
 var express = require('express'),
-	bodyParser = require('body-parser');
+	bodyParser = require('body-parser'),
+	mysql = require('mysql');
 
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 
-app.use(function(req, res){
-    res.setHeader('Content-Type', 'application/json');
-    res.send({message: 'It works!'});    
+var connection = mysql.createConnection({
+	host: process.env.OPENSHIFT_MYSQL_DB_HOST,
+	port: process.env.OPENSHIFT_MYSQL_DB_PORT,
+	user: process.env.OPENSHIFT_MYSQL_DB_USERNAME,
+	password: process.env.OPENSHIFT_MYSQL_DB_PASSWORD,
+	database: 'skywatch'
 });
 
-var server = app.listen(process.env.OPENSHIFT_NODEJS_PORT || 8080, process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1", function(){
-    console.log('Server listening on ' + server.address().port);
+app.use(function(req, res){
+	connection.connect();
+	connection.query('SELECT * FROM `ephemerid` WHERE id=1', function(err, rows, fields){
+		res.setHeader('Content-Type', 'application/json');
+		if(err){
+			return res.send(err);
+		}
+		res.send(rows);
+	});
+	connection.end();
+});
+
+var server = app.listen(process.env.OPENSHIFT_NODEJS_PORT || 8080, process.env.OPENSHIFT_NODEJS_IP, function(){
+	console.log('Server listening on ' + server.address().port);
 });
