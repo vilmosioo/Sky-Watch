@@ -1,6 +1,6 @@
 'use strict';
 
-var mysql = require('mysql'),
+var mysql = require('mysql');
 
 var DB = function(){
 	this.connection = mysql.createConnection({
