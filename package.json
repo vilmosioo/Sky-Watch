@@ -1,19 +1,15 @@
 {
-  "name": "OpenShift-Sample-App",
+  "name": "SkyWatchAPI",
   "version": "1.0.0",
-  "description": "OpenShift Sample Application",
-  "keywords": [
-    "OpenShift",
-    "Node.js",
-    "application",
-    "openshift"
-  ],
+  "description": "",
+  "keywords": [],
   "author": {
-    "name": "OpenShift",
-    "email": "ramr@example.org",
-    "url": "http://www.openshift.com/"
+    "name": "Vilmos Ioo",
+    "email": "a@a.com",
+    "url": "http://www.vilmosioo.co.uk"
   },
   "homepage": "http://www.openshift.com/",
+
   "repository": {
     "type": "git",
     "url": "https://github.com/openshift/origin-server"
