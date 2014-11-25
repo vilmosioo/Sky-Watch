@@ -1,6 +1,6 @@
 'use strict';
 
-var mysql = require('mysql'),
+var mysql = require('mysql'),	
 	connection = mysql.createConnection({
 		host: process.env.OPENSHIFT_MYSQL_DB_HOST || '127.0.0.1',
 		port: process.env.OPENSHIFT_MYSQL_DB_PORT || 8889,
@@ -12,17 +12,4 @@ var mysql = require('mysql'),
 // this is where we connect to the database
 connection.connect();
 
-var NGC = {
-	get: function(id, cb){
-		this.find('id=' + id, cb);
-	},
-	find: function(where, cb){
-		connection.query('SELECT * FROM `ngc` WHERE ' + where, function(err, rows, fields){
-			cb(err, rows, fields);
-		});
-	}
-};
-
-module.exports = {
-	NGC: NGC
-};
+module.exports = connection;

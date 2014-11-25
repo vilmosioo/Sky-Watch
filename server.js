@@ -10,7 +10,7 @@ app.use(logger('combined'));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 	
-app.get('/ngc/:id', routes.ngc);
+app.get('/ngc/:id?', routes.ngc);
 app.use(function(req, res){
 	res.send(404);
 });
