@@ -20,7 +20,8 @@
   "dependencies": {
     "express": "~3.4.4",
     "mysql": "^2.5.3",
-    "body-parser": "^1.9.3"
+    "body-parser": "^1.9.3",
+    "morgan": "^1.5.0"
   },
   "devDependencies": {},
   "bundleDependencies": [],
