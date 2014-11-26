@@ -1,14 +1,6 @@
 'use strict';
 
-var NGC = require('../db').NGC,
-	options = {
-		orderby: {
-			'magnitude': ['magnitude'],
-			'RA': ['RAh', 'RAm'],
-			'DE': ['DEh', 'DEm']
-		},
-		desc: ['ASC', 'DESC']
-	};
+var NGC = require('../db').NGC;
 
 module.exports = function(req, res){
 	if(req.params.id){
@@ -19,21 +11,15 @@ module.exports = function(req, res){
 			res.send(rows);
 		});	
 	} else {
-		NGC.all({
-			// todo move this to a middlewere
-			limit: (req.param('limit') && isFinite(req.param('limit')) && req.param('limit') < 50) ? req.param('limit') : 10,
-			offset: req.param('offset') && isFinite(req.param('offset')) ? req.param('offset') : 0,
-			orderby: options.orderby[req.param('orderby')] || options.orderby['magnitude'],
-			desc: (req.param('desc') && options.desc.indexOf(req.param('desc')) !== -1) ? req.param('desc') : options.desc[0]
-		}, function(err, rows){
+		NGC.all(req.options, function(err, rows){
 			if(err){
 				return res.send(400, err);
 			}
 			res.send({
-				limit: req.param('limit'),
-				offset: req.param('offset'),
-				orderby: req.param('orderby'),
-				results: rows	
+				limit: req.options.limit,
+				offset: req.options.offset,
+				orderby: req.options.orderby,
+				results: rows	|| []
 			});
 		});	
 	}
