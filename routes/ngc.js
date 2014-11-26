@@ -20,6 +20,7 @@ module.exports = function(req, res){
 		});	
 	} else {
 		NGC.all({
+			// todo move this to a middlewere
 			limit: (req.param('limit') && isFinite(req.param('limit')) && req.param('limit') < 50) ? req.param('limit') : 10,
 			offset: req.param('offset') && isFinite(req.param('offset')) ? req.param('offset') : 0,
 			orderby: options.orderby[req.param('orderby')] || options.orderby['magnitude'],
@@ -28,7 +29,12 @@ module.exports = function(req, res){
 			if(err){
 				return res.send(400, err);
 			}
-			res.send(rows);
+			res.send({
+				limit: req.param('limit'),
+				offset: req.param('offset'),
+				orderby: req.param('orderby'),
+				results: rows	
+			});
 		});	
 	}
 };
