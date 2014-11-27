@@ -16,6 +16,7 @@ module.exports = function(req, res){
 				return res.send(400, err);
 			}
 			res.send({
+				title: 'New General Catalogue and Index Catalogue',
 				limit: req.options.limit,
 				offset: req.options.offset,
 				orderby: req.options.orderby,
