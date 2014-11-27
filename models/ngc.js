@@ -2,23 +2,19 @@
 
 module.exports = function(sequelize, DataTypes) {
 	var NGC = sequelize.define('NGC', {
-		RAh: DataTypes.INTEGER,
-		RAm: DataTypes.FLOAT,
-		DEd: DataTypes.INTEGER,
-		DEm: DataTypes.FLOAT,
-		type: DataTypes.TEXT,
-		constelation: DataTypes.TEXT,
-		magnitude: DataTypes.FLOAT,
-		size_min: DataTypes.FLOAT,
-		size_max: DataTypes.FLOAT,
-		number_of_stars: DataTypes.INTEGER,
-		class: DataTypes.TEXT
+		'id': { type: DataTypes.INTEGER, allowNull: false},
+		'RAh': { type: DataTypes.INTEGER, defaultValue: null, validate: { min: 0, max: 14}},
+		'RAm': { type: DataTypes.FLOAT, defaultValue: null, validate: { min: 0, max: 60}},
+		'DEd': { type: DataTypes.INTEGER, defaultValue: null, validate: { min: -90, max: 89}},
+		'DEm': { type: DataTypes.FLOAT, defaultValue: null, validate: { min: 0, max: 60}},
+		'type': { type: DataTypes.TEXT, defaultValue: null},
+		'constelation': { type: DataTypes.TEXT, defaultValue: null},
+		'magnitude': { type: DataTypes.FLOAT, defaultValue: null},
+		'size_min': { type: DataTypes.FLOAT, defaultValue: null},
+		'size_max': { type: DataTypes.FLOAT, defaultValue: null},
+		'number_of_stars': { type: DataTypes.INTEGER, defaultValue: null},
+		'class': { type: DataTypes.TEXT, defaultValue: null}
 	}, {
-		classMethods: {
-			associate: function(models) {
-				NGC.hasMany(models.Names)
-			}
-		},
 		freezeTableName: true,
 		timestamps: false,
 		tableName: 'ngc'
