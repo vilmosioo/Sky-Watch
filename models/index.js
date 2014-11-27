@@ -9,8 +9,12 @@ var sequelize = new Sequelize('skywatch', process.env.OPENSHIFT_MYSQL_DB_USERNAM
 	port: process.env.OPENSHIFT_MYSQL_DB_PORT || 8889
 });
 
+var NGC = sequelize.import(path.join(__dirname, 'ngc.js'));
+var Name = sequelize.import(path.join(__dirname, 'name.js'));
+
+NGC.hasMany(Name, {foreignKey: 'ngc'}); // This adds ngc foreign key to Name
 
 module.exports = {
-	NGC: sequelize.import(path.join(__dirname, 'ngc.js')),
-	Name: sequelize.import(path.join(__dirname, 'name.js'))
+	NGC: NGC,
+	Name: Name
 };

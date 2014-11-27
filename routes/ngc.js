@@ -5,7 +5,7 @@ var models = require('../models'),
 
 module.exports = function(req, res){
 	models.NGC.findAll(extend({
-		// include: [models.Name]
+		include: [models.Name]
 	}, req.options)).then(function(ngcs){
 		res.send(extend({
 			title: 'New General Catalogue and Index Catalogue',

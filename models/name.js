@@ -2,13 +2,10 @@
 
 module.exports = function(sequelize, DataTypes) {
 	var Name = sequelize.define("Name", {
-		title: DataTypes.STRING
+		'id': { type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true, unique: true},
+		'ngc': { type: DataTypes.INTEGER },
+		'name': { type: DataTypes.TEXT, allowNull: false}
 	}, {
-		classMethods: {
-			associate: function(models) {
-				Name.belongsTo(models.NGC);
-			}
-		},
 		freezeTableName: true,
 		timestamps: false,
 		tableName: 'names'

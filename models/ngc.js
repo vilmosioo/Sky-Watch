@@ -2,7 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
 	var NGC = sequelize.define('NGC', {
-		'id': { type: DataTypes.INTEGER, allowNull: false},
+		'id': { type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true, unique: true},
 		'RAh': { type: DataTypes.INTEGER, defaultValue: null, validate: { min: 0, max: 14}},
 		'RAm': { type: DataTypes.FLOAT, defaultValue: null, validate: { min: 0, max: 60}},
 		'DEd': { type: DataTypes.INTEGER, defaultValue: null, validate: { min: -90, max: 89}},
