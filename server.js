@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use(require('./scripts/headers'));
 app.use(require('./scripts/options'));
 
-app.get('/ngc/:id?', routes.ngc);
+app.get('/ngc', routes.ngc);
 
 app.use(require('./scripts/404'));
 
