@@ -3,5 +3,6 @@
 module.exports = {
 	ngc: require('./ngc'),
 	planet: require('./planet'),
-	browse: require('./browse')
+	browse: require('./browse'),
+	search: require('./search')
 };

@@ -22,8 +22,11 @@ module.exports = function(req, res){
 			}]
 		})
 	]).then(function(results){
-		res.send(shuffle(results.reduce(function(a, b){
-			return a.concat(b);
-		})).splice(0, req.options.limit));
+		res.send({
+			title: 'Browse',
+			results: shuffle(results.reduce(function(a, b){
+				return a.concat(b);
+			})).splice(0, req.options.limit)
+		});
 	});
 };
