@@ -10,11 +10,11 @@ module.exports = function(req, res){
 		})
 	}
 
-	models.Name.findAll({ 
-		where: ['LOWER(name) LIKE ?', '%' + q.replace(/\s+/, '%').trim().toLowerCase() + '%'],
-		order: [
-			['name', 'ASC']
-		]
+	models.NGC.findAll({
+		include: [{
+			model: models.Name,
+			where: ['LOWER(name) LIKE ?', '%' + q.replace(/\s+/, '%').trim().toLowerCase() + '%'],	
+		}]
 	}).then(function(names){
 		res.send({
 			title: 'Search results for: ' + q,
