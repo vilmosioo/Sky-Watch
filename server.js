@@ -14,6 +14,7 @@ app.use(require('./scripts/headers'));
 app.use(require('./scripts/options'));
 
 app.get('/ngc', routes.ngc);
+app.get('/planet', routes.planet);
 
 app.use(require('./scripts/404'));
 

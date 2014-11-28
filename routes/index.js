@@ -1,5 +1,6 @@
 'use strict';
 
 module.exports = {
-	ngc: require('./ngc')
+	ngc: require('./ngc'),
+	planet: require('./planet')
 };
