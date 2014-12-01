@@ -8,7 +8,7 @@ var express = require('express'),
 var app = express();
 
 app.use(logger('combined'));
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(require('./scripts/headers'));
 app.use(require('./scripts/options'));
