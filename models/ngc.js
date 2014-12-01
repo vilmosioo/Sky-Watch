@@ -1,7 +1,9 @@
 'use strict';
 
 var sequelize = require('./db'),
-	DataTypes = require('sequelize');
+	DataTypes = require('sequelize'),
+	Name = require('./name'),
+	extend = require('extend');
 
 module.exports = sequelize.define('NGC', {
 	'id': { type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true, unique: true},
@@ -19,5 +21,14 @@ module.exports = sequelize.define('NGC', {
 }, {
 	freezeTableName: true,
 	timestamps: false,
-	tableName: 'ngc'
+	tableName: 'ngc',
+	classMethods: {
+		get: function(args){
+			return this.findAll(extend({
+				include: [{
+					model: Name
+				}]
+			}, args));
+		}
+	}
 });

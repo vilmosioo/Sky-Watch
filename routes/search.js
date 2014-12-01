@@ -1,12 +1,10 @@
 'use strict';
 
 var models = require('../models'),
-	sequelize = require('sequelize'),
-	julian = require('julian');
+	sequelize = require('sequelize');
 
 module.exports = function(req, res){
-	var now = julian(new Date()),
-		q = req.param('q');
+	var q = req.param('q');
 
 	if(!q){
 		res.send(400, {

@@ -1,16 +1,11 @@
 'use strict';
 
 var models = require('../models'),
-	sequelize = require('sequelize'),
-	julian = require('julian'),
-	extend = require('extend');
+	sequelize = require('sequelize');
 
 module.exports = function(req, res){
-	var now = julian(new Date());
 	sequelize.Promise.all([
-		models.NGC.findAll(extend({
-			include: [models.Name]
-		}, req.options)), // maybe attach the names after splice-ing?
+		models.NGC.get(req.options),
 		models.Planet.get()
 	]).then(function(results){
 		res.send(extend({
