@@ -1,7 +1,8 @@
 'use strict';
 
 var models = require('../models'),
-	sequelize = require('sequelize');
+	sequelize = require('sequelize'),
+	extend = require('extend');
 
 module.exports = function(req, res){
 	sequelize.Promise.all([
