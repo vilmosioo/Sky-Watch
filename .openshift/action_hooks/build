@@ -1,11 +1,10 @@
 #!/bin/bash
 
-echo "Testing application... please wait"
-
-# the default grunt task should run 
 echo "Changing to directory ".$OPENSHIFT_REPO_DIR
 cd $OPENSHIFT_REPO_DIR
-ls
+
+# the default grunt task should run 
+echo "Testing application... please wait"
 ./node_modules/grunt-cli/bin/grunt -v || exit $?
 
 echo "Success!"
