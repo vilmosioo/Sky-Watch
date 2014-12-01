@@ -15,16 +15,8 @@ module.exports = function(req, res){
 	}
 
 	sequelize.Promise.all([
-		models.Planet.findAll({
-			where: ['LOWER(name) LIKE ?', '%' + q.replace(/\s+/, '%').trim().toLowerCase() + '%'],
-			include: [{
-				model: models.Ephemerid,
-				where: {
-					JD: {
-						between: [now - 1, now + 1] // retrieving ephemerids for +-1 day
-					}
-				}
-			}]
+		models.Planet.get({
+			where: ['LOWER(name) LIKE ?', '%' + q.replace(/\s+/, '%').trim().toLowerCase() + '%']
 		}),
 		models.NGC.findAll({
 			include: [{

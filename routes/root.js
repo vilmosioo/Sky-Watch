@@ -11,16 +11,7 @@ module.exports = function(req, res){
 		models.NGC.findAll(extend({
 			include: [models.Name]
 		}, req.options)), // maybe attach the names after splice-ing?
-		models.Planet.findAll({ // this is not DRY
-			include: [{
-				model: models.Ephemerid,
-				where: {
-					JD: {
-						between: [now - 1, now + 1] // retrieving ephemerids for +-1 day
-					}
-				}
-			}]
-		})
+		models.Planet.get()
 	]).then(function(results){
 		res.send(extend({
 			results: results.reduce(function(a, b){

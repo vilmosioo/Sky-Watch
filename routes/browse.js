@@ -11,16 +11,7 @@ module.exports = function(req, res){
 	var now = julian(new Date());
 	sequelize.Promise.all([
 		models.NGC.findAll({ include: [models.Name]}), // maybe attach the names after splice-ing?
-		models.Planet.findAll({ // this is not DRY
-			include: [{
-				model: models.Ephemerid,
-				where: {
-					JD: {
-						between: [now - 1, now + 1] // retrieving ephemerids for +-1 day
-					}
-				}
-			}]
-		})
+		models.Planet.get()
 	]).then(function(results){
 		res.send({
 			title: 'Browse',
