@@ -1,8 +1,9 @@
 #!/bin/bash
 
-echo "Testing..."
+echo "Testing application... please wait"
 
 # the default grunt task should run 
-grunt -v || exit $?
+cd $OPENSHIFT_REPO_DIR
+./node_modules/grunt-cli/bin/grunt -v || exit $?
 
 echo "Success!"
