@@ -3,6 +3,6 @@
 echo "Testing..."
 
 # the default grunt task should run 
-./node_modules/grunt-cli/bin/grunt -v || exit $?
+grunt -v || exit $?
 
 echo "Success!"
