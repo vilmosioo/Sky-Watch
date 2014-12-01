@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 app.use(require('./scripts/headers'));
 app.use(require('./scripts/options'));
 
+app.get('/', routes.root);
 app.get('/ngc', routes.ngc);
 app.get('/planet', routes.planet);
 app.get('/browse', routes.browse);
