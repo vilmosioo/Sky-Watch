@@ -5,6 +5,7 @@ cd $OPENSHIFT_REPO_DIR
 
 # the default grunt task should run 
 echo "Testing application... please wait"
+which rhc
 ./node_modules/grunt-cli/bin/grunt -v || exit $?
 
 echo "Success!"
