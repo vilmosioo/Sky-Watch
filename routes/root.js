@@ -17,11 +17,11 @@ module.exports = function(req, res){
 				.sort(function(a, b){
 					var i, l, field, desc;
 					// compare each term one after the other
-					for(i = 0, l = req.order.length; i < l; l++){
-						field = req.order[i][0];
-						desc = req.order[i][1];
+					for(i = 0, l = req.options.order.length; i < l; i++){
+						field = req.options.order[i][0];
+						desc = req.options.order[i][1];
 						if(a[field] !== b[field]){
-							return a[field] < b[field] ? -1 : 1;
+							return (a[field] || 99) < (b[field] || 99) ? -1 : 1;
 						}
 					} 
 					// all terms equal
