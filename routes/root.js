@@ -10,9 +10,24 @@ module.exports = function(req, res){
 		models.Planet.get()
 	]).then(function(results){
 		res.send(extend({
-			results: results.reduce(function(a, b){
-				return a.concat(b);
-			}).splice(0, req.options.limit)
+			results: results
+				.reduce(function(a, b){
+					return a.concat(b);
+				})
+				.sort(function(a, b){
+					var i, l, field, desc;
+					// compare each term one after the other
+					for(i = 0, l = req.order.length; i < l; l++){
+						field = req.order[i][0];
+						desc = req.order[i][1];
+						if(a[field] !== b[field]){
+							return a[field] < b[field] ? -1 : 1;
+						}
+					} 
+					// all terms equal
+					return 0;
+				})
+				.splice(0, req.options.limit)
 		}, req.options));
 	});
 };
