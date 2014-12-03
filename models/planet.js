@@ -4,8 +4,18 @@ var sequelize = require('./db'),
 	DataTypes = require('sequelize'),
 	Ephemerid = require('./ephemerid'),
 	extend = require('extend'),
-	linear = require('../scripts/linear'),
 	julian = require('julian');
+
+// function to compute the linear extrapolation of certain fields from two ephemerids
+var linear = function(obj, obj1, obj2){
+	var JD = obj.JD;
+	delete obj.JD;
+
+	return Object.keys(obj).reduce(function(obj, field){
+		obj[field] = obj1[field] + (obj1[field] - obj2[field]) / (obj1.JD - obj2.JD) * (JD - obj1.JD);
+		return obj;
+	}, obj);
+};
 
 module.exports = sequelize.define('Planet', {
 	'id': { type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true, unique: true},
@@ -26,12 +36,30 @@ module.exports = sequelize.define('Planet', {
 						return planet.getEphemerids({
 							limit: 2,
 							order: [
-								[sequelize.fn('ABS', '\'JD\ - ' + now), 'ASC']
+								[sequelize.fn('ABS', 'JD - ' + now), 'ASC']
 							]
-						}).then(function(ephemerids){
-							return extend(linear({
-								JD: now
-							}, ephemerids), planet.values);
+						})
+						.then(function(ephemerids){
+							return ephemerids.map(function(ephemerid){
+								return ephemerid.values;
+							});
+						})
+						.then(function(ephemerids){
+							return extend({
+								JD: +now,
+								constellation: ephemerids[0].constellation,
+								ephemerids: ephemerids
+							}, linear({
+								JD: now,
+								magnitude: 99,
+								RAh: 0,
+								RAm: 0,
+								RAs: 0,
+								DEd: 0,
+								DEm: 0,
+								DEs: 0,
+								size: 0
+							}, ephemerids[0], ephemerids[1]), planet.values);
 						});
 					}));
 				})
