@@ -4,6 +4,7 @@ var sequelize = require('./db'),
 	DataTypes = require('sequelize'),
 	Ephemerid = require('./ephemerid'),
 	extend = require('extend'),
+	linear = require('../scripts/linear'),
 	julian = require('julian');
 
 module.exports = sequelize.define('Planet', {
@@ -16,16 +17,27 @@ module.exports = sequelize.define('Planet', {
 	classMethods: {
 		get: function(args){
 			var now = julian(new Date());
-			return this.findAll(extend({
-				include: [{
-					model: Ephemerid,
-					where: {
-						JD: {
-							between: [now - 1, now + 1] // retrieving ephemerids for +-1 day
-						}
-					}
-				}]
-			}, args));
+			// sequelize does not support order/limit clauses to include, it is not possible to retrive the current ephemeris
+			// each planet will need to find it's ephemerid using a separate call
+			// it's either this or a raw sql query
+			return this.findAll(args)
+				.then(function(planets){
+					return sequelize.Promise.all(planets.map(function(planet){
+						return planet.getEphemerids({
+							limit: 2,
+							order: [
+								[sequelize.fn('ABS', '\'JD\ - ' + now), 'ASC']
+							]
+						}).then(function(ephemerids){
+							return extend(linear({
+								JD: now
+							}, ephemerids), planet.values);
+						});
+					}));
+				})
+				.then(function(planets){
+					return planets;
+				});
 		}
 	}
 });
