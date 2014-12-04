@@ -36,7 +36,7 @@ module.exports = sequelize.define('Planet', {
 						return planet.getEphemerids({
 							limit: 2,
 							order: [
-								[sequelize.fn('ABS', 'JD - ' + now), 'ASC']
+								[sequelize.fn('ABS', sequelize.condition(sequelize.col('JD'), '-', now)), 'ASC']
 							]
 						})
 						.then(function(ephemerids){
@@ -46,9 +46,7 @@ module.exports = sequelize.define('Planet', {
 						})
 						.then(function(ephemerids){
 							return extend({
-								JD: +now,
-								constellation: ephemerids[0].constellation,
-								ephemerids: ephemerids
+								constellation: ephemerids[0].constellation
 							}, linear({
 								JD: now,
 								magnitude: 99,
