@@ -26,7 +26,9 @@ var bootstrap = function(){
 					// can only insert names once ngc is set
 					return Name.bulkCreate(ngcs.map(function(obj){ return obj.Names; }).reduce(function(a, b){ return a.concat(b); }))
 				}),
-				Planet.bulkCreate(planets.map(function(obj){ return obj.Planet; }))
+				Planet.bulkCreate(planets.map(function(obj){ return obj.Planet; })).then(function(){
+					return Ephemerid.bulkCreate(planets.map(function(obj){ return obj.Ephemerids; }).reduce(function(a, b){ return a.concat(b); }));
+				})
 			]);
 		});
 	});
