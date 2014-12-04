@@ -12,7 +12,7 @@ module.exports = sequelize.define('NGC', {
 	'DEd': { type: DataTypes.INTEGER, defaultValue: null, validate: { min: -90, max: 89}},
 	'DEm': { type: DataTypes.FLOAT, defaultValue: null, validate: { min: 0, max: 60}},
 	'type': { type: DataTypes.TEXT, defaultValue: null},
-	'constelation': { type: DataTypes.TEXT, defaultValue: null},
+	'constellation': { type: DataTypes.TEXT, defaultValue: null},
 	'magnitude': { type: DataTypes.FLOAT, defaultValue: null},
 	'size_min': { type: DataTypes.FLOAT, defaultValue: null},
 	'size_max': { type: DataTypes.FLOAT, defaultValue: null},
