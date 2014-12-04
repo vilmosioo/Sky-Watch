@@ -28,7 +28,21 @@ module.exports = sequelize.define('NGC', {
 				include: [{
 					model: Name
 				}]
-			}, args));
+			}, args))
+				.then(function(ngcs){
+					return ngcs.map(function(ngc){
+						return ngc.values;
+					});
+				})
+				.then(function(ngcs){
+					return ngcs.map(function(ngc){
+						delete ngc.id;
+						ngc.Names = ngc.Names.map(function(name){
+							return name.name;
+						});
+						return ngc;
+					});
+				});
 		}
 	}
 });
