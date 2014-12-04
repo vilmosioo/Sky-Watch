@@ -40,7 +40,6 @@ module.exports = fs.readFileSync('./data/SAC_DeepSky_Ver81_QCQ.TXT').toString().
 
 				if(config.NAMES[name]){
 					names = names.concat(config.NAMES[name]);
-					console.log(names);
 				}
 
 				return names.map(function(name){

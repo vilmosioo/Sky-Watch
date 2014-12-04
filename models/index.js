@@ -18,12 +18,15 @@ var bootstrap = function(){
 		// max_allowed_packet is too low, cannot use bulk create (low performance)
 		// overwrite this variable before continuing
 		return sequelize.query('SET @@global.max_allowed_packet = ' + (64 * 1024 * 1024)).then(function(){
-			var ngcs = require('../data/bootstrap/ngc');
+			var ngcs = require('../data/bootstrap/ngc'),
+				planets = require('../data/bootstrap/planet');
+
 			return Sequelize.Promise.all([
 				NGC.bulkCreate(ngcs.map(function(obj){ return obj.NGC; })).then(function(){
 					// can only insert names once ngc is set
 					return Name.bulkCreate(ngcs.map(function(obj){ return obj.Names; }).reduce(function(a, b){ return a.concat(b); }))
-				})
+				}),
+				Planet.bulkCreate(planets.map(function(obj){ return obj.Planet; }))
 			]);
 		});
 	});

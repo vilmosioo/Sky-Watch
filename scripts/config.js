@@ -215,6 +215,9 @@ module.exports = {
 		'NGC 5194': ['WHIRLPOOL GAL'],
 		'IC 2118': ['WITCH-HEAD NEB'],
 		'IC 4593': ['WHITE EYED PEA'],
-		'NGC 884': ['X PER'],
-	}
+		'NGC 884': ['X PER']
+	},
+	PLANETS: [
+		'Mercury', 'Venus', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune'
+	]
 };
