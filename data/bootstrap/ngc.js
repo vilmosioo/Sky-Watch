@@ -5,9 +5,8 @@ var fs = require('fs'),
 		return (str || '').trim();
 	};
 
-console.log(fs.readFileSync('./data/SAC_DeepSky_Ver81_QCQ.TXT').toString().split(/\r?\n/).map(function(line){
-	line = line.replace('"', '').replace(/\s+/g, ' ').split(',');
-
+module.exports = fs.readFileSync('./data/SAC_DeepSky_Ver81_QCQ.TXT').toString().split(/\r?\n/).map(function(line){
+	line = line.replace(/"/g, '').replace(/\s+/g, ' ').split(',');
 	var RA = trim(line[4]).split(' '),
 		DE = trim(line[5]).split(' ');
 
@@ -24,6 +23,4 @@ console.log(fs.readFileSync('./data/SAC_DeepSky_Ver81_QCQ.TXT').toString().split
 		number_of_stars: trim(line[14]),
 		class: trim(line[13])
 	};
-}));
-
-module.exports = [];
+});

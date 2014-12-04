@@ -15,9 +15,12 @@ Planet.hasMany(Ephemerid, {foreignKey: 'planet'}); // This adds planet foreign k
 
 var bootstrap = function(){
 	return sequelize.sync({ force: true }).then(function(){
-		return Sequelize.Promise.all([
-			NGC.bulkCreate(require('../data/bootstrap/ngc'))
-		]);
+		// max_allowed_packet is too low, cannot use bulk create (low performance)
+		// overwrite this variable before continuing
+		return sequelize.query('SET @@global.max_allowed_packet = ' + (64 * 1024 * 1024)).then(function(s){
+			var ngcs = require('../data/bootstrap/ngc');
+			return Sequelize.Promise.all(NGC.bulkCreate(ngcs));
+		});
 	});
 };
 
