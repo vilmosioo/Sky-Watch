@@ -11,7 +11,7 @@
 	"scripts": {
 		"build": "sh ci/build.sh",
 		"deploy": "sh ci/deploy.sh",
-		"postinstall": "node ./node_modules/bower/bin/bower install"
+		"postinstall": "export HOME=$HOME/app-root/runtime/repo; node ./node_modules/bower/bin/bower install"
 	},
 	"config": {
 		"app": "client",
