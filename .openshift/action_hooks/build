@@ -1,0 +1,5 @@
+#!/bin/sh
+
+grunt build || { echo 'Client build failed' ; exit 1; }
+
+exit 0;
