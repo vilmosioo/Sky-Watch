@@ -382,18 +382,6 @@ module.exports = function (grunt) {
         ]
       }
     },
-    'ftp-deploy': {
-      build: {
-        auth: {
-          host: 'ftp.vilmosioo.co.uk',
-          port: 21,
-          authKey: 'key'
-        },
-        src: '<%= yeoman.dist %>',
-        dest: '/',
-        exclusions: []
-      }
-    },
     angular_template_inline_js: {
       dist:{
         options: {
@@ -459,7 +447,6 @@ module.exports = function (grunt) {
     'usemin',
     'replace:dist',
     'angular_template_inline_js',
-    'manifest'
   ]);
 
   grunt.registerTask('default', [

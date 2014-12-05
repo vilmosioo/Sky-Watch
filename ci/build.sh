@@ -12,7 +12,6 @@ echo 'Patching version...'
 npm version patch -m "Updating version [skip ci]" || { echo 'Version patch failed' ; exit 1; }
 
 echo 'Running build command (default), assuming we are in the client folder'
-cd src/client || { echo 'Could not find client folder' ; exit 1; }
 grunt || { echo 'Client build failed' ; exit 1; }
 
 exit 0;

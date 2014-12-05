@@ -1,10 +1,8 @@
-src/server/library/Zend/
 node_modules
 dist
 .tmp
 .sass-cache
 components
-src/server/application/configs/application.prod.ini
 src/client/app/scripts/config/constants.js
 .bower-cache
 .bower-registry
