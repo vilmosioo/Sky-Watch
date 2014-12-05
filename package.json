@@ -13,6 +13,12 @@
 		"deploy": "sh ci/deploy.sh",
 		"postinstall": "node ./node_modules/bower/bin/bower install"
 	},
+	"config": {
+		"app": "client",
+		"dist": "dist",
+		"tmp": ".tmp",
+		"test": "test"
+	},
 	"author": {
 		"name": "Vilmos Ioo",
 		"url": "http://www.vilmosioo.co.uk"

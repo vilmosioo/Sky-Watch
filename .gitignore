@@ -3,7 +3,7 @@ dist
 .tmp
 .sass-cache
 components
-src/client/app/scripts/config/constants.js
+client/scripts/config/constants.js
 .bower-cache
 .bower-registry
 .bower-tmp

@@ -15,16 +15,14 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
-  // Define the configuration for all the tasks
+	var pck = grunt.file.readJSON('./package.json');
+
+	// Define the configuration for all the tasks
   grunt.initConfig({
 
     // Project settings
-    yeoman: {
-      // configurable paths
-      app: require('./bower.json').appPath || 'client',
-      dist: 'dist'
-    },
-    pkg: grunt.file.readJSON('./package.json'),
+    yeoman: pck.config,
+    pkg: pck,
     manifest: {
       generate: {
         options: {
@@ -40,10 +38,10 @@ module.exports = function (grunt) {
     },
     ngconstant: {
       dev: [{
-        dest: '<%= yeoman.app %>/scripts/config/constants.js',
+        dest: pck.config.app + '/scripts/config/constants.js',
         name: 'Constants',
         constants: {
-          Constants: grunt.file.readJSON('app/scripts/config/constants.json')
+          Constants: grunt.file.readJSON(pck.config.app + '/scripts/config/constants.json')
         }
       }]
     },
@@ -57,7 +55,7 @@ module.exports = function (grunt) {
         }
       },
       jsTest: {
-        files: ['test/**/*.js'],
+        files: ['<%= yeoman.test %>/**/*.js'],
         tasks: ['newer:jshint:test', 'karma']
       },
       compass: {
@@ -73,7 +71,7 @@ module.exports = function (grunt) {
         },
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
-          '.tmp/styles/{,*/}*.css',
+          '<%= yeoman.tmp %> %>/styles/{,*/}*.css',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
@@ -91,7 +89,7 @@ module.exports = function (grunt) {
         options: {
           open: true,
           base: [
-            '.tmp',
+            '<%= yeoman.tmp %>',
             '<%= yeoman.app %>'
           ]
         }
@@ -100,8 +98,8 @@ module.exports = function (grunt) {
         options: {
           port: 9001,
           base: [
-            '.tmp',
-            'test',
+            '<%= yeoman.tmp %>',
+            '<%= yeoman.test %>',
             '<%= yeoman.app %>'
           ]
         }
@@ -126,9 +124,9 @@ module.exports = function (grunt) {
       ],
       test: {
         options: {
-          jshintrc: 'test/.jshintrc'
+          jshintrc: '<%= yeoman.test %>/.jshintrc'
         },
-        src: ['test/**/*.js']
+        src: ['<%= yeoman.test %>/**/*.js']
       }
     },
 
@@ -138,19 +136,19 @@ module.exports = function (grunt) {
         files: [{
           dot: true,
           src: [
-            '.tmp',
+            '<%= yeoman.tmp %>',
             '<%= yeoman.dist %>/*',
             '!<%= yeoman.dist %>/.git*'
           ]
         }]
       },
-      server: '.tmp'
+      server: '<%= yeoman.tmp %>'
     },
     // Compiles Sass to CSS and generates necessary files if requested
     compass: {
       options: {
         sassDir: '<%= yeoman.app %>/styles',
-        cssDir: '.tmp/styles',
+        cssDir: '<%= yeoman.tmp %>/styles',
         relativeAssets: true,
         importPath: '<%= yeoman.app %>/components/compass-twitter-bootstrap/stylesheets'
       },
@@ -242,17 +240,10 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '.tmp/concat/scripts',
+          cwd: '<%= yeoman.tmp %>/concat/scripts',
           src: ['app.js', 'controllers/*.js'],
-          dest: '.tmp/concat/scripts'
+          dest: '<%= yeoman.tmp %>/concat/scripts'
         }]
-      }
-    },
-
-    // Replace Google CDN references
-    cdnify: {
-      dist: {
-        html: ['<%= yeoman.dist %>/*.html']
       }
     },
 
@@ -295,16 +286,16 @@ module.exports = function (grunt) {
       controllers: {
         files: {
           '<%= yeoman.dist %>/scripts/controllers/BrowseController.js': [
-            '.tmp/concat/scripts/controllers/BrowseController.js'
+            '<%= yeoman.tmp %>/concat/scripts/controllers/BrowseController.js'
           ],
           '<%= yeoman.dist %>/scripts/controllers/MainController.js': [
-            '.tmp/concat/scripts/controllers/MainController.js'
+            '<%= yeoman.tmp %>/concat/scripts/controllers/MainController.js'
           ],
           '<%= yeoman.dist %>/scripts/controllers/SearchController.js': [
-            '.tmp/concat/scripts/controllers/SearchController.js'
+            '<%= yeoman.tmp %>/concat/scripts/controllers/SearchController.js'
           ],
           '<%= yeoman.dist %>/scripts/controllers/AboutController.js': [
-            '.tmp/concat/scripts/controllers/AboutController.js'
+            '<%= yeoman.tmp %>/concat/scripts/controllers/AboutController.js'
           ]
         }
       }
@@ -312,16 +303,16 @@ module.exports = function (grunt) {
     concat: {
       controllers: {
         files: {
-          '.tmp/concat/scripts/controllers/BrowseController.js': [
+          '<%= yeoman.tmp %>/concat/scripts/controllers/BrowseController.js': [
             '<%= yeoman.app %>/scripts/controllers/BrowseController.js'
           ],
-          '.tmp/concat/scripts/controllers/MainController.js': [
+          '<%= yeoman.tmp %>/concat/scripts/controllers/MainController.js': [
             '<%= yeoman.app %>/scripts/controllers/MainController.js'
           ],
-          '.tmp/concat/scripts/controllers/SearchController.js': [
+          '<%= yeoman.tmp %>/concat/scripts/controllers/SearchController.js': [
             '<%= yeoman.app %>/scripts/controllers/SearchController.js'
           ],
-          '.tmp/concat/scripts/controllers/AboutController.js': [
+          '<%= yeoman.tmp %>/concat/scripts/controllers/AboutController.js': [
             '<%= yeoman.app %>/scripts/controllers/AboutController.js'
           ]
         }
@@ -349,20 +340,6 @@ module.exports = function (grunt) {
       }
     },
     replace: {
-      ftp: {
-        options: {
-          variables: {
-            'ftp_user' : process.env.DEPLOY_USER || '',
-            'ftp_pass': process.env.DEPLOY_PASSWORD || ''
-          }
-        },
-        files: [
-          {
-            src: '.ftppass',
-            dest: '.ftppass'
-          }
-        ]
-      },
       dist: {
         options: {
           variables: {
@@ -441,7 +418,6 @@ module.exports = function (grunt) {
     'htmlmin',
     'copy',
     'ngmin',
-    'cdnify',
     'uglify',
     'rev',
     'usemin',
