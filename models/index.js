@@ -12,7 +12,7 @@ NGC.hasMany(Name, {foreignKey: 'ngc'}); // This adds ngc foreign key to Name
 Planet.hasMany(Ephemerid, {foreignKey: 'planet'}); // This adds planet foreign key to Ephemerid
 
 var bootstrap = function(){
-	//return sequelize.sync();
+	return sequelize.sync();
 	return sequelize.sync({ force: true }).then(function(){
 		// max_allowed_packet is too low, cannot use bulk create (low performance)
 		// overwrite this variable before continuing
