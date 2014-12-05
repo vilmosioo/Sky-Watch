@@ -1,4 +1,40 @@
-#!/bin/sh
+#!/bin/bash
+
+# This is a simple build script and will be executed on your CI system if
+# available.  Otherwise it will execute while your application is stopped
+# before the deploy step.  This script gets executed directly, so it
+# could be python, php, ruby, etc.
+
+# Install our gems needed for yeomen
+if [ ! -d $OPENSHIFT_DATA_DIR/gems ]; then
+	echo "Making Gems dir"
+	mkdir $OPENSHIFT_DATA_DIR/gems
+fi
+
+export GEM_HOME=$OPENSHIFT_DATA_DIR/gems
+if [ `gem list compass -i` == 'false' ]; then
+	echo "Install Gems"
+	gem install compass
+fi
+
+if [ ! -x $OPENSHIFT_DATA_DIR/bin/optipng ]; then
+	# Install optipng it's in our git repo
+	cd $OPENSHIFT_TMP_DIR
+	tar -xzf $OPENSHIFT_REPO_DIR/binary/optipng-0.7.4.tgz
+	cd "$OPENSHIFT_TMP_DIR"optipng-0.7.4
+	echo "Configuring optipng"
+	./configure \
+	      --prefix=$OPENSHIFT_DATA_DIR
+	echo "Configured optipng"
+	make -j
+	echo "Build optipng"
+	make install
+	echo "Installed optipng"
+fi
+
+#put all the things on the PATH
+export PATH=$OPENSHIFT_DATA_DIR/bin:$OPENSHIFT_DATA_DIR/gems/bin:$PATH
+export GEM_HOME=$OPENSHIFT_DATA_DIR/gems
 
 if [ -f "${OPENSHIFT_REPO_DIR}"/Gruntfile.js ]; then
     (cd "${OPENSHIFT_REPO_DIR}"; node_modules/grunt-cli/bin/grunt build || { echo 'Client build failed' ; exit 1; })
