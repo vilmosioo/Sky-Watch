@@ -17,7 +17,5 @@ module.exports = sequelize.define('Ephemerid', {
 	'magnitude': { type: DataTypes.FLOAT, allowNull: false},
 	'constellation': { type: DataTypes.TEXT, allowNull: false}
 }, {
-	freezeTableName: true,
-	timestamps: false,
 	tableName: 'ephemerid'
 });

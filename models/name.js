@@ -8,7 +8,5 @@ module.exports = sequelize.define("Name", {
 	'ngc': { type: DataTypes.INTEGER },
 	'name': { type: DataTypes.TEXT, allowNull: false}
 }, {
-	freezeTableName: true,
-	timestamps: false,
 	tableName: 'names'
 });

@@ -19,8 +19,6 @@ module.exports = sequelize.define('NGC', {
 	'number_of_stars': { type: DataTypes.INTEGER, defaultValue: null},
 	'class': { type: DataTypes.TEXT, defaultValue: null}
 }, {
-	freezeTableName: true,
-	timestamps: false,
 	tableName: 'ngc',
 	classMethods: {
 		get: function(args){
