@@ -201,18 +201,6 @@ module.exports = function (grunt) {
 				}
 			}
 		},
-
-		// The following *-min tasks produce minified files in the dist folder
-		imagemin: {
-			dist: {
-				files: [{
-					expand: true,
-					cwd: '<%= yeoman.app %>/images',
-					src: '{,*/}*.{png,jpg,jpeg,gif}',
-					dest: '<%= yeoman.dist %>/images'
-				}]
-			}
-		},
 		htmlmin: {
 			dist: {
 				options: {
@@ -262,6 +250,14 @@ module.exports = function (grunt) {
 						'styles/fonts/*.{eot,svg,ttf,woff}'
 					]
 				}]
+			},
+			image: {
+				files: [{
+					expand: true,
+					cwd: '<%= yeoman.app %>/images',
+					src: '{,*/}*.{png,jpg,jpeg,gif}',
+					dest: '<%= yeoman.dist %>/images'
+				}]
 			}
 		},
 
@@ -274,8 +270,7 @@ module.exports = function (grunt) {
 				'compass'
 			],
 			dist: [
-				'compass:dist',
-				'imagemin'
+				'compass:dist'
 			]
 		},
 		uglify: {
@@ -412,7 +407,6 @@ module.exports = function (grunt) {
 		'useminPrepare',
 		'concurrent:dist',
 		'concat',
-		'imagemin',
 		'cssmin',
 		'htmlmin',
 		'copy',
