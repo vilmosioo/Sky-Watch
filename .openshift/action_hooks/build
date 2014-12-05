@@ -1,5 +1,7 @@
 #!/bin/sh
 
-grunt build || { echo 'Client build failed' ; exit 1; }
+if [ -f "${OPENSHIFT_REPO_DIR}"/Gruntfile.js ]; then
+    (cd "${OPENSHIFT_REPO_DIR}"; node_modules/grunt-cli/bin/grunt build || { echo 'Client build failed' ; exit 1; })
+fi
 
 exit 0;
