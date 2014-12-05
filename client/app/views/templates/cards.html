@@ -1,0 +1,17 @@
+<div>
+  <div ng-show="weather.clouds.all > 50" class="alert alert-warning">
+    <strong>Warning!</strong> Looks like there's no clear sky in your area :(
+  </div>
+  <div ng-class="config.wrapClass">
+    <div ng-class="'grid-' + config.grid" ng-repeat="item in list.items">
+      <card item='item'></card>   
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="noResults" ng-hide="list.items.length > 0 || list.isloading">
+    Sorry, no results
+  </div>
+  <div>
+    <is-loading flag="list.isloading" more="list.more" handler="list.load"></is-loading>
+  </div>
+</div>

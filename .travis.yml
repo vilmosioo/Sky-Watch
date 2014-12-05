@@ -1,0 +1,33 @@
+language: node_js
+node_js:
+- '0.10'
+before_script:
+- npm install -g grunt-cli bower
+- gem install sass --version 3.2.13
+- gem install compass
+- bower cache clean
+- npm cache clear
+- cd src/client
+- npm install
+- bower install
+- cd ../server
+- npm install
+- cd ../..
+script:
+- npm run build
+after_success:
+- npm run deploy
+env:
+  global:
+  - secure: GaVeSiDR628k9JCCkz0y8ytGOTQk1Rh6Z1PFOcoUZjsThdbDuMYRbTOWZ5VrE4nO5vdanzGZIyz175zJq5Ixpg8TieNHtvof1rKM+jQtIAH9RmRg2nQMo8omV8SfsWmCwh0Dkfixw7Jc/1mIQ7H4q61oyQEDX6+hOLH0GBBxFC0=
+  - secure: naph5PSsfk4uq0fdqvEvjv0SRss1IgKrkuHdUgJtz+PtmbDnKIeJbeRhgvnT9FWyHkTzhFaoy0ykfPyiY9y+wshVWpo45S9CgmcDXG+KWZo9lO0veD8wtrKTb7fcDeEo24USx/4ZGoNIXDWY408BpzingMaxnHbvT+z+Lq2SkxE=
+  - secure: GApt+oAJqGd+OZ1D+HubJQUJLSXEL/affKn8XpkXnuesT2oTK3Um9EcFluBm6CYZRWpidzrRGdqD21s5B4gvy8cQqaGdyCHlqPdmd4GOD4RZTQK0ZkOk9/xN2/oF9DyKrv7DKFwC0RndbASehjiJeMYBjjqD0bjRxJBlPKdLniY=
+  - secure: nfaOdu+4QJ1TfYzs/seE8VweBS0ECotM84Z0BwBKG0dgoGTw2YjQevF3kerapgoTKfGGGjS9rqfoq5lzKaEbS+2/qx2aaxFexPGLvSEbNboltZWojVHsBEHVl2D9WhNGxJ0UcWI21xEII43ypStjoH2P3D01Np0Av0u/O+bmcBs=
+  - secure: ExSZgk4uHILpfrNchBOJ6ZkQEf85YbeSXD+g1oW05SQfcixrc6OCtHELeLuayUKHGSipRx4F4zlaMTM6/UvumznuufAvezIp1Us0SbfvPLrFT6LzAHLLp7YXXgN9QldiZ7qTrQacsSJKXMp3uuEiYYjOjPANpkpULy+SfPzhy/E=
+  - secure: usSpkvwzLF/Sy+IxZCjW0yeMKw+dZkfEnePtAgN27KYbUAf1wAgFGsqaR0y+euWKACOKw24qgztSGTHUgBt6Z4fUVx8w2/sbJkeOR8c/hJ4vXLS+4KOSb4uQGbTU+Zj3Ywh95eRFnlIIh7C61wkeVqORfctT4tO4jvgE2PuCoiM=
+  - secure: SLtIlhG1yFJv8o5BDgKDXds8b+esNy538O7huJcI+BOfmo9hVufjaD7riVE8tSw75b/8HRYOJdX+KfhZgaaTUgTUzCh/ImFQUgoxJiMvTMlTbAHnFuVrE00SHwchgYXXn+ib2XSkwz7FA2+zmahlsmJOZ1SwAjAm96KQZFKGdzM=
+  - secure: zBO5fhbTzfyG+U9WdKOEcG9LxuvvAoWA84YFPL1EA4GICZGYZAf6MO4NaWssz7zMFyEF1bxEXmEmIdUdLFLgUJmshZ2tTUzkts7FbNx3BOGoZrDJqyQK8u8gQYyY65k/HDJop6eAx8mUftpVn5zfatPJIbBhnovYn90xCqf5YVs=
+  - secure: hfXVWS+mhG7Cqylmkv/3sjwLZmHesX+AWd54OltoSGXJahzwhiDQd4dh60I5CdyXkb2HgqBRNc7ixzUDZHlhFylHJ2dpy8M4LktGahGwgUQYh03Rwg2v+GfJvddAJyJ8+RTRehtWrDe6KDBhT8Xhqvp3jh2ltomjwITCPqnP8/k=
+branches:
+  only:
+    - master
