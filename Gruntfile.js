@@ -21,10 +21,10 @@ module.exports = function (grunt) {
     // Project settings
     yeoman: {
       // configurable paths
-      app: require('./bower.json').appPath || 'app',
+      app: require('./bower.json').appPath || 'client',
       dist: 'dist'
     },
-    pkg: grunt.file.readJSON('./../../package.json'),
+    pkg: grunt.file.readJSON('./package.json'),
     manifest: {
       generate: {
         options: {
@@ -40,7 +40,7 @@ module.exports = function (grunt) {
     },
     ngconstant: {
       dev: [{
-        dest: 'app/scripts/config/constants.js',
+        dest: '<%= yeoman.app %>/scripts/config/constants.js',
         name: 'Constants',
         constants: {
           Constants: grunt.file.readJSON('app/scripts/config/constants.json')
