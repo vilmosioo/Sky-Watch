@@ -4,6 +4,7 @@ var express = require('express'),
 	bodyParser = require('body-parser'),
 	logger = require('morgan'),
 	models = require('./models'),
+	path = require('path'),
 	routes = require('./routes');
 
 var app = express(),
@@ -12,6 +13,7 @@ var app = express(),
 app.use(logger('combined'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, '/dist')));
 
 router.use(require('./scripts/headers'));
 router.use(require('./scripts/options'));
