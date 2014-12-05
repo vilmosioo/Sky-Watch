@@ -9,6 +9,6 @@ module.exports = function(req, res){
 			results: planets || []
 		});
 	}, function(err){
-		res.send(400, err)
+		res.send(400, {message: 'An error has occurred, please try again later', err: err.toString()});
 	});
 };

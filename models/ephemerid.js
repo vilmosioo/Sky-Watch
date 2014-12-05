@@ -6,7 +6,7 @@ var sequelize = require('./db'),
 
 module.exports = sequelize.define('Ephemerid', {
 	'id': { type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true, unique: true},
-	'JD': { type: DataTypes.FLOAT, allowNull: false},
+	'JD': { type: 'DOUBLE', allowNull: false},
 	'RAh': { type: DataTypes.INTEGER, allowNull: false},
 	'RAm': { type: DataTypes.INTEGER, allowNull: false},
 	'RAs': { type: DataTypes.FLOAT, allowNull: false},

@@ -14,7 +14,7 @@ module.exports = config.PLANETS.map(function(planet, index){
 			id: id,
 			name: planet
 		},
-		Ephemerids: fs.readFileSync('./data/planets/'+planet.toLowerCase()+'.txt').toString().split(/\r?\n/).map(function(line){
+		Ephemerids: fs.readFileSync('./data/planets/'+planet.toLowerCase()+'.txt').toString().match(/[^\r\n]+/g).map(function(line){
 			line = line.replace(/"/g, '').replace(/\s+/g, ' ').split(',');
 
 			var RA = trim(line[1]).split(' '),
