@@ -25,4 +25,3 @@ deploy:
   app: 'skywatch'
   domain: skywatch
   on: openshift
-  skip_cleanup: true
