@@ -4,6 +4,7 @@ node_js:
 before_script:
 - npm install -g grunt-cli bower
 - gem install sass --version 3.2.13
+- gem install compass
 - npm cache clear && bower cache clean
 - npm install && bower install
 script:
