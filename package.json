@@ -9,9 +9,7 @@
 		"real-time"
 	],
 	"scripts": {
-		"build": "sh ci/build.sh",
-		"deploy": "sh ci/deploy.sh",
-		"postinstall": "export HOME=$HOME/app-root/runtime/repo; node ./node_modules/bower/bin/bower install"
+		"build": "sh ci/build.sh"
 	},
 	"config": {
 		"app": "client",
