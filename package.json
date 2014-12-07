@@ -9,7 +9,8 @@
     "real-time"
   ],
   "scripts": {
-    "build": "sh ci/build.sh"
+    "build": "sh ci/build.sh",
+		"before_deploy": "sh ci/before_deploy.sh"
   },
   "config": {
     "app": "client",

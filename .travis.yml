@@ -17,6 +17,8 @@ env:
 branches:
   only:
   - master
+before_deploy:
+- npm run before_deploy
 deploy:
   provider: openshift
   user: cool.villi@gmail.com
