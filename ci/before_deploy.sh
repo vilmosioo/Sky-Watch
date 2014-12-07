@@ -12,3 +12,6 @@ rm protractor.conf.js
 rm karma.conf.js
 rm Gruntfile.js
 rm .gitignore
+
+git add dist
+git commit -m "Artefacts generated"
