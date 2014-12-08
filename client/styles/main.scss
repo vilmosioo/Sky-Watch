@@ -2,6 +2,11 @@
 @import "compass_twitter_bootstrap/variables";
 @import "compass_twitter_bootstrap/mixins";
 @import "compass_twitter_bootstrap/reset";
+@import "compass_twitter_bootstrap/scaffolding";
+@import "compass_twitter_bootstrap/forms";
+@import "compass_twitter_bootstrap/buttons";
+@import "compass_twitter_bootstrap/button-groups";
+@import "compass_twitter_bootstrap/alerts";
 
 .clearfix {
   @include ctb-clearfix();
