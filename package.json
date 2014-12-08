@@ -75,7 +75,8 @@
     "karma-jasmine": "0.1.5",
     "grunt-angular-template-inline-js": "~0.1.1",
     "angular-template-inline-js": "~0.1.6",
-    "grunt-express-server": "^0.4.19"
+    "grunt-express-server": "^0.4.19",
+    "connect-livereload": "^0.5.2"
   },
   "bundleDependencies": [],
   "private": true,

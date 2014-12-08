@@ -5,6 +5,8 @@ var express = require('express'),
 	logger = require('morgan'),
 	models = require('./models'),
 	path = require('path'),
+	pck = require('./package.json'),
+	liveReload = require('connect-livereload'),
 	routes = require('./routes');
 
 var app = express(),
@@ -13,7 +15,14 @@ var app = express(),
 app.use(logger('combined'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, '/dist')));
+
+if(process.env.NODE_ENV === 'development'){
+	app.use(liveReload());
+	app.use(express.static(path.join(__dirname, pck.config.app)));
+	app.use(express.static(path.join(__dirname, pck.config.tmp)));
+} else {
+	app.use(express.static(path.join(__dirname, pck.config.dist)));
+}
 
 router.use(require('./scripts/headers'));
 router.use(require('./scripts/options'));

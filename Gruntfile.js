@@ -48,7 +48,7 @@ module.exports = function (grunt) {
 			},
 			express: {
 				files:  [ 'server.js', 'models/**/*.js', 'routes/**/*.js', 'scripts/**/*.js', 'data/**/*.js'],
-				tasks:  [ 'express' ],
+				tasks:  [ 'express:server' ],
 				options: {
 					spawn: false, // for grunt-contrib-watch v0.5.0+, "nospawn: true" for lower versions. Without this option specified express won't be reloaded
 					livereload: true
@@ -337,27 +337,36 @@ module.exports = function (grunt) {
 			}
 		},
 		express: {
+			options: {
+				script: 'server.js',
+				output: 'Server listening .+'
+			},
 			server: {
+				options:{
+					node_env: 'development'
+				}
+			},
+			dist: {
 				options: {
-					script: 'server.js',
-					output: 'Server listening .+'
+					node_env: 'production',
+					background: false
 				}
 			}
 		}
 	});
 
-	grunt.registerTask('serve', [
-		'express',
+	grunt.registerTask('server', [
+		'express:server',
 		'clean:server',
 		'ngconstant',
 		'concurrent:server',
 		'watch'
 	]);
 
-	grunt.registerTask('server', function () {
-		grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-		grunt.task.run(['serve']);
-	});
+	grunt.registerTask('dist', [
+		'build',
+		'express:dist'
+	]);
 
 	grunt.registerTask('ptor', function () {
 		grunt.task.run(['shell', 'protractor']);
