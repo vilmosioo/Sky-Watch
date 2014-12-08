@@ -76,8 +76,7 @@
     "karma-coverage": "0.2.4",
     "karma-jasmine": "0.1.5",
     "grunt-angular-template-inline-js": "~0.1.1",
-    "angular-template-inline-js": "~0.1.6",
-    "grunt-cli": "^0.1.13"
+    "angular-template-inline-js": "~0.1.6"
   },
   "bundleDependencies": [],
   "private": true,
