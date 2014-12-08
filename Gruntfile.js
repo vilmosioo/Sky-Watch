@@ -12,9 +12,6 @@ module.exports = function (grunt) {
 	// Load grunt tasks automatically
 	require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
-	// Time how long tasks take. Can help when optimizing build times
-	require('time-grunt')(grunt);
-
 	var pck = grunt.file.readJSON('./package.json');
 
 	// Define the configuration for all the tasks
@@ -23,19 +20,6 @@ module.exports = function (grunt) {
 		// Project settings
 		yeoman: pck.config,
 		pkg: pck,
-		manifest: {
-			generate: {
-				options: {
-					basePath: 'dist/',
-					preferOnline: true,
-					verbose: false
-				},
-				src: [
-					'**/*.*' // cache all files
-				],
-				dest: 'dist/manifest.appcache'
-			}
-		},
 		ngconstant: {
 			dev: [{
 				dest: pck.config.app + '/scripts/config/constants.js',
@@ -48,52 +32,42 @@ module.exports = function (grunt) {
 		// Watches files for changes and runs tasks based on the changed files
 		watch: {
 			js: {
-				files: ['<%= yeoman.app %>/scripts/**/*.js'],
-				tasks: ['newer:jshint:all'],
+				files: '<%= jshint.all %>',
+				tasks: ['jshint:all'],
 				options: {
 					livereload: true
 				}
 			},
 			jsTest: {
 				files: ['<%= yeoman.test %>/**/*.js'],
-				tasks: ['newer:jshint:test', 'karma']
+				tasks: ['jshint:test', 'karma']
 			},
 			compass: {
 				files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
 				tasks: ['compass:server']
 			},
-			gruntfile: {
-				files: ['Gruntfile.js']
+			express: {
+				files:  [ 'server.js', 'models/**/*.js', 'routes/**/*.js', 'scripts/**/*.js', 'data/**/*.js'],
+				tasks:  [ 'express' ],
+				options: {
+					spawn: false, // for grunt-contrib-watch v0.5.0+, "nospawn: true" for lower versions. Without this option specified express won't be reloaded
+					livereload: true
+				}
 			},
 			livereload: {
 				options: {
-					livereload: '<%= connect.options.livereload %>'
+					livereload: true
 				},
 				files: [
-					'<%= yeoman.app %>/{,*/}*.html',
-					'<%= yeoman.tmp %> %>/styles/{,*/}*.css',
-					'<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+					'<%= yeoman.app %>/**/*.{html,js}',
+					'<%= yeoman.tmp %> %>/styles/**/*.css',
+					'<%= yeoman.app %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}'
 				]
 			}
 		},
 
 		// The actual grunt server settings
 		connect: {
-			options: {
-				port: 9000,
-				// Change this to '0.0.0.0' to access the server from outside.
-				hostname: 'localhost',
-				livereload: 35729
-			},
-			livereload: {
-				options: {
-					open: true,
-					base: [
-						'<%= yeoman.tmp %>',
-						'<%= yeoman.app %>'
-					]
-				}
-			},
 			test: {
 				options: {
 					port: 9001,
@@ -102,11 +76,6 @@ module.exports = function (grunt) {
 						'<%= yeoman.test %>',
 						'<%= yeoman.app %>'
 					]
-				}
-			},
-			dist: {
-				options: {
-					base: '<%= yeoman.dist %>'
 				}
 			}
 		},
@@ -366,22 +335,24 @@ module.exports = function (grunt) {
 					dest: '<%= yeoman.dist %>'
 				}]
 			}
+		},
+		express: {
+			server: {
+				options: {
+					script: 'server.js',
+					output: 'Server listening .+'
+				}
+			}
 		}
 	});
 
-	grunt.registerTask('serve', function (target) {
-		if (target === 'dist') {
-			return grunt.task.run(['build', 'connect:dist:keepalive']);
-		}
-
-		grunt.task.run([
-			'clean:server',
-			'ngconstant',
-			'concurrent:server',
-			'connect:livereload',
-			'watch'
-		]);
-	});
+	grunt.registerTask('serve', [
+		'express',
+		'clean:server',
+		'ngconstant',
+		'concurrent:server',
+		'watch'
+	]);
 
 	grunt.registerTask('server', function () {
 		grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
