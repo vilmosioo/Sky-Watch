@@ -1,9 +1,9 @@
 {
-  "SEARCH_URL": "http://vilmosioo.co.uk/sky-watch-server/public/index.php/v1/search",
-  "NGC_URL": "http://vilmosioo.co.uk/sky-watch-server/public/index.php/v1",
-  "RANDOM_URL": "http://vilmosioo.co.uk/sky-watch-server/public/index.php/v1/browse",
+  "SEARCH_URL": "/api/search",
+  "NGC_URL": "/api",
+  "RANDOM_URL": "/api/browse",
   "WEATHER_URL": "http://api.openweathermap.org/data/2.5/weather",
   "ITEMS": "sky_watch_items",
-  "BUFFER": 10, 
+  "BUFFER": 10,
   "DEFAULT_LIMIT": 5
 }

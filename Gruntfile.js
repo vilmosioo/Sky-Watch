@@ -42,6 +42,10 @@ module.exports = function (grunt) {
 				files: ['<%= yeoman.test %>/**/*.js'],
 				tasks: ['jshint:test', 'karma']
 			},
+			constants: {
+				files: ['<%= yeoman.app %>/scripts/config/**/*.json'],
+				tasks: ['ngconstant']
+			},
 			compass: {
 				files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
 				tasks: ['compass:server']

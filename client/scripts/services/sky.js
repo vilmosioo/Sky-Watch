@@ -9,13 +9,23 @@ angular.module('ngApp')
           offset = angular.isNumber(params.offset) ? parseInt(params.offset, 10) : 0,
           q = angular.isString(params.q) ? params.q : '';
 
-        return $http.jsonp(Constants.SEARCH_URL + '?callback=JSON_CALLBACK&limit=' + limit + '&offset=' + offset + '&q=' + q);
+        return $http({
+					url: Constants.SEARCH_URL,
+					data: {
+						limit: limit,
+						offset: offset,
+						q: q
+					}
+				});
       },
       random: function(params){
         params = params || {};
         var limit = angular.isNumber(params.limit) ? parseInt(params.limit, 10) : Constants.DEFAULT_LIMIT;
 
-        return $http.jsonp(Constants.RANDOM_URL + '?callback=JSON_CALLBACK&limit=' + limit);
+        return $http({
+					url: Constants.RANDOM_URL,
+					limit: limit
+				});
       },
       getItems : function(params){
         params = params || {};
@@ -41,8 +51,13 @@ angular.module('ngApp')
             items = JSON.parse(items);
             _defer.resolve(items.splice(_real_offset, _limit));
           } else {
-            $http.jsonp(Constants.NGC_URL + '?callback=JSON_CALLBACK&limit=' + Constants.BUFFER * _limit + '&offset=' + _offset)
-              .success(function(data){
+            $http({
+							url: Constants.NGC_URL,
+							data: {
+								limit: Constants.BUFFER * _limit,
+								offset: _offset
+							}
+						}).success(function(data){
                 // save to storage 
                 LocalStorage.setItem(_key, JSON.stringify(data.results));
                 // handle success
@@ -53,8 +68,13 @@ angular.module('ngApp')
               });
           }
         } else {
-          $http.jsonp(Constants.NGC_URL + '?callback=JSON_CALLBACK&limit=' + _limit + '&offset=' + _offset)
-            .success(function(data){
+          $http({
+						url: Constants.NGC_URL,
+						data: {
+							limit: _limit,
+							offset: _offset
+						}
+					}).success(function(data){
               _defer.resolve(data.results);
             })
             .error(function(data, status, headers, config){
