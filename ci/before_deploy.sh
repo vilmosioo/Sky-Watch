@@ -2,7 +2,6 @@
 
 # prepare artefact for deployment
 
-git rm -rf node_modules
 git rm -rf client
 git rm -rf test
 git rm .bowerrc
@@ -11,7 +10,12 @@ git rm bower.json
 git rm protractor.conf.js
 git rm karma.conf.js
 git rm Gruntfile.js
-git rm .gitignore
+
+# files ignored by git are not removed
+
+rm -rf client
+rm -rf .sass-cache
+rm -rf coverage
 
 git add dist
 git commit -m "Artefacts generated"
