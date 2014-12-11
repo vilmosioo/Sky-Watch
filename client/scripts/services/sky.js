@@ -24,7 +24,9 @@ angular.module('ngApp')
 
         return $http({
 					url: Constants.RANDOM_URL,
-					limit: limit
+					params: {
+						limit: limit
+					}
 				});
       },
       getItems : function(params){

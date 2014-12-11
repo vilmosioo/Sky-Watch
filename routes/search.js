@@ -23,12 +23,16 @@ module.exports = function(req, res){
 			}]
 		})
 	]).then(function(results){
+		results = results.reduce(function(a, b){
+			return a.concat(b);
+		});
+
 		res.send({
 			title: 'Search results for: ' + q,
 			limit: req.options.limit,
-			results: results.reduce(function(a, b){
-				return a.concat(b);
-			}).splice(0, req.options.limit) || []
+			offset: req.options.offset,
+			total: results.length,
+			results: results.splice(req.options.offset, req.options.limit) || []
 		});
 	}, function(err){
 		res.send(400, err);
