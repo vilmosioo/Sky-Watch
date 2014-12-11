@@ -7,6 +7,7 @@ git rm -rf test
 git rm .bowerrc
 git rm .jshintrc
 git rm bower.json
+git rm .gitignore
 git rm protractor.conf.js
 git rm karma.conf.js
 git rm Gruntfile.js
@@ -16,6 +17,7 @@ git rm Gruntfile.js
 rm -rf client
 rm -rf .sass-cache
 rm -rf coverage
+rm -rf node_modules
 
 git add dist
 git commit -m "Artefacts generated"
