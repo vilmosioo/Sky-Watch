@@ -11,6 +11,8 @@ module.exports = function(req, res){
 	]).then(function(results){
 		res.send({
 			title: 'Browse',
+			total: 1000,
+			limit: req.options.limit,
 			results: shuffle(results.reduce(function(a, b){
 				return a.concat(b);
 			})).splice(0, req.options.limit)
