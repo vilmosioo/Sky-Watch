@@ -2,7 +2,6 @@
 
 var models = require('../models'),
 	sequelize = require('sequelize'),
-	extend = require('extend'),
 	shuffle = require('../scripts/shuffle');
 
 module.exports = function(req, res){

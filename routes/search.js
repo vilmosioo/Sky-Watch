@@ -9,7 +9,7 @@ module.exports = function(req, res){
 	if(!q){
 		res.send(400, {
 			message: 'Please provide a search query in the form of /search?q=[your query]'
-		})
+		});
 	}
 
 	sequelize.Promise.all([
@@ -19,7 +19,7 @@ module.exports = function(req, res){
 		models.NGC.findAll({
 			include: [{
 				model: models.Name,
-				where: ['LOWER(name) LIKE ?', '%' + q.replace(/\s+/, '%').trim().toLowerCase() + '%'],	
+				where: ['LOWER(name) LIKE ?', '%' + q.replace(/\s+/, '%').trim().toLowerCase() + '%']
 			}]
 		})
 	]).then(function(results){
@@ -29,8 +29,8 @@ module.exports = function(req, res){
 			results: results.reduce(function(a, b){
 				return a.concat(b);
 			}) || []
-		});	
+		});
 	}, function(err){
 		res.send(400, err);
-	});	
+	});
 };

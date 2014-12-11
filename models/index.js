@@ -1,5 +1,7 @@
 'use strict';
 
+/* jshint -W027 */
+
 var Sequelize = require('sequelize'),
 	sequelize = require('./db');
 
@@ -23,7 +25,7 @@ var bootstrap = function(){
 			return Sequelize.Promise.all([
 				NGC.bulkCreate(ngcs.map(function(obj){ return obj.NGC; })).then(function(){
 					// can only insert names once ngc is set
-					return Name.bulkCreate(ngcs.map(function(obj){ return obj.Names; }).reduce(function(a, b){ return a.concat(b); }))
+					return Name.bulkCreate(ngcs.map(function(obj){ return obj.Names; }).reduce(function(a, b){ return a.concat(b); }));
 				}),
 				Planet.bulkCreate(planets.map(function(obj){ return obj.Planet; })).then(function(){
 					return Ephemerid.bulkCreate(planets.map(function(obj){ return obj.Ephemerids; }).reduce(function(a, b){ return a.concat(b); }));

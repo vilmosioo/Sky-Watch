@@ -52,7 +52,7 @@ module.exports = function (grunt) {
 			},
 			express: {
 				files:  [ 'server.js', 'models/**/*.js', 'routes/**/*.js', 'scripts/**/*.js', 'data/**/*.js'],
-				tasks:  [ 'express:server' ],
+				tasks:  [ 'jshint:server', 'express:server' ],
 				options: {
 					spawn: false, // for grunt-contrib-watch v0.5.0+, "nospawn: true" for lower versions. Without this option specified express won't be reloaded
 					livereload: true
@@ -90,16 +90,27 @@ module.exports = function (grunt) {
 				jshintrc: '.jshintrc',
 				reporter: require('jshint-stylish')
 			},
-			all: [
-				'Gruntfile.js',
-				'<%= yeoman.app %>/scripts/**/*.js',
-				'!<%= yeoman.app %>/scripts/config/constants.js'
-			],
+			all: {
+				options: {
+					jshintrc: '<%= yeoman.app %>/.jshintrc'
+				},
+				src: [
+					'Gruntfile.js',
+					'<%= yeoman.app %>/scripts/**/*.js',
+					'!<%= yeoman.app %>/scripts/config/constants.js'
+				]
+			},
 			test: {
 				options: {
 					jshintrc: '<%= yeoman.test %>/.jshintrc'
 				},
 				src: ['<%= yeoman.test %>/**/*.js']
+			},
+			server: {
+				options: {
+					jshintrc: '.jshintrc'
+				},
+				src: ['server.js', 'models/**/*.js', 'routes/**/*.js', 'scripts/**/*.js', 'data/**/*.js']
 			}
 		},
 

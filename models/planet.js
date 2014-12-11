@@ -2,7 +2,6 @@
 
 var sequelize = require('./db'),
 	DataTypes = require('sequelize'),
-	Ephemerid = require('./ephemerid'),
 	extend = require('extend'),
 	julian = require('julian');
 

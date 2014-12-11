@@ -23,7 +23,7 @@ module.exports = function(req, res){
 						if(a[field] !== b[field]){
 							return (a[field] || 99) < (b[field] || 99) ? -1 : 1;
 						}
-					} 
+					}
 					// all terms equal
 					return 0;
 				})

@@ -10,6 +10,6 @@ module.exports = function(req, res){
 			results: ngcs || []
 		}, req.options));
 	}, function(err){
-		res.send(400, err)
+		res.send(400, err);
 	});
 };

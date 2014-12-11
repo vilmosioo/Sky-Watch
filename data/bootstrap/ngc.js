@@ -46,7 +46,7 @@ module.exports = fs.readFileSync('./data/SAC_DeepSky_Ver81_QCQ.TXT').toString().
 					return {
 						ngc: index,
 						name: trim(name)
-					}
+					};
 				});
 			})
 			.reduce(function(a, b){

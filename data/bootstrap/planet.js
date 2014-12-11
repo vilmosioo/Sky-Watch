@@ -32,7 +32,7 @@ module.exports = config.PLANETS.map(function(planet, index){
 				'size': line[5],
 				'magnitude': line[3],
 				'constellation': config.CONSTELLATIONS[trim(line[6]).toLowerCase()]
-		};
+			};
 		})
 	};
 });

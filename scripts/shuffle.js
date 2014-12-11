@@ -3,7 +3,9 @@
 // based on http://sroucheray.org/blog/2009/11/array-sort-should-not-be-used-to-shuffle-an-array/
 module.exports = function(data){
 	var i = data.length, j, temp;
-	if ( i == 0 ) return;
+	if ( i === 0 ){
+		return data;
+	}
 	while ( --i ) {
 		j = Math.floor( Math.random() * ( i + 1 ) );
 		temp = data[i];

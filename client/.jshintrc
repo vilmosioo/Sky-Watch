@@ -19,5 +19,8 @@
   "strict": true,
   "trailing": true,
   "smarttabs": true,
-  "globals": {}
+  "globals": {
+    "angular": false,
+		"$LAB": false
+  }
 }
