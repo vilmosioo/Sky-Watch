@@ -6,7 +6,6 @@ var express = require('express'),
 	models = require('./models'),
 	path = require('path'),
 	pck = require('./package.json'),
-	liveReload = require('connect-livereload'),
 	routes = require('./routes');
 
 var app = express(),
@@ -17,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 if(process.env.NODE_ENV === 'development'){
-	app.use(liveReload());
+	app.use(require('connect-livereload')());
 	app.use(express.static(path.join(__dirname, pck.config.app)));
 	app.use(express.static(path.join(__dirname, pck.config.tmp)));
 } else {
