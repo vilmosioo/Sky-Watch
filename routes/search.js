@@ -28,7 +28,7 @@ module.exports = function(req, res){
 			limit: req.options.limit,
 			results: results.reduce(function(a, b){
 				return a.concat(b);
-			}) || []
+			}).splice(0, req.options.limit) || []
 		});
 	}, function(err){
 		res.send(400, err);
