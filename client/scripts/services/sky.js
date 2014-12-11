@@ -11,7 +11,7 @@ angular.module('ngApp')
 
         return $http({
 					url: Constants.SEARCH_URL,
-					data: {
+					params: {
 						limit: limit,
 						offset: offset,
 						q: q
@@ -53,7 +53,7 @@ angular.module('ngApp')
           } else {
             $http({
 							url: Constants.NGC_URL,
-							data: {
+							params: {
 								limit: Constants.BUFFER * _limit,
 								offset: _offset
 							}
@@ -70,7 +70,7 @@ angular.module('ngApp')
         } else {
           $http({
 						url: Constants.NGC_URL,
-						data: {
+						params: {
 							limit: _limit,
 							offset: _offset
 						}

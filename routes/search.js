@@ -6,7 +6,7 @@ var models = require('../models'),
 module.exports = function(req, res){
 	var q = req.param('q');
 
-	if(!q){
+	if(!q || /^\s*$/.test(q)){
 		res.send(400, {
 			message: 'Please provide a search query in the form of /search?q=[your query]'
 		});
@@ -16,7 +16,7 @@ module.exports = function(req, res){
 		models.Planet.get({
 			where: ['LOWER(name) LIKE ?', '%' + q.replace(/\s+/, '%').trim().toLowerCase() + '%']
 		}),
-		models.NGC.findAll({
+		models.NGC.get({
 			include: [{
 				model: models.Name,
 				where: ['LOWER(name) LIKE ?', '%' + q.replace(/\s+/, '%').trim().toLowerCase() + '%']
