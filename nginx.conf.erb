@@ -1,8 +1,13 @@
 server {
     listen  <%= ENV['OPENSHIFT_NGINX_IP'] %>:<%= ENV['OPENSHIFT_NGINX_PORT'] %>;
-    root    <%= ENV['OPENSHIFT_REPO_DIR'] %>public;
+    root    <%= ENV['OPENSHIFT_REPO_DIR'] %>dist;
 
-    location / {
+		location /api {
+        rewrite ^/api/(.*) /$1 break;
+    		proxy_pass http://skywatch-server.vilmosioo.co.uk/;
+    }
+
+    location ^~ / {
         index  index.html index.htm;
     }
 }
