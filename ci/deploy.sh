@@ -5,6 +5,8 @@ echo 'Preparing to deploy...'
 
 git remote add nginx ssh://548f150d5973ca6d0b00014f@nginx-vilmosioo.rhcloud.com/~/git/nginx.git/
 git remote add skywatch ssh://548f150d5973ca6d0b00014f@nginx-vilmosioo.rhcloud.com/~/git/nginx.git/
+git remote -v
+git fetch
 
 echo "Deploying skywatch app"
 git checkout master
