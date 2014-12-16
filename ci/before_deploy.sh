@@ -14,4 +14,4 @@ git add dist
 git commit -m "Artefacts generated"
 git push origin openshift/nginx
 
-git checkout master
+git checkout $TRAVIS_BRANCH
