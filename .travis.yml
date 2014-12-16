@@ -28,4 +28,3 @@ deploy:
     openshift/skywatch: 'skywatch'
     openshift/nginx: 'nginx'
   domain: vilmosioo
-  on: master
