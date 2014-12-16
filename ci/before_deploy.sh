@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # prepare artefacts for deployment
+printenv
 
 git checkout openshift/skywatch
 git rm -r public
