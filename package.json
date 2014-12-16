@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "build": "sh ci/build.sh",
-    "before_deploy": "sh ci/before_deploy.sh"
+    "deploy": "sh ci/deploy.sh"
   },
   "config": {
     "app": "client",

@@ -17,11 +17,5 @@ env:
 branches:
   only:
   - master
-deploy:
-  provider: releases
-  api_key:
-    secure: zc0jpe2M/23vDxtkY0GxvXKn9W0fINXfVVuQ6no864G3LZgpJ/tBZ/ugoovx1CxuoCbEJPcPZJ8fNpUssQpbpHg3C5gn8ldQG5gZkHZV+gTa1mgwNcG6zdXknuJPoHI4bHmXqmkfdqh1GtvylFRZ876qWYcv/JAC1Vsif/b5Og8=
-  skip_cleanup: true
-  file: 'dist'
-  on:
-    repo: vilmosioo/Sky-Watch
+after_success:
+- npm run deploy
