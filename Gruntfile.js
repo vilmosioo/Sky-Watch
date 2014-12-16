@@ -173,7 +173,7 @@ module.exports = function (grunt) {
 
 		// Performs rewrites based on rev and the useminPrepare configuration
 		usemin: {
-			html: ['<%= yeoman.dist %>/{,*/}*.html'],
+			html: ['<%= yeoman.dist %>/{,*/}*.html', '<%= yeoman.public %>/{,*/}*.html'],
 			css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
 			js: ['<%= yeoman.dist %>/scripts/{,*/}*.js'],
 			options: {
@@ -201,8 +201,27 @@ module.exports = function (grunt) {
 				files: [{
 					expand: true,
 					cwd: '<%= yeoman.app %>',
-					src: ['*.html', 'views/*.html', 'views/*/*.html'],
+					src: ['views/*.html', 'views/*/*.html'],
 					dest: '<%= yeoman.dist %>'
+				}]
+			},
+			public: {
+				options: {
+					removeCommentsFromCDATA: true,
+					// https://github.com/yeoman/grunt-usemin/issues/44
+					//  collapseWhitespace: true,
+					collapseBooleanAttributes: true,
+					removeAttributeQuotes: true,
+					removeRedundantAttributes: true,
+					useShortDoctype: true,
+					removeEmptyAttributes: true,
+					removeOptionalTags: true
+				},
+				files: [{
+					expand: true,
+					cwd: '<%= yeoman.app %>',
+					src: ['index.html'],
+					dest: '<%= yeoman.public %>'
 				}]
 			}
 		},

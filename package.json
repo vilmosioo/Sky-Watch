@@ -16,7 +16,8 @@
     "app": "client",
     "dist": "dist",
     "tmp": ".tmp",
-    "test": "test"
+    "test": "test",
+		"public": "public"
   },
   "author": {
     "name": "Vilmos Ioo",
