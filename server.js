@@ -4,8 +4,6 @@ var express = require('express'),
 	bodyParser = require('body-parser'),
 	logger = require('morgan'),
 	models = require('./models'),
-	path = require('path'),
-	pck = require('./package.json'),
 	routes = require('./routes');
 
 var app = express();
