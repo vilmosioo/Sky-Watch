@@ -1,5 +1,4 @@
 node_modules
-dist
 .tmp
 .sass-cache
 components
@@ -204,7 +203,6 @@ $RECYCLE.BIN/
 # Packages
 *.egg
 *.egg-info
-dist/
 build/
 eggs/
 parts/
