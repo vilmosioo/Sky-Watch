@@ -1,6 +1,7 @@
 node_modules
 .tmp
 .sass-cache
+public
 components
 client/scripts/config/constants.js
 .bower-cache
