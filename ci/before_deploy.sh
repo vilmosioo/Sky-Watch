@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # prepare artefacts for deployment
+# TODO update github
 
 git checkout openshift/skywatch
 git rm -r public
