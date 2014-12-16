@@ -5,10 +5,12 @@ set -e
 # prepare artefacts for deployment
 echo 'Preparing to deploy...'
 
+ssh-keyscan nginx-vilmosioo.rhcloud.com skywatch-vilmosioo.rhcloud.com # avoids prompt that blocks travis
+
 git remote add nginx ssh://548f150d5973ca6d0b00014f@nginx-vilmosioo.rhcloud.com/~/git/nginx.git/
 git remote add skywatch ssh://548f150d5973ca6d0b00014f@nginx-vilmosioo.rhcloud.com/~/git/nginx.git/
 git remote -v
-echo "yes" | git remote update
+git remote update
 git fetch
 
 echo "Deploying skywatch app"
