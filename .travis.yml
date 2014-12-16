@@ -25,7 +25,7 @@ deploy:
   password:
     secure: EtAOJwZix3LHw8E1hyfugyERWZqZEwLhQXFd4BTbKcR/VoAx1EmSVw8Aa0/iPMkqlab0IRkHpSXp3LuK0a0J0dSntmIu2L3CrxGLGGWnbdsKkT1R5Y71vf5ZfnjyhB6HGT5Z/mwbh2mjI3JiXzR8rYnt1OYYFWl2LNFuxsYtIBI=
   app:
-    openshift/skywatch: 'skywatch',
+    openshift/skywatch: 'skywatch'
     openshift/nginx: 'nginx'
   domain: vilmosioo
   on: master
