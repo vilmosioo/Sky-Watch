@@ -1,6 +1,6 @@
 {
   "name": "Sky-Watch",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "Sky Watch ====",
   "keywords": [
     "astronomy",
@@ -17,7 +17,7 @@
     "dist": "dist",
     "tmp": ".tmp",
     "test": "test",
-		"public": "public"
+    "public": "public"
   },
   "author": {
     "name": "Vilmos Ioo",
