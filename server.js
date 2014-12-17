@@ -22,10 +22,14 @@ if(process.env.NODE_ENV === 'development'){
 	app.use(express.static(path.join(__dirname, pck.config.app)));
 	app.use(express.static(path.join(__dirname, pck.config.tmp)));
 } else if(process.env.NODE_ENV === 'production'){
-	app.use(express.static(path.join(__dirname, pck.config.public)));
 	app.use(express.static(path.join(__dirname, pck.config.dist)));
+	app.use(function(req, res){
+		res.sendFile(path.join(__dirname, pck.config.public) + '/index.html');
+	});
 } else {
-	app.use(express.static(path.join(__dirname, pck.config.public)));
+	app.use(function(req, res){
+		res.sendFile(path.join(__dirname, pck.config.public) + '/index.html');
+	});
 }
 
 router.use(require('./scripts/headers'));
