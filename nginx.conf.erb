@@ -44,8 +44,8 @@ http {
 					expires 30d;
 				}
 
-				location ~ /(?<section>.*) {
-					proxy_pass http://<%= ENV['OPENSHIFT_NODEJS_IP'] %>:15000/$section;
+				location / {
+					proxy_pass http://<%= ENV['OPENSHIFT_NODEJS_IP'] %>:15000;
 				}
 
         # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000

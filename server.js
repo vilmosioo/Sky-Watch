@@ -5,6 +5,7 @@ var express = require('express'),
 	logger = require('morgan'),
 	models = require('./models'),
 	path = require('path'),
+	compression = require('compression'),
 	pck = require('./package.json'),
 	routes = require('./routes');
 
@@ -14,6 +15,7 @@ var app = express(),
 app.use(logger('combined'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(compression());
 
 if(process.env.NODE_ENV === 'development'){
 	app.use(require('connect-livereload')());
