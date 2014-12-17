@@ -3,7 +3,7 @@
 angular.module('ngApp')
   .directive('cards', function cards($window, $interval, $timeout, $rootScope, Constants, Converter) {
     return {
-      templateUrl: 'views/templates/cards.html',
+      templateUrl: '/views/templates/cards.html',
       replace: true,
       restrict: 'E',
       scope: {

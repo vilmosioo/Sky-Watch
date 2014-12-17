@@ -24,7 +24,6 @@ router.get('/ngc', routes.ngc);
 router.get('/planet', routes.planet);
 router.get('/browse', routes.browse);
 router.get('/search', routes.search);
-router.use(require('./scripts/404'));
 
 app.use('/api', router);
 
@@ -42,6 +41,8 @@ if(process.env.NODE_ENV === 'development'){
 		res.sendFile(path.join(__dirname, pck.config.public) + '/index.html');
 	});
 }
+
+app.use(require('./scripts/404'));
 
 console.log('Bootstrapping application, this may take a moment...');
 models.bootstrap().then(function(){
