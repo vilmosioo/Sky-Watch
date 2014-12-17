@@ -21,12 +21,9 @@ if(process.env.NODE_ENV === 'development'){
 	app.use(require('connect-livereload')());
 	app.use(express.static(path.join(__dirname, pck.config.app)));
 	app.use(express.static(path.join(__dirname, pck.config.tmp)));
-} else if(process.env.NODE_ENV === 'production'){
-	app.use(express.static(path.join(__dirname, pck.config.dist)));
-	app.use(function(req, res){
-		res.sendFile(path.join(__dirname, pck.config.public) + '/index.html');
-	});
 } else {
+	// express will not actually serve any static files, this is just a fallback, nginx will take care of this
+	app.use(express.static(path.join(__dirname, pck.config.dist)));
 	app.use(function(req, res){
 		res.sendFile(path.join(__dirname, pck.config.public) + '/index.html');
 	});
