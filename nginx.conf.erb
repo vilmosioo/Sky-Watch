@@ -1,12 +1,14 @@
-server {
-    listen  <%= ENV['OPENSHIFT_NODEJS_IP'] %>:<%= ENV['OPENSHIFT_NODEJS_PORT'] %>;
+http {
+	server {
+			listen  <%= ENV['OPENSHIFT_NODEJS_IP'] %>:<%= ENV['OPENSHIFT_NODEJS_PORT'] %>;
 
-		location ~* \.(ico|txt|js|jpg|gif|png|css|html)$ {
-        root    <%= ENV['OPENSHIFT_REPO_DIR'] %>dist;
-        expires 30d;
-    }
+			location ~* \.(ico|txt|js|jpg|gif|png|css|html)$ {
+					root    <%= ENV['OPENSHIFT_REPO_DIR'] %>dist;
+					expires 30d;
+			}
 
-		location / {
-    		proxy_pass <%= ENV['OPENSHIFT_NODEJS_IP'] %>:15000;
-    }
+			location / {
+					proxy_pass <%= ENV['OPENSHIFT_NODEJS_IP'] %>:15000;
+			}
+	}
 }
