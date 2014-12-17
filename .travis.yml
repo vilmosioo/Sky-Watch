@@ -24,7 +24,7 @@ deploy:
   user: cool.villi@gmail.com
   password:
     secure: SI0L/pHMO4fPt294yWqINSOTFtFoG6EqF2Ybcxg7691AIYHxm86hv8VjCgRmIjLMuY6E+zdZibLBzumVm5N6ds+atgxOWDfNH2SJiclox39WD3VPMog5TmMEnWVoCalpUm17ptOQMKed7y2dB+ddXqf6FuXZL4NEih5ONnymdRM=
-  app: nginx
+  app: skywatch
   domain: vilmosioo
   on:
     repo: vilmosioo/Sky-Watch
