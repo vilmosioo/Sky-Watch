@@ -7,6 +7,6 @@ server {
     }
 
 		location / {
-    		proxy_pass http://skywatch-server.vilmosioo.co.uk/;
+    		proxy_pass <%= ENV['OPENSHIFT_NGINX_IP'] %>:15000;
     }
 }
