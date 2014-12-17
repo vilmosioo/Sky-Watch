@@ -1,6 +1,0 @@
-cd $OPENSHIFT_REPO_DIR
-
-echo 'Starting Express application'
-
-npm install --production || echo 'Could not install dependencies'
-npm start || 'Could not start express app'
