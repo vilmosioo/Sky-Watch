@@ -7,3 +7,6 @@
 
 echo 'Patching nginx configuration'
 erb $OPENSHIFT_REPO_DIR/nginx.conf.erb > $OPENSHIFT_DATA_DIR/conf/nginx.conf
+echo 'Starting nginx'
+nohup $OPENSHIFT_DATA_DIR/sbin/nginx > $OPENSHIFT_LOG_DIR/server.log 2>&1 &
+echo 'Done'
