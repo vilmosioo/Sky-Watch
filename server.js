@@ -17,18 +17,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(compression());
 
-if(process.env.NODE_ENV === 'development'){
-	app.use(require('connect-livereload')());
-	app.use(express.static(path.join(__dirname, pck.config.app)));
-	app.use(express.static(path.join(__dirname, pck.config.tmp)));
-} else {
-	// express will not actually serve any static files, this is just a fallback, nginx will take care of this
-	app.use(express.static(path.join(__dirname, pck.config.dist)));
-	app.use(function(req, res){
-		res.sendFile(path.join(__dirname, pck.config.public) + '/index.html');
-	});
-}
-
 router.use(require('./scripts/headers'));
 router.use(require('./scripts/options'));
 router.get('/', routes.root);
@@ -39,6 +27,21 @@ router.get('/search', routes.search);
 router.use(require('./scripts/404'));
 
 app.use('/api', router);
+
+if(process.env.NODE_ENV === 'development'){
+	app.use(require('connect-livereload')());
+	app.use(express.static(path.join(__dirname, pck.config.app)));
+	app.use(express.static(path.join(__dirname, pck.config.tmp)));
+	app.use(function(req, res){
+		res.sendFile(path.join(__dirname, pck.config.app) + '/index.html');
+	});
+} else {
+	// express will not actually serve any static files, this is just a fallback, nginx will take care of this
+	app.use(express.static(path.join(__dirname, pck.config.dist)));
+	app.use(function(req, res){
+		res.sendFile(path.join(__dirname, pck.config.public) + '/index.html');
+	});
+}
 
 console.log('Bootstrapping application, this may take a moment...');
 models.bootstrap().then(function(){
