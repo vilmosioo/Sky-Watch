@@ -9,11 +9,6 @@ before_script:
 - npm install && bower install
 script:
 - npm run build
-env:
-  global:
-  - secure: qDJ5T1TO/O7Bx16TQ4487R7wnyH1WD71UrcFHPH4h2q5XjAk40FzzOmnpfVDZOTWExZWTLHcIC4dW5B/YzTlhx4pCKu1JdjdMp7YbqMMdrmDai4bqyroyuw3GKDzuSaQ4RK8UB4JeJCYT26sx2trdy4GDgDvIKs9tARR1IUEfjc=
-  - secure: zttbnA52Svkf9bNCNjsLwJxAtWqt1vZLUhbxNEys9e9tj6krd4wJczQw7GJtSpG31eT1YRknggwT0fnsdy7Zr/eE3dlkJtGnlN+CBiqxeT66G4pDdFyNgKQBbhRmNco1Cs6cn6vW4PkHmxCygkP97PRDD+ZsfgMevli3BR6aEqk=
-  - secure: VEjXKFxgW/5vbdKdROtVdlyWMxslBQfv6GbTOx63uuFF3Xyrx6ZLjW+jx+XzmSYYiFoczCDHy7UD5uyBXZ3Q5R2esppPX9BElniiofwp48CNGmNbFdTjOjRuUyKR9q8fs6P/VXAlmRIzTCbGqAkthqW/X7nMGzmzhSpIIcMjicQ=
 branches:
   only:
   - master
@@ -29,3 +24,8 @@ deploy:
   on:
     repo: vilmosioo/Sky-Watch
     branch: master
+env:
+  global:
+  - secure: x/cqj8KBQvIGaMIOZzrwUXZNA2JsTXTyky4fhSJfbutlY5hcjz09+x2KfvFwYFfSDSFTH+agi31JeTYkZG5PVJGSgI5Wiml3CFyYdDt+R+Vr5s1eJJ5GCsBAaQUleaedUzV5rrVJYpwOVE2jzF24L/ghxa95knORyiTlpONPi00=
+  - secure: OlyNWK99sBVliwGBKm2zbh2tRKFL+bFT1csgxXh6QabUWaJk+sFRSOMJW8D9LHI4Z9Gew2XJEi/QUxVXKdzmdZdRKxv9yDwJe8+KwiOagbLRdIu3Y+13V+45nzIti97eAb04NwvTPbnx/8zhUD89a7j7ZAB/WxVvZU4YHRPQL3Q=
+  - secure: X9qDSh6SjB1QLy2lzCRt6wr0UYpRd/e0RkETcJM1EZ+KB/wCDqEa3KOKWevE/PqI9PdYxbUVdmj18cEakLPWZ2JxDhpBp5N2C0qzY0FNuYvFcIqEfzOMrDFce84e0SZ0vvw2Ee4H+uSIne2dbL6z37k3pe5NMUd85p8pZRDD/VA=
