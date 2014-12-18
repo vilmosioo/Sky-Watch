@@ -61,6 +61,7 @@ module.exports = sequelize.define('Planet', {
 				.then(function(planets){
 					return planets.map(function(planet){
 						delete planet.id;
+						planet.type = 'Planet';
 						return planet;
 					});
 				});
