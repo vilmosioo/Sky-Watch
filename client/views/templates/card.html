@@ -5,7 +5,7 @@
     <strong><span ng-repeat="name in item.names" ng-show="!$first">{{ name }}{{ !$last && ', ' || ''}}</span></strong>
   </p>
   <div class='separator'></div>
-  <p>{{item.type}} in constellation {{item.constellation}}</p>
+  <p ng-if="item.constellation">{{item.type}} in constellation {{item.constellation}}</p>
   <!--
   <p>Right ascension <strong>{{ item.RAh }}<sup>h</sup> {{ item.RAm | number }}<sup>m</sup></strong></p>
   <p>Declination <strong>{{ item.DEd }}° {{ item.DEm | number }}<sup>'</sup></strong></p>
