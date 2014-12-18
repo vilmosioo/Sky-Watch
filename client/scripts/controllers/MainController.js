@@ -31,6 +31,6 @@ angular.module('ngApp')
 
 		$scope.config = {
 			show_moon: true
-		}
+		};
 
 	});
