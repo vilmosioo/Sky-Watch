@@ -29,4 +29,8 @@ angular.module('ngApp')
 			more: true
 		};
 
+		$scope.config = {
+			show_moon: true
+		}
+
 	});

@@ -3,6 +3,9 @@
     <strong>Warning!</strong> Looks like there's no clear sky in your area :(
   </div>
   <div ng-class="config.wrapClass">
+	  <div ng-class="'grid-' + config.grid" ng-if="moon">
+		  <card item='moon'></card>
+	  </div>
     <div ng-class="'grid-' + config.grid" ng-repeat="item in list.items">
       <card item='item'></card>   
     </div>
