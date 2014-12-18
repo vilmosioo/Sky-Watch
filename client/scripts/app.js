@@ -36,7 +36,7 @@ app.config(function appConfig($routeProvider, $controllerProvider, $compileProvi
 			templateUrl: '/views/main.html',
 			controller: 'MainController',
 			title: 'Home',
-			resolve: _requireDependencies(['/scripts/controllers/MainController.js', '/components/suncalc/suncalc.js', '/scripts/directives/illumination.js', '/scripts/services/suncalc.js'])
+			resolve: _requireDependencies(['/scripts/controllers/MainController.js'])
 		})
 		.when('/search/', {
 			templateUrl: '/views/main.html',
