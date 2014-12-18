@@ -32,7 +32,8 @@ angular.module('ngApp')
 				// set up moon object
 				if($scope.config.show_moon){
 					$scope.moon = {
-						names: ['Moon']
+						names: ['Moon'],
+						phase: 1
 					};
 					computeMoonPosition();
 				}
