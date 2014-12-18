@@ -1,3 +1,7 @@
+### v0.1.5
+
+ * Displaying the moon phase and position.
+
 ### v0.1.2
 
  * HTML5 history support.
