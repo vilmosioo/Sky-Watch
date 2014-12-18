@@ -119,8 +119,9 @@ angular.module('ngApp')
 				};
 			},
 			link: function(scope, element){
-				console.log(element[0], scope.illumination.phase, scope.illumination.isWaxing);
-				scope.draw(element[0], scope.illumination.phase, scope.illumination.isWaxing);
+				scope.draw(element[0], scope.illumination.phase, scope.illumination.isWaxing, {
+					diameter: element[0].clientWidth
+				});
 			}
 		};
 	});

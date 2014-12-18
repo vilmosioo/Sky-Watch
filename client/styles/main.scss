@@ -209,3 +209,14 @@ nav{
     @include ctb-transition-duration(0);
   }
 }
+
+.illumination{
+  text-align: center;
+}
+
+.phase{
+  position:relative;
+  display: inline-block;
+  width:110px;
+  height:110px;
+}

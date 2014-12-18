@@ -1,17 +1,19 @@
 <div class="card">
   <span class="isvisible" ng-class="{'icon-eye-open' : item.alt > 15, 'icon-eye-close' : item.alt <= 15}"></span>
-  <h2 class="title">{{ item.name || item.names[0] }}</h2>
+	<h2 class="title">{{ item.name || item.names[0] }}</h2>
   <p class="names" ng-show="item.names.length > 1">
     <strong><span ng-repeat="name in item.names" ng-show="!$first">{{ name }}{{ !$last && ', ' || ''}}</span></strong>
   </p>
   <div class='separator'></div>
+	<div ng-if="item.illumination" class="illumination">
+		<span illumination="item.illumination" class="phase"></span>
+	</div>
   <p ng-if="item.constellation">{{item.type}} in constellation {{item.constellation}}</p>
-	<span ng-if="item.illumination" illumination="item.illumination" class="phase"></span>
   <!--
   <p>Right ascension <strong>{{ item.RAh }}<sup>h</sup> {{ item.RAm | number }}<sup>m</sup></strong></p>
   <p>Declination <strong>{{ item.DEd }}° {{ item.DEm | number }}<sup>'</sup></strong></p>
   -->
-  <p>Apparent magnitude <strong>{{item.magnitude | number}}</strong></p>
+  <p ng-if="item.magnitude">Apparent magnitude <strong>{{item.magnitude | number}}</strong></p>
   <p ng-show="item.size_max && item.size_min">Apparent dimensions <strong>{{item.size_max | number}}"x{{item.size_min | number}}"</strong></p>
   <p ng-show="item.number_of_stars">Number of stars: <strong>{{item.number_of_stars}}</strong></p>
   <div class="coordinates clearfix">
