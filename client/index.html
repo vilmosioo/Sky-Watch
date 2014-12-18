@@ -23,11 +23,6 @@
       <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
     <![endif]-->
 
-    <!--[if lt IE 9]>
-      <script src="/components/es5-shim/es5-shim.js"></script>
-      <script src="/components/json3/lib/json3.min.js"></script>
-    <![endif]-->
-
     <!-- Add your site or application content here -->
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -36,7 +31,7 @@
     <main id="main" role="main" class="clearfix" ng-view></main>
     <div ng-include src="'/views/templates/footer.html'"></div>
 
-    <!-- build:js /components/vendor.js -->
+    <!-- build:js /scripts/app.js -->
     <script src="/components/angular/angular.js"></script>
     <script src="/components/angular-resource/angular-resource.js"></script>
     <script src="/components/angular-sanitize/angular-sanitize.js"></script>
@@ -44,9 +39,6 @@
     <script src="/components/angular-animate/angular-animate.js"></script>
     <script src="/components/modernizr/modernizr.js"></script>
     <script src="/components/labjs/LAB.min.js"></script>
-    <!-- endbuild -->
-
-    <!-- build:js /scripts/app.js -->
     <script src="/scripts/config/constants.js"></script>
     <script src="/scripts/app.js"></script>
     <script src="/scripts/config/config.js"></script>
@@ -65,15 +57,14 @@
     <script src="/scripts/filters/degrees.js"></script>
     <!-- endbuild -->
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-     <script>
-       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <script>
+	    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-       ga('create', 'UA-XXXXX-X');
-       ga('send', 'pageview');
+	    ga('create', 'UA-27809256-1', 'auto');
+	    ga('send', 'pageview');
     </script>
   </body>
 </html>
