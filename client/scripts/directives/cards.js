@@ -31,10 +31,15 @@ angular.module('ngApp')
 
 				// set up moon object
 				if($scope.config.show_moon){
+					var illumination = SunCalc.getMoonIllumination(new Date());
 					$scope.moon = {
 						names: ['Moon'],
-						phase: 1
+						illumination: {
+							phase: illumination.phase,
+							isWaxing: illumination.angle < 0
+						}
 					};
+
 					computeMoonPosition();
 				}
 
