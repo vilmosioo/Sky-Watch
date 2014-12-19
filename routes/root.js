@@ -6,7 +6,7 @@ var models = require('../models'),
 
 module.exports = function(req, res){
 	sequelize.Promise.all([
-		models.NGC.get(req.options),
+		models.NGC.get(),
 		models.Planet.get()
 	]).then(function(results){
 		res.send(extend({
@@ -27,7 +27,7 @@ module.exports = function(req, res){
 					// all terms equal
 					return 0;
 				})
-				.splice(0, req.options.limit)
+				.splice(req.options.offset, req.options.limit)
 		}, req.options));
 	});
 };
