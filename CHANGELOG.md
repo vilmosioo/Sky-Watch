@@ -1,4 +1,4 @@
-### v0.1.6
+### v0.1.10
 
  * Displaying the moon phase and position.
 
