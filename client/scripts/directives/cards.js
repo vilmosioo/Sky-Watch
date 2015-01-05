@@ -35,7 +35,7 @@ angular.module('ngApp')
 					$scope.moon = {
 						names: ['Moon'],
 						illumination: {
-							phase: illumination.phase,
+							phase: illumination.fraction,
 							isWaxing: illumination.angle < 0
 						}
 					};
