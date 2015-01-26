@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('ngApp', ['ngSanitize', 'ngAnimate', 'Constants', 'ngRoute']);
+var app = angular.module('ngApp', ['ngSanitize', 'ngAnimate', 'Constants', 'ngRoute', 'angulartics', 'angulartics.google.analytics']);
 
 // Initial configuration
 app.config(function appConfig($routeProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $locationProvider) {
