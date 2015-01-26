@@ -19,6 +19,8 @@ module.exports = function(config) {
 			pck.config.app + '/components/angular-mocks/angular-mocks.js',
 			pck.config.app + '/components/angular-resource/angular-resource.js',
 			pck.config.app + '/components/angular-sanitize/angular-sanitize.js',
+			pck.config.app + '/components/angulartics/src/angulartics.js',
+			pck.config.app + '/components/angulartics/src/angulartics-ga.js',
 			pck.config.app + '/components/angular-route/angular-route.js',
 			pck.config.app + '/components/angular-animate/angular-animate.js',
 			pck.config.app + '/components/modernizr/modernizr.js',
