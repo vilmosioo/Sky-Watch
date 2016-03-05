@@ -11,6 +11,10 @@ client/scripts/config/constants.js
 coverage/
 .idea
 sky-watch.zip
+platforms/**
+plugins/**
+resources/**
+www/**
 
 #################
 ## Eclipse
