@@ -2,6 +2,11 @@ language: android
 sudo: false
 node_js:
 - '0.12'
+android:
+  components:
+    - android-23
+    - platform-tools
+    - build-tools
 before_script:
 - npm install -g grunt-cli bower cordova ionic
 - gem install sass --version 3.2.13
