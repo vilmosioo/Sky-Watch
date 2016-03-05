@@ -402,20 +402,6 @@ module.exports = function (grunt) {
 					}
 				]
 			}
-		},
-		'github-release': {
-			dist: {
-				options: {
-					repository: 'vilmosioo/Sky-Watch', // Path to repository 
-					auth: {   // Auth credentials 
-						user: 'vilmosioo',
-						password: process.env.GITHUB_TOKEN
-					}
-				},
-				files: {
-					src: ['sky-watch.zip'] // Files that you want to attach to Release 
-				}
-			}
 		}
 	});
 
@@ -459,7 +445,8 @@ module.exports = function (grunt) {
 		'rev',
 		'usemin',
 		'replace:dist',
-		'angular_template_inline_js'
+		'angular_template_inline_js',
+		'compress'
 	]);
 
 	grunt.registerTask('default', [
