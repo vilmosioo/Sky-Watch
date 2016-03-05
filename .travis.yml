@@ -15,24 +15,23 @@ branches:
   - master
 before_deploy:
 - npm run before_deploy
-deploy:
-- provider: openshift
-  user: cool.villi@gmail.com
-  password:
-    secure: SI0L/pHMO4fPt294yWqINSOTFtFoG6EqF2Ybcxg7691AIYHxm86hv8VjCgRmIjLMuY6E+zdZibLBzumVm5N6ds+atgxOWDfNH2SJiclox39WD3VPMog5TmMEnWVoCalpUm17ptOQMKed7y2dB+ddXqf6FuXZL4NEih5ONnymdRM=
-  app: skywatch
-  domain: vilmosioo
-  on:
-    repo: vilmosioo/Sky-Watch
-    branch: master
-- provider: releases
-  api-key: $GITHUB_TOKEN
-  file: sky-watch.zip
-  skip_cleanup: true
-  on:
-    tags: true
 env:
   global:
   - secure: k+KcYZAdk5qZ1/bZedgSMEiHIuUAerplyrtSLhItTsEkMfGUtFvM7NB9XP17szIpMTtP8xcGNrulqpHFXGA2GnpX/J+5ZIeLyrI3aZu6eySTYc2AJPPRXsZJNT8FgOATq1OdFA917+G25ide7FK/U75PFuNH5H7gH1QVT7JVpAQ=
   - secure: CmGfgp9h7c1PW+8lRRLjXQkEk29vrQf45/IfRk4AvfoRqRLTKdHXZ/GLOmJt1GSbnB/Ozg6dyMJWI2IGkHEvtnrE7hJ6/QSkdkEbCHuojzxuIgqfE845L/7Tx5ogHN24QJVrtGZbE+49CW6E1opyx3gZeytqYgBkpjkvQFQ5AHk=
   - secure: SX6VEqm82FUowQsEN8MawHzvIRS7DRbgEE3c8S33xUP6p0Ja4ULWoGUmwFolz4jNBui8vo0q5BlS3G1lBTaZ9nU7B5Aoq1BssH+TGAl4ybKcYVpDlvbE/lp886GuXi7dGVovq7HNaoMxDK6YyIV5BjQJmqoWHRN7syO1Fatqrv0=
+deploy:
+  - provider: releases
+    api-key: $GITHUB_TOKEN
+    file: sky-watch.zip
+    skip_cleanup: true
+    on:
+      tags: true
+  - provider: openshift
+    user: vilmosioo
+    password:
+      secure: Hp6CNuV/PO+ic3JfzuxOhs4M4RRSXREOOxjc+UUuZzJNi22+mB0uhPzOMd5kdRZGApWFV4Bv/+X5gvIOQy8e5Aj1g7e1LaP82OPkGbchEGM9oJybhxsqRN7P4kFcNoQWJzB5X5Np5uEa4VPxWC1UeVwvk0gHIhCGXTzVlb39K5E=
+    app: skywatch
+    domain: vilmosioo
+    on:
+      repo: vilmosioo/Sky-Watch
