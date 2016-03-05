@@ -1,4 +1,5 @@
 {
   "name": "skywatch",
-  "app_id": ""
+  "app_id": "",
+  "documentRoot": "dist"
 }
