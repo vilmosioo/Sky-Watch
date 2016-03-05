@@ -10,9 +10,11 @@ before_script:
 - npm install && bower install
 script:
 - npm run build
-after_script:
+after_success:
+- cp -R dist/ www/
 - ionic state restore
 - ionic build android
+- rm -rf www/
 branches:
   only:
   - master

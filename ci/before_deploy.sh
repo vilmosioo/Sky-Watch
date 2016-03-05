@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# prepare artefact for deployment
+# prepare artefact for deployment, should remove ionic dependencies
 
 git rm -rf client
 git rm -rf test
