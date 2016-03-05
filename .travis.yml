@@ -28,7 +28,7 @@ deploy:
     on:
       tags: true
   - provider: openshift
-    user: vilmosioo
+    user: cool.villi@gmail.com
     password:
       secure: Hp6CNuV/PO+ic3JfzuxOhs4M4RRSXREOOxjc+UUuZzJNi22+mB0uhPzOMd5kdRZGApWFV4Bv/+X5gvIOQy8e5Aj1g7e1LaP82OPkGbchEGM9oJybhxsqRN7P4kFcNoQWJzB5X5Np5uEa4VPxWC1UeVwvk0gHIhCGXTzVlb39K5E=
     app: skywatch
