@@ -11,7 +11,8 @@ before_script:
 script:
 - npm run build
 after_success:
-- cp -R dist/ www/
+- cp -R dist/. www/
+- cp -R public/. www/
 - ionic state restore
 - ionic build android
 - rm -rf www/
