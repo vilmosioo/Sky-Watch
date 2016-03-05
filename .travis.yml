@@ -16,23 +16,23 @@ branches:
 before_deploy:
 - npm run before_deploy
 deploy:
-  - provider: openshift
-    user: cool.villi@gmail.com
-    password:
-      secure: SI0L/pHMO4fPt294yWqINSOTFtFoG6EqF2Ybcxg7691AIYHxm86hv8VjCgRmIjLMuY6E+zdZibLBzumVm5N6ds+atgxOWDfNH2SJiclox39WD3VPMog5TmMEnWVoCalpUm17ptOQMKed7y2dB+ddXqf6FuXZL4NEih5ONnymdRM=
-    app: skywatch
-    domain: vilmosioo
-    on:
-      repo: vilmosioo/Sky-Watch
-      branch: master
-  - provider: releases
-    api-key: $GITHUB_TOKEN
-    file: "sky-watch.zip"
-    skip_cleanup: true
-    on:
-      tags: true
+- provider: openshift
+  user: cool.villi@gmail.com
+  password:
+    secure: SI0L/pHMO4fPt294yWqINSOTFtFoG6EqF2Ybcxg7691AIYHxm86hv8VjCgRmIjLMuY6E+zdZibLBzumVm5N6ds+atgxOWDfNH2SJiclox39WD3VPMog5TmMEnWVoCalpUm17ptOQMKed7y2dB+ddXqf6FuXZL4NEih5ONnymdRM=
+  app: skywatch
+  domain: vilmosioo
+  on:
+    repo: vilmosioo/Sky-Watch
+    branch: master
+- provider: releases
+  api-key: $GITHUB_TOKEN
+  file: sky-watch.zip
+  skip_cleanup: true
+  on:
+    tags: true
 env:
   global:
-  - secure: x/cqj8KBQvIGaMIOZzrwUXZNA2JsTXTyky4fhSJfbutlY5hcjz09+x2KfvFwYFfSDSFTH+agi31JeTYkZG5PVJGSgI5Wiml3CFyYdDt+R+Vr5s1eJJ5GCsBAaQUleaedUzV5rrVJYpwOVE2jzF24L/ghxa95knORyiTlpONPi00=
-  - secure: OlyNWK99sBVliwGBKm2zbh2tRKFL+bFT1csgxXh6QabUWaJk+sFRSOMJW8D9LHI4Z9Gew2XJEi/QUxVXKdzmdZdRKxv9yDwJe8+KwiOagbLRdIu3Y+13V+45nzIti97eAb04NwvTPbnx/8zhUD89a7j7ZAB/WxVvZU4YHRPQL3Q=
-  - secure: X9qDSh6SjB1QLy2lzCRt6wr0UYpRd/e0RkETcJM1EZ+KB/wCDqEa3KOKWevE/PqI9PdYxbUVdmj18cEakLPWZ2JxDhpBp5N2C0qzY0FNuYvFcIqEfzOMrDFce84e0SZ0vvw2Ee4H+uSIne2dbL6z37k3pe5NMUd85p8pZRDD/VA=
+  - secure: FeVKCcZdUH1H70JOZxOqBJMTU1HXUPJIIb6ffXTFpfG3Q/NrFEVc0+FBgAbHGwkVd/frRCXwqVnbn74hnNpijDj7VMxoQmtMfzY9f6RW+ifos6JDv/lUiK2w4uejkFLE5Mh2aZMGOxJ0B5lYHyy22CWwmT5tZOfOhwKPZ/V3aPY=
+  - secure: OSQKi82+Rk/clyNZPX650EpsZsf5GIEZ3VaRVeIJ4RPwRjn1g2vY2Q+UzkaArpIeg4dLStjkqcKzG2kkYIAa8VJDr0bTFr3tqbi/pIKsR1HLD+Agfb9YQu2x+q7L7D1qHPouNrgoqIEzrKOwe6VWaWqT6q7zN/iRF4D4EZPK/CM=
+  - secure: cobJKuGUpy38/NvJC5u7+4F55+uyfZYmMRzE2bittXfET/S2a7if2F4P24DslS9wOOWc+eTwo/GpKG1BJmjEoDoMBjtExWWp5UlPZlC0QD4Hj/XTp6yVL+rvJ/N70wwztF2kFYLuI2AjnPqR9J+mNCHLVxyWGgZHTYnKJB+lIp8=
