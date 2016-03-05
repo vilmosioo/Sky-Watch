@@ -1,4 +1,5 @@
 language: node_js
+sudo: false
 node_js:
 - '0.10'
 before_script:
@@ -15,15 +16,21 @@ branches:
 before_deploy:
 - npm run before_deploy
 deploy:
-  provider: openshift
-  user: cool.villi@gmail.com
-  password:
-    secure: SI0L/pHMO4fPt294yWqINSOTFtFoG6EqF2Ybcxg7691AIYHxm86hv8VjCgRmIjLMuY6E+zdZibLBzumVm5N6ds+atgxOWDfNH2SJiclox39WD3VPMog5TmMEnWVoCalpUm17ptOQMKed7y2dB+ddXqf6FuXZL4NEih5ONnymdRM=
-  app: skywatch
-  domain: vilmosioo
-  on:
-    repo: vilmosioo/Sky-Watch
-    branch: master
+  - provider: openshift
+    user: cool.villi@gmail.com
+    password:
+      secure: SI0L/pHMO4fPt294yWqINSOTFtFoG6EqF2Ybcxg7691AIYHxm86hv8VjCgRmIjLMuY6E+zdZibLBzumVm5N6ds+atgxOWDfNH2SJiclox39WD3VPMog5TmMEnWVoCalpUm17ptOQMKed7y2dB+ddXqf6FuXZL4NEih5ONnymdRM=
+    app: skywatch
+    domain: vilmosioo
+    on:
+      repo: vilmosioo/Sky-Watch
+      branch: master
+  - provider: releases
+    api-key: $GITHUB_TOKEN
+    file: "sky-watch.zip"
+    skip_cleanup: true
+    on:
+      tags: true
 env:
   global:
   - secure: x/cqj8KBQvIGaMIOZzrwUXZNA2JsTXTyky4fhSJfbutlY5hcjz09+x2KfvFwYFfSDSFTH+agi31JeTYkZG5PVJGSgI5Wiml3CFyYdDt+R+Vr5s1eJJ5GCsBAaQUleaedUzV5rrVJYpwOVE2jzF24L/ghxa95knORyiTlpONPi00=

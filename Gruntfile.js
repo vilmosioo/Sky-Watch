@@ -387,6 +387,21 @@ module.exports = function (grunt) {
 					background: false
 				}
 			}
+		},
+		compress: {
+			build: {
+				options: {
+					archive: 'sky-watch.zip'
+				},
+				files: [
+					{
+						expand: true,
+						cwd: 'dist/',
+						src: ['**/*'],
+						dest: '.'
+					}
+				]
+			}
 		}
 	});
 
@@ -430,7 +445,8 @@ module.exports = function (grunt) {
 		'rev',
 		'usemin',
 		'replace:dist',
-		'angular_template_inline_js'
+		'angular_template_inline_js',
+		'compress'
 	]);
 
 	grunt.registerTask('default', [
