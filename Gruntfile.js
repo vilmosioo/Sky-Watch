@@ -387,6 +387,35 @@ module.exports = function (grunt) {
 					background: false
 				}
 			}
+		},
+		compress: {
+			build: {
+				options: {
+					archive: 'sky-watch.zip'
+				},
+				files: [
+					{
+						expand: true,
+						cwd: 'dist/',
+						src: ['**/*'],
+						dest: '.'
+					}
+				]
+			}
+		},
+		'github-release': {
+			dist: {
+				options: {
+					repository: 'vilmosioo/Sky-Watch', // Path to repository 
+					auth: {   // Auth credentials 
+						user: 'vilmosioo',
+						password: process.env.GITHUB_TOKEN
+					}
+				},
+				files: {
+					src: ['sky-watch.zip'] // Files that you want to attach to Release 
+				}
+			}
 		}
 	});
 
