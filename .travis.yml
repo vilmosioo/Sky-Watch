@@ -3,13 +3,16 @@ sudo: false
 node_js:
 - '0.12'
 before_script:
-- npm install -g grunt-cli bower
+- npm install -g grunt-cli bower cordova ionic
 - gem install sass --version 3.2.13
 - gem install compass
 - npm cache clear && bower cache clean
 - npm install && bower install
+- ionic state restore
 script:
 - npm run build
+after_script:
+- ionic build android
 branches:
   only:
   - master
