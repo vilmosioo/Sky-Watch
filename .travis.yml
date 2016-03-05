@@ -27,7 +27,7 @@ deploy:
       branch: master
   - provider: releases
     api-key: $GITHUB_TOKEN
-    file: "sky-Watch.zip"
+    file: "sky-watch.zip"
     skip_cleanup: true
     on:
       tags: true
