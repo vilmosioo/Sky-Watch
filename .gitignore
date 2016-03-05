@@ -13,7 +13,6 @@ coverage/
 sky-watch.zip
 platforms/**
 plugins/**
-resources/**
 www/**
 
 #################
