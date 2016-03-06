@@ -11,9 +11,18 @@
     "labjs": "*",
     "compass-twitter-bootstrap": "~2.3.1",
     "suncalc": "~1.6.0",
-    "angulartics": "~0.17.2"
+    "angulartics": "~0.17.2",
+    "ngCordova": "~0.1.24-alpha",
+    "ionic": "~1.2.4",
+    "angular-ui-router": "~0.2.18"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.13"
+  },
+  "resolutions": {
+    "angular-animate": "~1.2.13",
+    "angular": "~1.2.13",
+    "angular-sanitize": "~1.2.13",
+    "angular-ui-router": "0.2.13"
   }
 }

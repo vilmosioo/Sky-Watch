@@ -25,6 +25,10 @@ module.exports = function(config) {
 			pck.config.app + '/components/angular-animate/angular-animate.js',
 			pck.config.app + '/components/modernizr/modernizr.js',
 			pck.config.app + '/components/labjs/LAB.min.js',
+			pck.config.app + '/components/ionic/release/js/ionic.js',
+			pck.config.app + '/components/ionic/release/js/ionic-angular.js',
+			pck.config.app + '/components/ngCordova/dist/ng-cordova.js',
+			pck.config.app + '/components/angular-ui-router/release/angular-ui-router.js',
 
 			// the app
 			pck.config.app + '/scripts/**/*.js',

@@ -21,6 +21,8 @@
   "smarttabs": true,
   "globals": {
     "angular": false,
-		"$LAB": false
+		"$LAB": false,
+    "cordova": false,
+    "StatusBar": false
   }
 }
