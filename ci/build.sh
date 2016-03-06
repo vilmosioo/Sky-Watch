@@ -14,8 +14,4 @@ npm version patch -m "Updating version [skip ci]" || { echo 'Version patch faile
 echo 'Running build command (default), assuming we are in the client folder'
 grunt || { echo 'Client build failed' ; exit 1; }
 
-echo 'Pushing git data to repo...'
-git push origin master || { echo 'Git push failed.' ; exit 1; }
-git push origin master --tags || { echo 'Git tagging failed.' ; exit 1; }
-
 exit 0;

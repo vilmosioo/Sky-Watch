@@ -11,6 +11,7 @@ client/scripts/config/constants.js
 coverage/
 .idea
 sky-watch.zip
+sky-watch.apk
 platforms/**
 plugins/**
 www/**

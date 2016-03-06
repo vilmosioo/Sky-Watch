@@ -402,6 +402,33 @@ module.exports = function (grunt) {
 					}
 				]
 			}
+		},
+		'github-release': {
+			dist: {
+				options: {
+					repository: 'vilmosioo/Sky-Watch', // Path to repository 
+					auth: {   // Auth credentials 
+						user: 'vilmosioo',
+						password: process.env.GITHUB_TOKEN
+					}
+				},
+				files: {
+					src: [
+						'sky-watch.zip',
+						'sky-watch.apk'
+					]
+				}
+			}
+		},
+		rename: {
+			dist: {
+				files: [
+					{
+						src: 'platforms/android/build/outputs/apk/android-debug.apk',
+						dest: 'sky-watch.apk'
+					}
+				]
+			}
 		}
 	});
 
@@ -416,6 +443,11 @@ module.exports = function (grunt) {
 	grunt.registerTask('dist', [
 		'build',
 		'express:dist'
+	]);
+
+	grunt.registerTask('release', [
+		'rename',
+		'github-release'
 	]);
 
 	grunt.registerTask('ptor', function () {
