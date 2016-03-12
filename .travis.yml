@@ -28,12 +28,6 @@ env:
   - secure: CmGfgp9h7c1PW+8lRRLjXQkEk29vrQf45/IfRk4AvfoRqRLTKdHXZ/GLOmJt1GSbnB/Ozg6dyMJWI2IGkHEvtnrE7hJ6/QSkdkEbCHuojzxuIgqfE845L/7Tx5ogHN24QJVrtGZbE+49CW6E1opyx3gZeytqYgBkpjkvQFQ5AHk=
   - secure: SX6VEqm82FUowQsEN8MawHzvIRS7DRbgEE3c8S33xUP6p0Ja4ULWoGUmwFolz4jNBui8vo0q5BlS3G1lBTaZ9nU7B5Aoq1BssH+TGAl4ybKcYVpDlvbE/lp886GuXi7dGVovq7HNaoMxDK6YyIV5BjQJmqoWHRN7syO1Fatqrv0=
 deploy:
-  - provider: releases
-    api-key: $GITHUB_TOKEN
-    file: sky-watch.zip
-    skip_cleanup: true
-    on:
-      tags: true
   - provider: openshift
     user: cool.villi@gmail.com
     password:
@@ -41,4 +35,5 @@ deploy:
     app: skywatch
     domain: vilmosioo
     on:
+      branch: master
       repo: vilmosioo/Sky-Watch
