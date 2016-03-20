@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sh -h
+sh --version
 
 if [[ $TRAVIS_BRANCH == "master" ]] && [[ $TRAVIS_PULL_REQUEST == false ]]; then
 	echo "Switching to master and setting identity for git"
