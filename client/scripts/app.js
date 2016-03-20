@@ -1,8 +1,28 @@
 'use strict';
 
-var app = angular.module('ngApp', ['ngSanitize', 'ngAnimate', 'Constants', 'ngRoute', 'angulartics', 'angulartics.google.analytics']);
+var app = angular.module('ngApp', ['ngSanitize', 'ngAnimate', 'Constants', 'ngRoute', 'angulartics', 'angulartics.google.analytics', 'ionic', 'ngCordova']);
 
 // Initial configuration
+app.run(function ionicRun($ionicPlatform, $cordovaSplashscreen) {
+	$ionicPlatform.ready(function() {
+		// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+		// for form inputs)
+		if (window.cordova && window.cordova.plugins.Keyboard) {
+			cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+		}
+		if(window.navigator && window.navigator.splashscreen) {
+			window.plugins.orientationLock.unlock();
+		}
+		if (window.StatusBar) {
+			// org.apache.cordova.statusbar required
+			StatusBar.styleDefault();
+		}
+		if (window.cordova){
+			// Hide Splash Screen when App is Loaded
+			$cordovaSplashscreen.hide();
+		}
+	});
+});
 app.config(function appConfig($routeProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $locationProvider) {
 	// Redefine providers.
 	app._controller = app.controller;
