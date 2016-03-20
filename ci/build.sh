@@ -1,8 +1,6 @@
 #!/bin/sh
 
-sh --version
-
-if [[ $TRAVIS_BRANCH == "master" ]] && [[ $TRAVIS_PULL_REQUEST == false ]]; then
+if [ "${TRAVIS_BRANCH}" == "master" ] && [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then
 	echo "Switching to master and setting identity for git"
 	git checkout master
 	git config user.name $GITHUB_USER
