@@ -80,5 +80,8 @@ app.config(function appConfig($routeProvider, $controllerProvider, $compileProvi
 			redirectTo: '/'
 		});
 
-	$locationProvider.html5Mode(true);
+	$locationProvider.html5Mode({
+		enabled: true,
+		requireBase: false
+	});
 });
