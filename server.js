@@ -3,7 +3,6 @@
 var express = require('express'),
 	bodyParser = require('body-parser'),
 	logger = require('morgan'),
-	enforce = require('express-sslify'),
 	models = require('./models'),
 	path = require('path'),
 	compression = require('compression'),
@@ -17,7 +16,6 @@ app.use(logger('combined'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(compression());
-app.use(enforce.HTTPS());
 
 router.use(require('./scripts/headers'));
 router.use(require('./scripts/options'));
