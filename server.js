@@ -17,7 +17,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(compression());
 
-router.use(require('./scripts/redirect'));
 router.use(require('./scripts/headers'));
 router.use(require('./scripts/options'));
 router.get('/', routes.root);
