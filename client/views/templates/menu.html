@@ -1,7 +1,7 @@
 <nav>
   <ul>
-    <li ng-class="{'active':$index == menu.active}" ng-repeat="item in menu.items">
-      <a ng-href="{{item.href}}" ng-bind="item.label" title="{{item.label}}"></a>
+    <li ui-sref-active="active" ng-repeat="item in ::menu.items">
+      <a ui-sref="{{item.href}}" ng-bind="item.label" title="{{item.label}}"></a>
     </li>
   </ul>
 </nav>
