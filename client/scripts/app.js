@@ -1,9 +1,9 @@
 'use strict';
 
-var app = angular.module('ngApp', ['ngSanitize', 'ngAnimate', 'Constants', 'ngRoute', 'angulartics', 'angulartics.google.analytics', 'ngAppIonic']);
+var app = angular.module('ngApp', ['ngSanitize', 'ngAnimate', 'Constants', 'ui.router', 'angulartics', 'angulartics.google.analytics', 'ngAppIonic']);
 
 // Initial configuration
-app.config(function appConfig($routeProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $locationProvider) {
+app.config(function appConfig($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $locationProvider) {
 	// Redefine providers.
 	app._controller = app.controller;
 	app._service = app.service;
@@ -31,34 +31,41 @@ app.config(function appConfig($routeProvider, $controllerProvider, $compileProvi
 	};
 
 	// Register routes
-	$routeProvider
-		.when('/', {
+	$stateProvider
+		.state({
+			url: '/',
+			name: '/',
 			templateUrl: '/views/main.html',
 			controller: 'MainController',
 			title: 'Home',
 			resolve: _requireDependencies(['/scripts/controllers/MainController.js'])
 		})
-		.when('/search/', {
+		.state({
+			url: '/search/',
+			name: '/search/',
 			templateUrl: '/views/main.html',
 			controller: 'SearchController',
 			title: 'Search',
 			resolve: _requireDependencies(['/scripts/controllers/SearchController.js'])
 		})
-		.when('/browse/', {
+		.state({
+			url: '/browse/',
+			name: '/browse/',
 			templateUrl: '/views/main.html',
 			controller: 'BrowseController',
 			title: 'Browse',
 			resolve: _requireDependencies(['/scripts/controllers/BrowseController.js'])
 		})
-		.when('/about/', {
+		.state({
+			url: '/about/',
+			name: '/about/',
 			templateUrl: '/views/about.html',
 			controller: 'AboutController',
 			title: 'About',
 			resolve: _requireDependencies(['/scripts/controllers/AboutController.js'])
-		})
-		.otherwise({
-			redirectTo: '/'
 		});
+
+	$urlRouterProvider.otherwise('/');
 
 	$locationProvider.html5Mode({
 		enabled: true,
