@@ -34,34 +34,30 @@ app.config(function appConfig($stateProvider, $urlRouterProvider, $controllerPro
 	$stateProvider
 		.state({
 			url: '/',
-			name: '/',
 			templateUrl: '/views/main.html',
 			controller: 'MainController',
-			title: 'Home',
+			name: 'Home',
 			resolve: _requireDependencies(['/scripts/controllers/MainController.js'])
 		})
 		.state({
 			url: '/search/',
-			name: '/search/',
 			templateUrl: '/views/main.html',
 			controller: 'SearchController',
-			title: 'Search',
+			name: 'Search',
 			resolve: _requireDependencies(['/scripts/controllers/SearchController.js'])
 		})
 		.state({
 			url: '/browse/',
-			name: '/browse/',
 			templateUrl: '/views/main.html',
 			controller: 'BrowseController',
-			title: 'Browse',
+			name: 'Browse',
 			resolve: _requireDependencies(['/scripts/controllers/BrowseController.js'])
 		})
 		.state({
 			url: '/about/',
-			name: '/about/',
 			templateUrl: '/views/about.html',
 			controller: 'AboutController',
-			title: 'About',
+			name: 'About',
 			resolve: _requireDependencies(['/scripts/controllers/AboutController.js'])
 		});
 

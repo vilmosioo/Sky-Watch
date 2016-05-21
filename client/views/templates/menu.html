@@ -1,7 +1,7 @@
 <nav>
   <ul>
-    <li ui-sref-active="active" ng-repeat="item in ::menu.items">
-      <a ui-sref="{{item.href}}" ng-bind="item.label" title="{{item.label}}"></a>
+    <li ui-sref-active="active" ng-repeat="state in ::menu">
+      <a ui-sref="{{state}}" ng-bind="state" title="{{state}}"></a>
     </li>
   </ul>
 </nav>
