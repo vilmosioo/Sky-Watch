@@ -101,7 +101,7 @@ nav{
 /*==============MAIN==============*/
 #main{ padding:0 3%; text-align:left;
   .card{
-    padding:15px 15px 45px; background:#fff; height:203px; overflow:hidden; @include ctb-border-radius(3px); @include ctb-box-shadow(0 0 3px $gray); position:relative;
+    margin: 0; padding:15px 15px 45px; background:#fff; height:203px; overflow:hidden; @include ctb-border-radius(3px); @include ctb-box-shadow(0 0 3px $gray); position:relative;
     .isvisible{
       position:absolute; right:5px; top:3px; width:30px; height:30px; text-align:center; line-height:30px; font-size:25px; color:$gray;
     }   
