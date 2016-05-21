@@ -13,11 +13,8 @@ angular.module('ngApp')
       $rootScope.global.search = $location.search().q || '';
     });
   })
-  .run(function($rootScope, Geo, Weather){
+  .run(function($rootScope, Geo){
     Geo.locate().then(function (position) {
       $rootScope.position = position.coords;
-    });
-    Weather.get().then(function(weather){
-      $rootScope.weather = weather;
     });
   });
