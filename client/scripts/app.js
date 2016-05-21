@@ -40,7 +40,7 @@ app.config(function appConfig($stateProvider, $urlRouterProvider, $controllerPro
 			resolve: _requireDependencies(['/scripts/controllers/MainController.js'])
 		})
 		.state({
-			url: '/search/',
+			url: '/search?q',
 			templateUrl: '/views/main.html',
 			controller: 'SearchController',
 			name: 'Search',
