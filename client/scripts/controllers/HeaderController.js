@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ngApp')
-  .controller('HeaderController', function HeaderController($scope, $rootScope, $sanitize, $location) {
+  .controller('HeaderController', function HeaderController($scope, $rootScope, $sanitize, $state) {
     $scope.search = '';
     $rootScope.$watch('global.search', function(value){
       $scope.search = value;
@@ -9,8 +9,8 @@ angular.module('ngApp')
 
     // search function
     $scope.submit = function(){
-      if($scope.search && $scope.search.length){
-        $location.path('/search').search({ q: $sanitize($scope.search) });
+      if($scope.search){
+        $state.go('Search', { q: $sanitize($scope.search) });
       }
     };
   });

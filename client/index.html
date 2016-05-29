@@ -15,7 +15,6 @@
     <link rel="icon" href="/favicon.ico" />
     <!-- build:css(.tmp/) /styles/main.css -->
     <link rel="stylesheet" href="/styles/main.css">
-    <link rel="stylesheet" href="/components/ionic/release/css/ionic.css">
     <!-- endbuild -->
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
   </head>
@@ -29,14 +28,14 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <div ng-include src="'/views/templates/header.html'"></div>
-    <main id="main" role="main" class="clearfix" ng-view></main>
+    <main id="main" role="main" class="clearfix" ui-view></main>
     <div ng-include src="'/views/templates/footer.html'"></div>
 
     <!-- build:js /scripts/vendor.js -->
     <script src="/components/angular/angular.js"></script>
     <script src="/components/angular-resource/angular-resource.js"></script>
     <script src="/components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="/components/angular-route/angular-route.js"></script>
+    <script src="/components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/components/angular-animate/angular-animate.js"></script>
     <script src="/components/angulartics/src/angulartics.js"></script>
     <script src="/components/angulartics/src/angulartics-ga.js"></script>

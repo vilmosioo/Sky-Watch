@@ -8,8 +8,8 @@ angular.module('ngApp')
       search: ''
     };
     
-    $rootScope.$on('$routeChangeSuccess', function(event, route) {
-      $rootScope.global.pageTitle = route.$$route.title || '';
+    $rootScope.$on('$stateChangeSuccess', function(event, state) {
+      $rootScope.global.pageTitle = state.name || '';
       $rootScope.global.search = $location.search().q || '';
     });
   })
