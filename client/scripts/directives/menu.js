@@ -7,7 +7,7 @@ angular.module('ngApp')
       replace: true,
       restrict: 'E',
       scope: {},
-      controller: function($scope, $rootScope, $location){
+      controller: function($scope){
         $scope.menu = [
           'Home',
           'Browse'
