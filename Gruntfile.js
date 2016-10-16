@@ -21,13 +21,15 @@ module.exports = function (grunt) {
 		yeoman: pck.config,
 		pkg: pck,
 		ngconstant: {
-			dev: [{
-				dest: pck.config.app + '/scripts/config/constants.js',
-				name: 'Constants',
-				constants: {
-					Constants: grunt.file.readJSON(pck.config.app + '/scripts/config/constants.json')
+			dev: {
+				options: {
+					dest: pck.config.app + '/scripts/config/constants.js',
+					name: 'Constants',
+					constants: {
+						Constants: grunt.file.readJSON(pck.config.app + '/scripts/config/constants.json')
+					}
 				}
-			}]
+			}
 		},
 		// Watches files for changes and runs tasks based on the changed files
 		watch: {
