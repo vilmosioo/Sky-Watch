@@ -17,7 +17,6 @@ describe('Controller: MainController', function () {
   }));
 
   it('should pass an empty test', function () {
-    console.log(scope);
     expect(scope.results).toBeDefined();
   });
 

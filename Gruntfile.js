@@ -429,6 +429,12 @@ module.exports = function (grunt) {
 					}
 				]
 			}
+		},
+		ts: {
+			dev : {
+				src: '<%= yeoman.app %>/**/*.ts',
+				dest: '<%= yeoman.dist %>/scripts'
+			}
 		}
 	});
 
@@ -466,6 +472,7 @@ module.exports = function (grunt) {
 
 	grunt.registerTask('build', [
 		'clean:dist',
+        'ts:dev',
 		'useminPrepare',
 		'less:dist',
 		'concat',
@@ -482,7 +489,7 @@ module.exports = function (grunt) {
 	]);
 
 	grunt.registerTask('default', [
-		'test',
-		'build'
+		'build',
+		'test'
 	]);
 };

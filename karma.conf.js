@@ -31,7 +31,7 @@ module.exports = function(config) {
 			pck.config.app + '/components/angular-ui-router/release/angular-ui-router.js',
 
 			// the app
-			pck.config.app + '/scripts/**/*.js',
+			pck.config.dist + '/scripts/**/*.js',
 
 			// the tests
 			pck.config.test + '/spec/**/*.js'

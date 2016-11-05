@@ -9,7 +9,7 @@
     "real-time"
   ],
   "scripts": {
-    "install": "bower install",
+    "install": "bower install && typings install",
     "build": "sh ci/build.sh",
     "release": "sh ci/release.sh",
     "before_deploy": "sh ci/before_deploy.sh"
@@ -75,6 +75,7 @@
     "grunt-replace": "1.0.1",
     "grunt-rev": "0.1.0",
     "grunt-shell": "2.0.0",
+    "grunt-ts": "^6.0.0-beta.3",
     "grunt-usemin": "3.1.1",
     "jshint-stylish": "2.2.1",
     "karma": "1.3.0",
@@ -82,7 +83,8 @@
     "karma-jasmine": "1.0.2",
     "karma-phantomjs-launcher": "1.0.2",
     "matchdep": "1.0.1",
-    "protractor": "4.0.9"
+    "protractor": "4.0.9",
+    "typescript": "^2.0.7"
   },
   "cordovaPlugins": [
     "cordova-plugin-device",
