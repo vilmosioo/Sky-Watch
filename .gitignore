@@ -15,6 +15,7 @@ sky-watch.apk
 platforms/**
 plugins/**
 www/**
+client/scripts/.baseDir.ts
 
 #################
 ## Eclipse
@@ -210,31 +211,3 @@ $RECYCLE.BIN/
 # Packages
 *.egg
 *.egg-info
-<<<<<<< HEAD
-dist/
-=======
->>>>>>> nginx/master
-build/
-eggs/
-parts/
-var/
-sdist/
-develop-eggs/
-.installed.cfg
-
-# Installer logs
-pip-log.txt
-
-# Unit test / coverage reports
-.coverage
-.tox
-
-#Translations
-*.mo
-
-#Mr Developer
-<<<<<<< HEAD
-.mr.developer.cfg
-=======
-.mr.developer.cfg
->>>>>>> nginx/master

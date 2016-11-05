@@ -408,8 +408,8 @@ module.exports = function (grunt) {
 		'github-release': {
 			dist: {
 				options: {
-					repository: 'vilmosioo/Sky-Watch', // Path to repository 
-					auth: {   // Auth credentials 
+					repository: 'vilmosioo/Sky-Watch', // Path to repository
+					auth: {   // Auth credentials
 						user: 'vilmosioo',
 						password: process.env.GITHUB_TOKEN
 					}
@@ -430,6 +430,12 @@ module.exports = function (grunt) {
 						dest: 'sky-watch.apk'
 					}
 				]
+			}
+		},
+		ts: {
+			dev : {
+				src: '<%= yeoman.app %>/**/*.js',
+				dest: '<%= yeoman.dist %>'
 			}
 		}
 	});
