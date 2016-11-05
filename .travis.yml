@@ -17,7 +17,7 @@ cache:
   directories:
   - $HOME/.yarn-cache
 before_script:
-- npm install -g grunt-cli bower cordova ionic
+- yarn global add grunt-cli bower cordova ionic
 - gem install sass --version 3.2.13
 - gem install compass
 - yarn
