@@ -17,7 +17,7 @@ cache:
   directories:
   - $HOME/.yarn-cache
 before_script:
-- yarn global add grunt-cli bower cordova ionic
+- yarn global add grunt-cli bower cordova ionic typings
 - yarn
 script:
 - npm run build

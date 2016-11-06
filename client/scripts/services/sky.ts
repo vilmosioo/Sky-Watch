@@ -1,4 +1,4 @@
-'use strict';
+/// <reference path="../../../typings/index.d.ts" />
 
 angular.module('ngApp')
   .factory('Sky', function ($http, $q, $rootScope, Constants, Time, LocalStorage, Modernizr) {

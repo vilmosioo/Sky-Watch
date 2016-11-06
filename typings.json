@@ -1,0 +1,9 @@
+{
+  "globalDependencies": {
+    "angular": "registry:dt/angular#1.5.0+20161016133926",
+    "angular-ui-router": "registry:dt/angular-ui-router#1.1.5+20160810191828",
+    "cordova": "registry:dt/cordova#0.0.0+20160607055823",
+    "ionic": "registry:dt/ionic#0.0.0+20160907111202",
+    "jquery": "registry:dt/jquery#1.10.0+20160929162922"
+  }
+}

@@ -1,4 +1,8 @@
-'use strict';
+/// <reference path="../../../typings/index.d.ts" />
+
+interface  IIsLoading extends ng.IScope {
+  handler: any;
+}
 
 angular.module('ngApp')
   .directive('isLoading', function isLoading() {
@@ -11,7 +15,7 @@ angular.module('ngApp')
         handler: '=',
         more: '='
       },
-      link: function($scope, elem){
+      link: function($scope: IIsLoading, elem){
         if(typeof $scope.handler === 'function'){
           elem.bind('click', $scope.handler);
           $scope.$on('$destroy', function(){

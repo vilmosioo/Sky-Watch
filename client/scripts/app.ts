@@ -1,6 +1,8 @@
-'use strict';
+/// <reference path="../../typings/index.d.ts" />
 
 var app = angular.module('ngApp', ['ngSanitize', 'ngAnimate', 'ngMaterial', 'Constants', 'ui.router', 'angulartics', 'angulartics.google.analytics', 'ngAppIonic']);
+
+declare var $LAB: any;
 
 // Initial configuration
 app.config(function appConfig($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $locationProvider) {
