@@ -1,4 +1,4 @@
-'use strict';
+/// <reference path="../../../typings/index.d.ts" />
 
 angular.module('ngApp')
 	.controller('SearchController', function SearchCtrl($scope, $rootScope, Constants, $sanitize, $location, Sky) {

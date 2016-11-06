@@ -1,4 +1,4 @@
-'use strict';
+/// <reference path="../../../typings/index.d.ts" />
 
 angular.module('ngApp')
 	.factory('Geo', function ($q, $timeout) {

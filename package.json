@@ -9,7 +9,7 @@
     "real-time"
   ],
   "scripts": {
-    "install": "bower install",
+    "install": "bower install && typings install",
     "build": "sh ci/build.sh",
     "release": "sh ci/release.sh",
     "before_deploy": "sh ci/before_deploy.sh"

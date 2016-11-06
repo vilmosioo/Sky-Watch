@@ -15,7 +15,9 @@ sky-watch.apk
 platforms/**
 plugins/**
 www/**
-client/scripts/.baseDir.ts
+.baseDir.ts
+typings
+.tscache
 
 #################
 ## Eclipse
