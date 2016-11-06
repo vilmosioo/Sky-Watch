@@ -8,12 +8,12 @@
     "angular-sanitize": "1.4.3",
     "angular-ui-router": "0.2.13",
     "angulartics": "0.17.2",
-    "compass-twitter-bootstrap": "2.3.1",
     "ionic": "1.2.4",
     "labjs": "*",
     "modernizr": "2.6.2",
     "ngCordova": "0.1.24-alpha",
-    "suncalc": "1.6.0"
+    "suncalc": "1.6.0",
+    "bootstrap-less": "^3.3.4"
   },
   "devDependencies": {
     "angular-mocks": "1.4.3"

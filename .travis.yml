@@ -18,8 +18,6 @@ cache:
   - $HOME/.yarn-cache
 before_script:
 - yarn global add grunt-cli bower cordova ionic typings
-- gem install sass --version 3.2.13
-- gem install compass
 - yarn
 script:
 - npm run build
