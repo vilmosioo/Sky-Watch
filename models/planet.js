@@ -38,7 +38,7 @@ module.exports = sequelize.define('Planet', {
 						})
 						.then(function(ephemerids){
 							return ephemerids.map(function(ephemerid){
-								return ephemerid.values;
+								return ephemerid.dataValues;
 							});
 						})
 						.then(function(ephemerids){
@@ -54,7 +54,7 @@ module.exports = sequelize.define('Planet', {
 								DEm: 0,
 								DEs: 0,
 								size: 0
-							}, ephemerids[0], ephemerids[1]), planet.values);
+							}, ephemerids[0], ephemerids[1]), planet.dataValues);
 						});
 					}));
 				})

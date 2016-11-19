@@ -29,7 +29,7 @@ module.exports = sequelize.define('NGC', {
 			}, args))
 				.then(function(ngcs){
 					return ngcs.map(function(ngc){
-						return ngc.values;
+						return ngc.dataValues;
 					});
 				})
 				.then(function(ngcs){
