@@ -1,4 +1,3 @@
-/// <reference path="../../../typings/index.d.ts" />
 
 angular.module('ngApp')
 	.factory('Converter', function ($rootScope, $timeout, Time) {

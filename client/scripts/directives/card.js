@@ -1,4 +1,3 @@
-/// <reference path="../../../typings/index.d.ts" />
 
 angular.module('ngApp')
   .directive('card', function card() {

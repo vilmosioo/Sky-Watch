@@ -1,9 +1,3 @@
-/// <reference path="../../../typings/index.d.ts" />
-
-interface IIlluminationScope extends ng.IScope {
-	draw: any;
-	illumination: any;
-}
 
 angular.module('ngApp')
 	.directive('illumination', function card() {
@@ -123,7 +117,7 @@ angular.module('ngApp')
 					setPhase(el, phase, isWaxing, config);
 				};
 			},
-			link: function(scope: IIlluminationScope, element){
+			link: function(scope, element){
 				scope.draw(element[0], scope.illumination.phase, scope.illumination.isWaxing, {
 					diameter: element[0].clientWidth
 				});
