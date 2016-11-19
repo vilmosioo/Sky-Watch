@@ -4,12 +4,6 @@ var app = angular.module('ngApp', ['ngSanitize', 'ngAnimate', 'Constants', 'ui.r
 
 // Initial configuration
 app.config(function appConfig($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $locationProvider) {
-	// Redefine providers.
-	app._controller = app.controller;
-	app._service = app.service;
-	app._factory = app.factory;
-	app._directive = app.directive;
-
 	// Provider-based controller.
 	app.controller = $controllerProvider.register;
 	app.service = $provide.service;

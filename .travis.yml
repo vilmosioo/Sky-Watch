@@ -1,18 +1,24 @@
 language: android
-sudo: false
-node_js:
-- '0.12'
+sudo: required
 android:
   components:
     - android-23
     - platform-tools
     - build-tools
+before_install:
+  # Repo for newer Node.js versions
+  - nvm install node
+  # Repo for Yarn
+  - sudo apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg
+  - echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+  - sudo apt-get update -qq
+  - sudo apt-get install -y -qq yarn
+cache:
+  directories:
+  - $HOME/.yarn-cache
 before_script:
-- npm install -g grunt-cli bower cordova ionic
-- gem install sass --version 3.2.13
-- gem install compass
-- npm cache clear && bower cache clean
-- npm install && bower install
+- yarn global add grunt-cli bower cordova ionic
+- yarn
 script:
 - npm run build
 after_success:

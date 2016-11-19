@@ -42,7 +42,7 @@ angular.module('ngApp')
         if(Modernizr.localstorage){
           // delete old keys
           for (var key in LocalStorage){
-            if(key.indexOf(_time) === -1){
+            if(key.indexOf(_time.toString()) === -1){
               LocalStorage.removeItem(key);
             }
           }
@@ -60,7 +60,7 @@ angular.module('ngApp')
 								offset: _offset
 							}
 						}).success(function(data){
-                // save to storage 
+                // save to storage
                 LocalStorage.setItem(_key, JSON.stringify(data.results));
                 // handle success
                 _defer.resolve(data.results.splice(_real_offset, _limit));

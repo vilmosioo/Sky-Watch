@@ -21,13 +21,15 @@ module.exports = function (grunt) {
 		yeoman: pck.config,
 		pkg: pck,
 		ngconstant: {
-			dev: [{
-				dest: pck.config.app + '/scripts/config/constants.js',
-				name: 'Constants',
-				constants: {
-					Constants: grunt.file.readJSON(pck.config.app + '/scripts/config/constants.json')
+			dev: {
+				options: {
+					dest: pck.config.app + '/scripts/config/constants.js',
+					name: 'Constants',
+					constants: {
+						Constants: grunt.file.readJSON(pck.config.app + '/scripts/config/constants.json')
+					}
 				}
-			}]
+			}
 		},
 		// Watches files for changes and runs tasks based on the changed files
 		watch: {
@@ -46,9 +48,9 @@ module.exports = function (grunt) {
 				files: ['<%= yeoman.app %>/scripts/config/**/*.json'],
 				tasks: ['ngconstant']
 			},
-			compass: {
-				files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
-				tasks: ['compass:server']
+			less: {
+				files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,less}'],
+				tasks: ['less:dev']
 			},
 			express: {
 				files:  [ 'server.js', 'models/**/*.js', 'routes/**/*.js', 'scripts/**/*.js', 'data/**/*.js'],
@@ -130,22 +132,33 @@ module.exports = function (grunt) {
 			server: '<%= yeoman.tmp %>'
 		},
 		// Compiles Sass to CSS and generates necessary files if requested
-		compass: {
+		less: {
 			options: {
-				sassDir: '<%= yeoman.app %>/styles',
-				cssDir: '<%= yeoman.tmp %>/styles',
-				relativeAssets: true,
-				importPath: '<%= yeoman.app %>/components/compass-twitter-bootstrap/stylesheets'
+				paths: '<%= yeoman.app %>/components/'
 			},
 			dist: {
 				options: {
-					outputStyle: 'compressed'
-				}
+					style: 'compressed'
+				},
+				files: [{
+	        expand: true,
+	        cwd: '<%= yeoman.app %>/styles',
+	        src: ['*.less'],
+	        dest: '<%= yeoman.tmp %>',
+	        ext: '.css'
+	      }]
 			},
-			server: {
+			dev: {
 				options: {
-					debugInfo: true
-				}
+					sourceMap: true
+				},
+				files: [{
+	        expand: true,
+	        cwd: '<%= yeoman.app %>/styles',
+	        src: ['*.less'],
+	        dest: '<%= yeoman.tmp %>',
+	        ext: '.css'
+	      }]
 			}
 		},
 		// Renames files for browser caching purposes
@@ -263,19 +276,6 @@ module.exports = function (grunt) {
 					dest: '<%= yeoman.dist %>/images'
 				}]
 			}
-		},
-
-		// Run some tasks in parallel to speed up the build process
-		concurrent: {
-			server: [
-				'compass:server'
-			],
-			test: [
-				'compass'
-			],
-			dist: [
-				'compass:dist'
-			]
 		},
 		uglify: {
 			options: {
@@ -406,8 +406,8 @@ module.exports = function (grunt) {
 		'github-release': {
 			dist: {
 				options: {
-					repository: 'vilmosioo/Sky-Watch', // Path to repository 
-					auth: {   // Auth credentials 
+					repository: 'vilmosioo/Sky-Watch', // Path to repository
+					auth: {   // Auth credentials
 						user: 'vilmosioo',
 						password: process.env.GITHUB_TOKEN
 					}
@@ -436,7 +436,7 @@ module.exports = function (grunt) {
 		'express:server',
 		'clean:server',
 		'ngconstant',
-		'concurrent:server',
+		'less:dev',
 		'watch'
 	]);
 
@@ -458,7 +458,7 @@ module.exports = function (grunt) {
 		'jshint',
 		'clean:server',
 		'ngconstant',
-		'concurrent:test',
+		'less:dev',
 		'connect:test',
 		'karma',
 		//'ptor'
@@ -467,7 +467,7 @@ module.exports = function (grunt) {
 	grunt.registerTask('build', [
 		'clean:dist',
 		'useminPrepare',
-		'concurrent:dist',
+		'less:dist',
 		'concat',
 		'cssmin',
 		'htmlmin',
