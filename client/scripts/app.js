@@ -1,3 +1,5 @@
+'use strict';
+
 var app = angular.module('ngApp', ['ngSanitize', 'ngAnimate', 'Constants', 'ui.router', 'angulartics', 'angulartics.google.analytics', 'ngAppIonic']);
 
 // Initial configuration

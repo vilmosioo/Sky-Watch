@@ -1,3 +1,4 @@
+'use strict';
 
 angular.module('ngApp')
 	.controller('SearchController', function SearchCtrl($scope, $rootScope, Constants, $sanitize, $location, Sky) {
@@ -15,7 +16,7 @@ angular.module('ngApp')
 						$scope.results.items.push(obj.data.results[i]);
 					}
 					$scope.results.more = $scope.results.items.length < obj.data.total;
-				}, function(data, status, headers, config){
+				}, function(){
 					$scope.results.isloading = false;
 				});
 		};

@@ -1,3 +1,4 @@
+'use strict';
 
 angular.module('ngApp')
 	.factory('Geo', function ($q, $timeout) {

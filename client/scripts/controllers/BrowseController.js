@@ -1,3 +1,4 @@
+'use strict';
 
 angular.module('ngApp')
 	.controller('BrowseController', function BrowseCtrl($scope, Sky) {

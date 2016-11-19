@@ -1,3 +1,4 @@
+'use strict';
 
 angular.module('ngApp')
   .directive('menu', function isLoading() {

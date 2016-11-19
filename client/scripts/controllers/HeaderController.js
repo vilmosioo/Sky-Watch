@@ -1,3 +1,4 @@
+'use strict';
 
 angular.module('ngApp')
   .controller('HeaderController', function HeaderController($scope, $rootScope, $sanitize, $state) {

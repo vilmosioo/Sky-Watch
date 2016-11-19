@@ -1,3 +1,4 @@
+'use strict';
 
 angular.module('ngApp')
 	.factory('Converter', function ($rootScope, $timeout, Time) {

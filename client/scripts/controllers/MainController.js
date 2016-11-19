@@ -1,3 +1,4 @@
+'use strict';
 
 angular.module('ngApp')
 	.controller('MainController', function MainCtrl($scope, Sky) {

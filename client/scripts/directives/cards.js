@@ -1,3 +1,4 @@
+'use strict';
 
 angular.module('ngApp')
   .directive('cards', function cards($window, $interval, $timeout, $rootScope, Constants, Converter, Geo, SunCalc) {

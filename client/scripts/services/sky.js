@@ -1,3 +1,4 @@
+'use strict';
 
 angular.module('ngApp')
   .factory('Sky', function ($http, $q, $rootScope, Constants, Time, LocalStorage, Modernizr) {

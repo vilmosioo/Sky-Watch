@@ -1,3 +1,4 @@
+'use strict';
 
 angular.module('ngApp')
   .run(function Run($rootScope, $location) {
