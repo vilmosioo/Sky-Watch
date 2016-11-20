@@ -18,7 +18,14 @@
 * { .box-sizing(border-box); line-height:1.2;}
 
 body{
-  text-align:center; background:#eee; font-family: Helvetica Neue, Helvetica, sans-serif; color:#333; font-weight:100; font-size:16px;
+  margin: 0;
+  padding: 0;
+  text-align:center;
+  background:#eee;
+  font-family: Helvetica Neue, Helvetica, sans-serif;
+  color:#333;
+  font-weight:100;
+  font-size:16px;
 }
 
 h1, h2, h3, h4, h5, h6{ line-height:1.2; font-weight:100;}
@@ -43,7 +50,19 @@ h1, h2, h3, h4, h5, h6{ line-height:1.2; font-weight:100;}
   #search{
     float:right; margin:0; position:relative;
     input{
-      .box-sizing(border-box); width:100px; height:auto; font-weight:100; margin:0; padding-right: @iconSize; .transition(.5s width);
+      display: inline-block;
+      .box-sizing(border-box);
+      width:100px;
+      height: 24px;
+      font-weight:100;
+      margin: 8px 0 10px 0;
+      padding: 4px @iconSize 4px 6px;
+      .transition(.5s width);
+      font-size: 14px;
+      line-height: 20px;
+      color: #555;
+      border-radius: 4px;
+      vertical-align: middle;
       &:focus{
         width:206px;
       };
