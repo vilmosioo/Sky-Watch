@@ -63,4 +63,9 @@ app.config(function appConfig($stateProvider, $urlRouterProvider, $controllerPro
 		enabled: true,
 		requireBase: false
 	});
-});
+})
+	.directive(Object.keys(SkyWatch.Directives).reduce((directives, directive) => {
+		directives[directive] = SkyWatch.Directives[directive];
+		return directives;
+	}, {}));
+// todo use decorators

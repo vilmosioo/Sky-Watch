@@ -1,13 +1,12 @@
 /// <reference path="../../../typings/index.d.ts" />
 
-angular.module('ngApp')
-  .directive('card', function card() {
-    return {
-      templateUrl: '/views/templates/card.html',
-      replace: true,
-      restrict: 'E',
-      scope: {
-        item : '='
-      }
-    };
-  });
+module SkyWatch.Directives {
+    export var card: ng.Injectable<ng.IDirectiveFactory> = () => ({
+        templateUrl: '/views/templates/card.html',
+        replace: true,
+        restrict: 'E',
+        scope: {
+            item : '='
+        }
+    });
+}
