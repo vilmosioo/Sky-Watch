@@ -23,7 +23,7 @@ module.exports = function (grunt) {
 		ngconstant: {
 			dev: {
 				options: {
-					dest: pck.config.app + '/scripts/config/constants.js',
+					dest: pck.config.tmp + '/scripts/config/constants.js',
 					name: 'Constants',
 					constants: {
 						Constants: grunt.file.readJSON(pck.config.app + '/scripts/config/constants.json')
@@ -441,6 +441,7 @@ module.exports = function (grunt) {
 	grunt.registerTask('server', [
 		'express:server',
 		'clean:server',
+		'ts:dev',
 		'ngconstant',
 		'less:dev',
 		'watch'
