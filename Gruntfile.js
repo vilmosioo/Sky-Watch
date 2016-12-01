@@ -40,6 +40,10 @@ module.exports = function (grunt) {
 					livereload: true
 				}
 			},
+            ts: {
+                files: '<%= ts.dev.src %>',
+                tasks: ['ts:dev']
+            },
 			jsTest: {
 				files: ['<%= yeoman.test %>/**/*.js'],
 				tasks: ['jshint:test', 'karma']
@@ -66,8 +70,9 @@ module.exports = function (grunt) {
 				},
 				files: [
 					'<%= yeoman.app %>/**/*.{html,js}',
-					'<%= yeoman.tmp %> %>/styles/**/*.css',
-					'<%= yeoman.app %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}'
+                    '<%= yeoman.tmp %> %>/styles/**/*.css',
+                    '<%= yeoman.tmp %> %>/scripts/**/*.js',
+                    '<%= yeoman.app %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}'
 				]
 			}
 		},
