@@ -303,16 +303,16 @@ module.exports = function (grunt) {
 			controllers: {
 				files: {
 					'<%= yeoman.tmp %>/concat/scripts/controllers/BrowseController.js': [
-						'<%= yeoman.app %>/scripts/controllers/BrowseController.js'
+						'<%= yeoman.tmp %>/scripts/controllers/BrowseController.js'
 					],
 					'<%= yeoman.tmp %>/concat/scripts/controllers/MainController.js': [
-						'<%= yeoman.app %>/scripts/controllers/MainController.js'
+						'<%= yeoman.tmp %>/scripts/controllers/MainController.js'
 					],
 					'<%= yeoman.tmp %>/concat/scripts/controllers/SearchController.js': [
-						'<%= yeoman.app %>/scripts/controllers/SearchController.js'
+						'<%= yeoman.tmp %>/scripts/controllers/SearchController.js'
 					],
 					'<%= yeoman.tmp %>/concat/scripts/controllers/AboutController.js': [
-						'<%= yeoman.app %>/scripts/controllers/AboutController.js'
+						'<%= yeoman.tmp %>/scripts/controllers/AboutController.js'
 					]
 				}
 			}
@@ -433,7 +433,7 @@ module.exports = function (grunt) {
 		ts: {
 			dev : {
 				src: '<%= yeoman.app %>/**/*.ts',
-				dest: '<%= yeoman.dist %>/scripts'
+				dest: '<%= yeoman.tmp %>/scripts'
 			}
 		}
 	});

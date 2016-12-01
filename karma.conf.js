@@ -14,26 +14,18 @@ module.exports = function(config) {
 
 		// list of files / patterns to load in the browser
 		files: [
-			// libraries
-			pck.config.app + '/components/angular/angular.js',
-			pck.config.app + '/components/angular-mocks/angular-mocks.js',
-			pck.config.app + '/components/angular-resource/angular-resource.js',
-			pck.config.app + '/components/angular-sanitize/angular-sanitize.js',
-			pck.config.app + '/components/angulartics/src/angulartics.js',
-			pck.config.app + '/components/angulartics/src/angulartics-ga.js',
-			pck.config.app + '/components/angular-route/angular-route.js',
-			pck.config.app + '/components/angular-animate/angular-animate.js',
-			pck.config.app + '/components/modernizr/modernizr.js',
-			pck.config.app + '/components/labjs/LAB.min.js',
-			pck.config.app + '/components/ionic/release/js/ionic.js',
-			pck.config.app + '/components/ionic/release/js/ionic-angular.js',
-			pck.config.app + '/components/ngCordova/dist/ng-cordova.js',
-			pck.config.app + '/components/angular-ui-router/release/angular-ui-router.js',
+		    // libraries
+			pck.config.dist + '/scripts/*.vendor.js',
+
+            // test libraries
+            pck.config.app + '/components/angular-mocks/angular-mocks.js',
 
 			// the app
-			pck.config.dist + '/scripts/**/*.js',
+            pck.config.dist + '/scripts/*.ionic.js',
+            pck.config.dist + '/scripts/*.app.js',
+            pck.config.dist + '/scripts/controllers/*.js',
 
-			// the tests
+            // the tests
 			pck.config.test + '/spec/**/*.js'
 		],
 
@@ -80,6 +72,6 @@ module.exports = function(config) {
 
 		// Continuous Integration mode
 		// if true, it capture browsers, run tests and exit
-		singleRun: true
+		singleRun: false
 	});
 };
