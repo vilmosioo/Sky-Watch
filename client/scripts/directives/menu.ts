@@ -17,5 +17,5 @@ module SkyWatch.Directives {
                 'Browse'
             ];
         }
-    })
+    });
 }
